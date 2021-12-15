@@ -1,2 +1,12 @@
 Main.java
  Main
+admin/server/ServerAdmin.java
+ admin.server.ServerAdmin
+drones/Drone.java
+ drones.Drone
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin
+admin/server/services/DroneService.java
+ admin.server.services.DroneService
+drones/Drones.java
+ drones.Drones

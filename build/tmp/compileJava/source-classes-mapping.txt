@@ -1,12 +1,22 @@
 Main.java
  Main
-admin/server/ServerAdmin.java
- admin.server.ServerAdmin
-drones/Drone.java
- drones.Drone
-admin/client/ClientAdmin.java
- admin.client.ClientAdmin
+admin/models/Statistic.java
+ admin.models.Statistic
+admin/models/Drone.java
+ admin.models.Drone
+admin/utils/Constants.java
+ admin.utils.Constants
+admin/server/services/StatsService.java
+ admin.server.services.StatsService
 admin/server/services/DroneService.java
  admin.server.services.DroneService
-drones/Drones.java
- drones.Drones
+admin/server/beans/Drones.java
+ admin.server.beans.Drones
+admin/server/ServerAdmin.java
+ admin.server.ServerAdmin
+admin/messages/DroneAccepted.java
+ admin.messages.DroneAccepted
+admin/server/beans/Statistics.java
+ admin.server.beans.Statistics
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin

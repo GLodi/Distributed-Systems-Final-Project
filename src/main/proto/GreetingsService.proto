@@ -1,0 +1,22 @@
+syntax = "proto3";
+package com.progetto.grpc;
+
+message HelloRequest {
+  Drone drone = 1;
+}
+
+message Drone {
+  uint32 id = 1;
+  uint32 x = 2;
+  uint32 y = 3;
+  uint32 port = 4;
+}
+
+message HelloResponse {
+  uint32 id = 1;
+}
+
+
+service GreetingsService {
+  rpc greet(HelloRequest) returns (HelloResponse);
+}

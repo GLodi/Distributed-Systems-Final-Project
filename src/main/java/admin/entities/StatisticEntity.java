@@ -1,18 +1,18 @@
-package admin.models;
+package admin.entities;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @XmlRootElement
-public class Statistic {
+public class StatisticEntity {
     private int deliveryDone;
     private int kmTraveled;
     private int pollutionLevel;
     private int batteryLevel;
     private Timestamp ts;
 
-    public Statistic(int deliveryDone, int kmTraveled, int pollutionLevel, int batteryLevel, Timestamp ts) {
+    public StatisticEntity(int deliveryDone, int kmTraveled, int pollutionLevel, int batteryLevel, Timestamp ts) {
         this.deliveryDone = deliveryDone;
         this.kmTraveled = kmTraveled;
         this.pollutionLevel = pollutionLevel;
@@ -64,7 +64,7 @@ public class Statistic {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Statistic stats = (Statistic) o;
+        StatisticEntity stats = (StatisticEntity) o;
         return deliveryDone == stats.deliveryDone && kmTraveled == stats.kmTraveled && pollutionLevel == stats.pollutionLevel && batteryLevel == stats.batteryLevel;
     }
 

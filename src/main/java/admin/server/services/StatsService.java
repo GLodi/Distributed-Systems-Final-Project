@@ -1,6 +1,6 @@
 package admin.server.services;
 
-import admin.models.Statistic;
+import admin.entities.StatisticEntity;
 import admin.server.beans.Drones;
 import admin.server.beans.Statistics;
 
@@ -12,7 +12,7 @@ public class StatsService {
 
     @POST
     @Consumes({"application/json"})
-    public Response addStatistic(Statistic s) {
+    public Response addStatistic(StatisticEntity s) {
         System.out.println("POST /stats called");
         Statistics.getInstance().add(s);
         System.out.println("POST /stats ended");

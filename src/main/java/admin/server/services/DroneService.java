@@ -1,6 +1,7 @@
 package admin.server.services;
 
-import admin.models.Drone;
+import admin.entities.DroneAcceptedEntity;
+import admin.entities.DroneEntity;
 import admin.server.beans.Drones;
 
 import javax.ws.rs.*;
@@ -11,17 +12,19 @@ public class DroneService {
 
     @Path("add")
     @POST
-    @Consumes({"application/json"})
-    public Response addDrone(Drone d) {
+    @Consumes({"application/json", "application/xml"})
+    @Produces({"application/json", "application/xml"})
+    public Response addDrone(DroneEntity d) {
         try {
-            System.out.println("POST /drones called");
-            Drones.getInstance().add(d);
-            System.out.println("POST /drones list");
+            System.out.println("POST /drones/add called");
+            DroneAcceptedEntity da = Drones.getInstance().add(d);
+            System.out.println("POST /drones/add list");
             Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
-            System.out.println("POST /drones ended");
-            System.out.println();
-            return Response.ok().build();
+            System.out.println("POST /drones/add ended");
+            return Response.ok(da).build();
         } catch (Exception e) {
+            System.out.println("POST /drones/add ended with error: " + e.getLocalizedMessage());
+            System.out.println();
             return Response.status(Response.Status.CONFLICT).build();
         }
     }
@@ -31,21 +34,25 @@ public class DroneService {
     @Produces({"application/json"})
     public Response getByid(@PathParam("id") int id) {
         System.out.println("GET /drones/get/{id} called");
-        Drone d = Drones.getInstance().getById(id);
+        DroneEntity d = Drones.getInstance().getById(id);
         System.out.println("GET /drones/get/{id} list:");
         Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
-        System.out.println("GET /drones/get/{id} ended with: " + d);
-        System.out.println();
-        if (d != null)
+        if (d != null) {
+            System.out.println("GET /drones/get/{id} ended with: " + d);
+            System.out.println();
             return Response.ok(d).build();
-        else
+        } else {
+            System.out.println("GET /drones/get/{id} ended with status NOT_FOUND");
+            System.out.println();
             return Response.status(Response.Status.NOT_FOUND).build();
+        }
+
     }
 
     @Path("delete")
     @DELETE
     @Consumes({"application/json"})
-    public Response removeDroneById(Drone d) {
+    public Response removeDroneById(DroneEntity d) {
         System.out.println("DELETE /drones/delete called");
         boolean b = Drones.getInstance().remove(d);
         System.out.println("DELETE /drones/delete list:");
@@ -54,8 +61,11 @@ public class DroneService {
         System.out.println();
         if (b)
             return Response.ok().build();
-        else
+        else {
+            System.out.println("DELETE /drones/delete ended with status NOT_MODIFIED");
+            System.out.println();
             return Response.status(Response.Status.NOT_MODIFIED).build();
+        }
     }
 
 }

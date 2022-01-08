@@ -1,10 +1,9 @@
 package admin.client;
 
-import admin.models.Drone;
-import admin.models.Statistic;
+import admin.entities.DroneEntity;
+import admin.entities.StatisticEntity;
 import admin.server.beans.Drones;
 import admin.server.beans.Statistics;
-import admin.utils.Constants;
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -63,11 +62,11 @@ public class ClientAdmin {
         ClientResponse clientResponse = null;
 
         String getPath = "/stats/drones";
-        clientResponse = getRequest(client, Constants.SERVER_ADDRESS + getPath);
+        clientResponse = getRequest(client, "http://localhost:1337" + getPath);
         System.out.println(clientResponse.toString());
         Drones drones = clientResponse.getEntity(Drones.class);
         System.out.println("Users List");
-        for (Drone d : drones.getDroneList()) {
+        for (DroneEntity d : drones.getDroneList()) {
             System.out.println("id: " + d.getId());
         }
     }
@@ -82,10 +81,10 @@ public class ClientAdmin {
         ClientResponse clientResponse = null;
 
         String getPath = "/stats/last/" + n;
-        clientResponse = getRequest(client, Constants.SERVER_ADDRESS + getPath);
+        clientResponse = getRequest(client, "http://localhost:1337" + getPath);
         System.out.println(clientResponse.toString());
         Statistics statistics = clientResponse.getEntity(Statistics.class);
-        for (Statistic s : statistics.getStatisticList()) {
+        for (StatisticEntity s : statistics.getStatisticList()) {
             System.out.println("battery: " + s.getBatteryLevel());
         }
     }
@@ -104,7 +103,7 @@ public class ClientAdmin {
         ClientResponse clientResponse = null;
 
         String getPath = "/stats/deliveries/" + ts1 + "&" + ts2;
-        clientResponse = getRequest(client, Constants.SERVER_ADDRESS + getPath);
+        clientResponse = getRequest(client, "http://localhost:1337" + getPath);
         System.out.println(clientResponse.toString());
     }
 
@@ -122,11 +121,11 @@ public class ClientAdmin {
         ClientResponse clientResponse = null;
 
         String getPath = "/stats/km/" + ts1 + "&" + ts2;
-        clientResponse = getRequest(client, Constants.SERVER_ADDRESS + getPath);
+        clientResponse = getRequest(client, "http://localhost:1337" + getPath);
         System.out.println(clientResponse.toString());
     }
 
-    private static ClientResponse postRequest(Client client, String url, Drone d) {
+    private static ClientResponse postRequest(Client client, String url, DroneEntity d) {
         WebResource webResource = client.resource(url);
         String input = new Gson().toJson(d);
         try {
@@ -147,7 +146,7 @@ public class ClientAdmin {
         }
     }
 
-    private static ClientResponse deleteRequest(Client client, String url, Drone d) {
+    private static ClientResponse deleteRequest(Client client, String url, DroneEntity d) {
         WebResource webResource = client.resource(url);
         String input = new Gson().toJson(d);
         try {

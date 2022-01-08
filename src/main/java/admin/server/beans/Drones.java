@@ -1,8 +1,7 @@
 package admin.server.beans;
 
-import admin.messages.DroneAccepted;
-import admin.models.Drone;
-import admin.utils.Constants;
+import admin.entities.DroneAcceptedEntity;
+import admin.entities.DroneEntity;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,10 +16,10 @@ public class Drones {
 
     private static Drones instance;
     @XmlElement(name = "my_drones")
-    private final List<Drone> dronelist;
+    private final List<DroneEntity> dronelist;
 
     private Drones() {
-        dronelist = new ArrayList<Drone>();
+        dronelist = new ArrayList<DroneEntity>();
     }
 
     public synchronized static Drones getInstance() {
@@ -29,12 +28,12 @@ public class Drones {
         return instance;
     }
 
-    public synchronized List<Drone> getDroneList() {
+    public synchronized List<DroneEntity> getDroneList() {
         return new ArrayList<>(dronelist);
     }
 
-    public synchronized DroneAccepted add(Drone d) throws Exception {
-        if (dronelist.stream().anyMatch(dd -> dd.equals(d))) {
+    public synchronized DroneAcceptedEntity add(DroneEntity d) throws Exception {
+        if (dronelist.stream().anyMatch(dd -> dd.getId() == d.getId())) {
             throw new Exception("Drone with same id already in grid");
         }
 
@@ -43,14 +42,14 @@ public class Drones {
         d.setCoordinates(coordinates[0], coordinates[1]);
         dronelist.add(d);
 
-        return new DroneAccepted(dronelist, coordinates[0], coordinates[1]);
+        return new DroneAcceptedEntity(dronelist, coordinates[0], coordinates[1]);
     }
 
     private synchronized int[] findRandomCoordinates() {
         int[] res = new int[2];
         while (true) {
-            int randomX = (int) (Math.random() * Constants.GRID_SIZE);
-            int randomY = (int) (Math.random() * Constants.GRID_SIZE);
+            int randomX = (int) (Math.random() * 10);
+            int randomY = (int) (Math.random() * 10);
             if (!dronelist.stream().anyMatch(dd -> dd.getY() == randomX && dd.getY() == randomY)) {
                 res[0] = randomX;
                 res[1] = randomY;
@@ -60,16 +59,16 @@ public class Drones {
         return res;
     }
 
-    public synchronized boolean remove(Drone d) {
+    public synchronized boolean remove(DroneEntity d) {
         return dronelist.remove(d);
     }
 
     // NON METTERE SYNCHRONIZED:
     // chi vuole fare operazioni sulla lista dei droni, ne prende una copia
     // (in sync) e poi ci opera sopra senza bloccare gli altri.
-    public Drone getById(int id) {
-        List<Drone> droneListCopy = getDroneList();
-        for (Drone d : droneListCopy)
+    public DroneEntity getById(int id) {
+        List<DroneEntity> droneEntityListCopy = getDroneList();
+        for (DroneEntity d : droneEntityListCopy)
             if (d.getId() == id)
                 return d;
         return null;

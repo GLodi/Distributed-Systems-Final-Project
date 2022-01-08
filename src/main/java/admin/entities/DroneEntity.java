@@ -1,19 +1,30 @@
-package admin.models;
+package admin.entities;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
 @XmlRootElement
-public class Drone {
+public class DroneEntity {
     private int id;
     private int x;
     private int y;
+    private int port;
+    private int battery;
 
-    public Drone() {
+    public DroneEntity() {
     }
 
-    public Drone(int id) {
+    public DroneEntity(int id, int port) {
         this.id = id;
+        this.port = port;
+    }
+
+    public DroneEntity(int id, int x, int y, int port, int battery) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.port = port;
+        this.battery = battery;
     }
 
     public void setCoordinates(int x, int y) {
@@ -25,32 +36,28 @@ public class Drone {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getPort() {
+        return port;
+    }
+
+    public int getBattery() {
+        return battery;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Drone drone = (Drone) o;
-        return id == drone.id;
+        DroneEntity droneEntity = (DroneEntity) o;
+        return id == droneEntity.id;
     }
 
     @Override

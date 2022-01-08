@@ -1,6 +1,5 @@
 package drones;
 
-import admin.entities.DroneAcceptedEntity;
 import admin.entities.DroneEntity;
 
 import java.util.List;
@@ -14,11 +13,11 @@ public class DroneModel {
     private final int battery;
     private boolean isMaster;
 
-    public DroneModel(int id, int port, DroneAcceptedEntity droneAcceptedEntity) {
+    public DroneModel(int id, int port, List<DroneEntity> droneEntityList) {
         this.id = id;
-        this.x = droneAcceptedEntity.getX();
-        this.y = droneAcceptedEntity.getY();
-        this.droneList = droneAcceptedEntity.getDrones();
+        this.x = droneEntityList.stream().filter(d -> d.getId() == id).findFirst().get().getX();
+        this.y = droneEntityList.stream().filter(d -> d.getId() == id).findFirst().get().getY();
+        this.droneList = droneEntityList;
         this.battery = 100;
         this.port = port;
     }

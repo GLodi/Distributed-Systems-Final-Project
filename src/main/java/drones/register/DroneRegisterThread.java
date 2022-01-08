@@ -1,13 +1,15 @@
 package drones.register;
 
-import admin.entities.DroneAcceptedEntity;
 import admin.entities.DroneEntity;
 import com.google.gson.Gson;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientHandlerException;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.*;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.json.JSONConfiguration;
 import drones.DroneModel;
+import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
+
+import java.util.List;
 
 public class DroneRegisterThread extends Thread {
     private final int id;
@@ -56,16 +58,21 @@ public class DroneRegisterThread extends Thread {
 
     public void run() {
         System.out.println("DroneRegisterThread started");
-        Client client = Client.create();
-        ClientResponse clientResponse = null;
 
+        ClientConfig config = new DefaultClientConfig();
+        config.getClasses().add(JacksonJaxbJsonProvider.class);
+        config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+
+        Client client = Client.create(config);
+        ClientResponse clientResponse = null;
 
         String addPath = "/drones/add";
         DroneEntity droneEntity = new DroneEntity(id, port);
         clientResponse = postRequest(client, "http://" + address + addPath, droneEntity);
         System.out.println(clientResponse.toString());
-        DroneAcceptedEntity droneAcceptedEntity = clientResponse.getEntity(DroneAcceptedEntity.class);
-        this.droneModel = new DroneModel(id, port, droneAcceptedEntity);
+        List<DroneEntity> droneEntityList = clientResponse.getEntity(new GenericType<List<DroneEntity>>() {
+        });
+        this.droneModel = new DroneModel(id, port, droneEntityList);
 
         System.out.println("DroneRegisterThread ended");
     }

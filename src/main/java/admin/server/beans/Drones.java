@@ -1,6 +1,5 @@
 package admin.server.beans;
 
-import admin.entities.DroneAcceptedEntity;
 import admin.entities.DroneEntity;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -32,7 +31,7 @@ public class Drones {
         return new ArrayList<>(dronelist);
     }
 
-    public synchronized DroneAcceptedEntity add(DroneEntity d) throws Exception {
+    public synchronized List<DroneEntity> add(DroneEntity d) throws Exception {
         if (dronelist.stream().anyMatch(dd -> dd.getId() == d.getId())) {
             throw new Exception("Drone with same id already in grid");
         }
@@ -42,7 +41,7 @@ public class Drones {
         d.setCoordinates(coordinates[0], coordinates[1]);
         dronelist.add(d);
 
-        return new DroneAcceptedEntity(dronelist, coordinates[0], coordinates[1]);
+        return dronelist;
     }
 
     private synchronized int[] findRandomCoordinates() {

@@ -36,20 +36,40 @@ public class DroneEntity {
         return x;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
     public int getY() {
         return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getPort() {
         return port;
     }
 
+    public void setPort(int port) {
+        this.port = port;
+    }
+
     public int getBattery() {
         return battery;
+    }
+
+    public void setBattery(int battery) {
+        this.battery = battery;
     }
 
     @Override

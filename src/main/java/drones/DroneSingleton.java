@@ -59,9 +59,17 @@ public class DroneSingleton {
     }
 
     public synchronized void interruptAll() {
-        droneElectionThread.interrupt();
-        droneOrderThread.interrupt();
-        droneSensorsThread.interrupt();
-        droneStatsThread.interrupt();
+        if (droneElectionThread != null) {
+            droneElectionThread.interrupt();
+        }
+        if (droneOrderThread != null) {
+            droneOrderThread.interrupt();
+        }
+        if (droneSensorsThread != null) {
+            droneSensorsThread.interrupt();
+        }
+        if (droneStatsThread != null) {
+            droneStatsThread.interrupt();
+        }
     }
 }

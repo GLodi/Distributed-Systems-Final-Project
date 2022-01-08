@@ -1,27 +1,30 @@
 package admin.server.services;
 
-import admin.entities.DroneAcceptedEntity;
 import admin.entities.DroneEntity;
 import admin.server.beans.Drones;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("drones")
 public class DroneService {
 
     @Path("add")
     @POST
-    @Consumes({"application/json", "application/xml"})
-    @Produces({"application/json", "application/xml"})
+    @Consumes({"application/json"})
+    @Produces({"application/json"})
     public Response addDrone(DroneEntity d) {
         try {
             System.out.println("POST /drones/add called");
-            DroneAcceptedEntity da = Drones.getInstance().add(d);
+            GenericEntity droneEntities = new GenericEntity<List<DroneEntity>>(Drones.getInstance().add(d)) {
+            };
             System.out.println("POST /drones/add list");
             Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
             System.out.println("POST /drones/add ended");
-            return Response.ok(da).build();
+            System.out.println();
+            return Response.ok(droneEntities).build();
         } catch (Exception e) {
             System.out.println("POST /drones/add ended with error: " + e.getLocalizedMessage());
             System.out.println();
@@ -57,11 +60,11 @@ public class DroneService {
         boolean b = Drones.getInstance().remove(d);
         System.out.println("DELETE /drones/delete list:");
         Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
-        System.out.println("DELETE /drones/delete ended with: " + b);
-        System.out.println();
-        if (b)
+        if (b) {
+            System.out.println("DELETE /drones/delete ended with: " + b);
+            System.out.println();
             return Response.ok().build();
-        else {
+        } else {
             System.out.println("DELETE /drones/delete ended with status NOT_MODIFIED");
             System.out.println();
             return Response.status(Response.Status.NOT_MODIFIED).build();

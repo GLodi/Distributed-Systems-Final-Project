@@ -64,15 +64,13 @@ public class DroneMain {
         //      thread per ricevere ordini da MQTT (se drone e' master)
         //      thread per invio stats / collegamento con server (REST) (sempre master)
 
-        int a = 1;
-
         while (true) {
             System.out.println("Press q to exit:");
             String command = keyboard.nextLine();
-            if (command == "q") {
+            if (command.equals("q")) {
                 // JOIN, INTERRUPT VARI THREAD DA SINGLETON E CHIUDI
                 DroneSingleton.getInstance().interruptAll();
-                return;
+                break;
             }
         }
 

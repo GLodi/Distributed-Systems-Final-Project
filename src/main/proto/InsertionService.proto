@@ -1,0 +1,15 @@
+syntax = "proto3";
+package com.progetto.grpc;
+
+message InsertionRequest {
+  uint32 id = 1;
+}
+
+message InsertionResponse {
+  uint32 id = 1;
+  uint32 nextId = 2;
+}
+
+service InsertionService {
+  rpc insert(InsertionRequest) returns (InsertionResponse);
+}

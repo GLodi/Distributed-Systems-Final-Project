@@ -1,9 +1,7 @@
 package drones.eventbus;
 
-import java.sql.Timestamp;
-
 public abstract class Message {
-    public Timestamp timestamp;
+    public String timestamp;
     public String kind;
+    public String message;
 }
-

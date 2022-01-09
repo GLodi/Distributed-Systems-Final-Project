@@ -16,7 +16,6 @@ message HelloResponse {
   uint32 id = 1;
 }
 
-
 service GreetingsService {
   rpc greet(HelloRequest) returns (HelloResponse);
 }

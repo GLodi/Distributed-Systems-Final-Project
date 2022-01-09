@@ -43,6 +43,11 @@ public class DroneMain {
         // TODO: PER LA COMUNICAZIONE TRA THREAD USA UN EVENT BUS PUB/SUB
         //      sviluppalo come producer/consumer ma i consumer si sottoscrivono a specifici messaggi
 
+        // TODO: greet everyone for 5 sec.
+        instance.startGreetingsService();
+
+        // TODO: send insertion request to closest id to get into ring
+
         // TODO: check su anello.
         //  Se unico:
         //      si elegge master. METTI WAIT/NOTIFY SUL DIVENTARE MASTER COSI' I THREAD SI SVEGLIANO

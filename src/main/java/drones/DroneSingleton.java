@@ -2,7 +2,7 @@ package drones;
 
 import admin.entities.DroneEntity;
 import drones.election.DroneElectionThread;
-import drones.eventbus.EventBus;
+import drones.greetings.GreetingsLogic;
 import drones.order.DroneOrderThread;
 import drones.sensors.DroneSensorsThread;
 import drones.stats.DroneStatsThread;
@@ -17,8 +17,7 @@ public class DroneSingleton {
     //      doesn't require the sync of the entire DroneSingleton
     private DroneModel droneModel;
 
-    private EventBus eventBus;
-
+    private GreetingsLogic greetingsLogic;
     private DroneElectionThread droneElectionThread;
     private DroneOrderThread droneOrderThread;
     private DroneSensorsThread droneSensorsThread;
@@ -49,16 +48,29 @@ public class DroneSingleton {
         return droneModel.getPort();
     }
 
-    public synchronized void startElectionThread() {
+    public synchronized void startGreetingsService() {
+        try {
+            greetingsLogic = new GreetingsLogic();
+            greetingsLogic.run();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startGreetingsService esecuzione fallita");
+        }
+    }
+
+    public synchronized void startElectionService() {
         try {
             droneElectionThread = new DroneElectionThread(droneModel.getDroneList());
             droneElectionThread.run();
         } catch (Exception e) {
-            System.out.println("esecuzione fallita");
+            System.out.println("DroneSingleton startElectionService esecuzione fallita");
         }
     }
 
+    // TODO: subscribe to eventbus for error handling. If error message shows up, kill all threads.
     public synchronized void interruptAll() {
+        if (greetingsLogic != null) {
+            greetingsLogic.interrupt();
+        }
         if (droneElectionThread != null) {
             droneElectionThread.interrupt();
         }

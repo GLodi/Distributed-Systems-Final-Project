@@ -27,6 +27,14 @@ public class DroneEntity {
         this.battery = battery;
     }
 
+    public DroneEntity(DroneEntity d) {
+        this.id = d.id;
+        this.x = d.x;
+        this.y = d.y;
+        this.port = d.port;
+        this.battery = d.battery;
+    }
+
     public void setCoordinates(int x, int y) {
         this.x = x;
         this.y = y;

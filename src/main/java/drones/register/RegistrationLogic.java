@@ -11,19 +11,19 @@ import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
 import java.util.List;
 
-public class DroneRegisterThread extends Thread {
+public class RegistrationLogic extends Thread {
     private final int id;
     private final String address;
     private final int port;
     private volatile DroneModel droneModel; // volatile perche' main ritira il droneModel nel suo thread
 
-    public DroneRegisterThread(int id, String address, int port) {
+    public RegistrationLogic(int id, String address, int port) {
         this.id = id;
         this.address = address;
         this.port = port;
     }
 
-    private static ClientResponse postRequest(Client client, String url, DroneEntity d) {
+    private ClientResponse postRequest(Client client, String url, DroneEntity d) {
         WebResource webResource = client.resource(url);
         String input = new Gson().toJson(d);
         try {
@@ -34,7 +34,7 @@ public class DroneRegisterThread extends Thread {
         }
     }
 
-    private static ClientResponse getRequest(Client client, String url) {
+    private ClientResponse getRequest(Client client, String url) {
         WebResource webResource = client.resource(url);
         try {
             return webResource.type("application/json").get(ClientResponse.class);
@@ -42,18 +42,6 @@ public class DroneRegisterThread extends Thread {
             System.out.println("Server non disponibile");
             return null;
         }
-    }
-
-    public static DroneModel connectToServer(String id, String address, String port) {
-        try {
-            DroneRegisterThread droneRegisterThread = new DroneRegisterThread(Integer.valueOf(id), address, Integer.valueOf(port));
-            droneRegisterThread.run();
-            droneRegisterThread.join();
-            return droneRegisterThread.getDroneModel();
-        } catch (Exception e) {
-            System.out.println("esecuzione fallita");
-        }
-        return null;
     }
 
     public void run() {

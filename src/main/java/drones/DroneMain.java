@@ -2,8 +2,6 @@ package drones;
 
 import java.util.Scanner;
 
-import static drones.register.DroneRegisterThread.connectToServer;
-
 public class DroneMain {
 
     public static void main(String[] args) {
@@ -31,22 +29,23 @@ public class DroneMain {
             address = "localhost:1337";
         }
 
-        DroneModel droneModel = connectToServer(id, address, port);
-        if (droneModel == null) {
+        // START
+        //DroneSingleton.getInstance().listenForErrors();
+
+        DroneSingleton.getInstance().startRegisterService(Integer.parseInt(id), address, Integer.parseInt(port));
+        if (!DroneSingleton.getInstance().initiated()) {
             System.out.println("Unable to connect. Closing.");
             return;
         }
-
-        DroneSingleton instance = DroneSingleton.getInstance();
-        instance.init(droneModel);
 
         // TODO: PER LA COMUNICAZIONE TRA THREAD USA UN EVENT BUS PUB/SUB
         //      sviluppalo come producer/consumer ma i consumer si sottoscrivono a specifici messaggi
 
         // TODO: greet everyone for 5 sec.
-        instance.startGreetingsService();
+        DroneSingleton.getInstance().startGreetingsService();
 
         // TODO: send insertion request to closest id to get into ring
+        DroneSingleton.getInstance().startInsertionService();
 
         // TODO: check su anello.
         //  Se unico:

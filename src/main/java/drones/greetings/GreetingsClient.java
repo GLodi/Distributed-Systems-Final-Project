@@ -23,7 +23,7 @@ public class GreetingsClient extends Thread {
 
     @Override
     public void run() {
-        System.out.println("GreetingsClient client started");
+        System.out.println("GreetingsClient started");
         final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:" + target.getPort()).usePlaintext().build();
         GreetingsServiceBlockingStub stub = GreetingsServiceGrpc.newBlockingStub(channel);
         HelloRequest helloRequest = HelloRequest.newBuilder()
@@ -37,7 +37,7 @@ public class GreetingsClient extends Thread {
         HelloResponse helloResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).greet(helloRequest);
         System.out.println("greeting da: " + helloResponse.getId());
         channel.shutdown();
-        System.out.println("GreetingsClient client ended");
+        System.out.println("GreetingsClient ended");
         this.droneIdReceived = helloResponse.getId();
     }
 

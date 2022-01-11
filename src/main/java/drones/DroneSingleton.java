@@ -2,8 +2,12 @@ package drones;
 
 import admin.entities.DroneEntity;
 import drones.election.DroneElectionThread;
+import drones.eventbus.ErrorMessage;
+import drones.eventbus.EventBus;
 import drones.greetings.GreetingsLogic;
+import drones.insertion.InsertionLogic;
 import drones.order.DroneOrderThread;
+import drones.register.RegistrationLogic;
 import drones.sensors.DroneSensorsThread;
 import drones.stats.DroneStatsThread;
 
@@ -17,7 +21,9 @@ public class DroneSingleton {
     //      doesn't require the sync of the entire DroneSingleton
     private DroneModel droneModel;
 
+    private RegistrationLogic registrationLogic;
     private GreetingsLogic greetingsLogic;
+    private InsertionLogic insertionLogic;
     private DroneElectionThread droneElectionThread;
     private DroneOrderThread droneOrderThread;
     private DroneSensorsThread droneSensorsThread;
@@ -32,37 +38,46 @@ public class DroneSingleton {
         return instance;
     }
 
-    public synchronized void init(DroneModel model) {
-        droneModel = model;
-    }
 
-    public synchronized List<DroneEntity> getDroneList() {
-        return droneModel.getDroneList();
-    }
-
-    public synchronized DroneEntity getDroneEntity() {
-        return DroneModel.getEntity(droneModel);
-    }
-
-    public synchronized int getPort() {
-        return droneModel.getPort();
-    }
-
-    public synchronized void startGreetingsService() {
+    public void startRegisterService(int id, String address, int port) {
         try {
-            greetingsLogic = new GreetingsLogic();
-            greetingsLogic.run();
+            registrationLogic = new RegistrationLogic(id, address, port);
+            registrationLogic.run();
+            registrationLogic.join();
+            droneModel = registrationLogic.getDroneModel();
         } catch (Exception e) {
-            System.out.println("DroneSingleton startGreetingsService esecuzione fallita");
+            System.out.println("DroneSingleton startRegisterService esecuzione fallita");
+            EventBus.getInstance().put(new ErrorMessage());
         }
     }
 
-    public synchronized void startElectionService() {
+    public void startGreetingsService() {
         try {
-            droneElectionThread = new DroneElectionThread(droneModel.getDroneList());
-            droneElectionThread.run();
+            greetingsLogic = new GreetingsLogic();
+            greetingsLogic.run();
+            greetingsLogic.join();
         } catch (Exception e) {
-            System.out.println("DroneSingleton startElectionService esecuzione fallita");
+            System.out.println("DroneSingleton startGreetingsService esecuzione fallita");
+            EventBus.getInstance().put(new ErrorMessage());
+        }
+    }
+
+    public void startInsertionService() {
+        try {
+            insertionLogic = new InsertionLogic();
+            insertionLogic.run();
+            insertionLogic.join();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startInsertionService esecuzione fallita");
+            EventBus.getInstance().put(new ErrorMessage());
+        }
+    }
+
+    public void listenForErrors() {
+        while (true) {
+            if (EventBus.getInstance().take("ERROR") != null) {
+
+            }
         }
     }
 
@@ -83,5 +98,29 @@ public class DroneSingleton {
         if (droneStatsThread != null) {
             droneStatsThread.interrupt();
         }
+    }
+
+    public synchronized boolean initiated() {
+        return droneModel != null;
+    }
+
+    public synchronized List<DroneEntity> getDroneList() {
+        return droneModel.droneList;
+    }
+
+    public synchronized DroneEntity getDroneEntity() {
+        return DroneModel.getEntity(droneModel);
+    }
+
+    public synchronized int getPort() {
+        return droneModel.port;
+    }
+
+    public synchronized int getId() {
+        return droneModel.id;
+    }
+
+    public synchronized int getNextId() {
+        return droneModel.nextId;
     }
 }

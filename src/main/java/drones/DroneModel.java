@@ -5,13 +5,14 @@ import admin.entities.DroneEntity;
 import java.util.List;
 
 public class DroneModel {
-    private final int id;
-    private final int port;
-    private final List<DroneEntity> droneList;
-    private final int x;
-    private final int y;
-    private final int battery;
-    private boolean isMaster;
+    public final int id;
+    public final int port;
+    public final int x;
+    public final int y;
+    public final int battery;
+    public final List<DroneEntity> droneList;
+    public boolean isMaster;
+    public int nextId;
 
     public DroneModel(int id, int port, List<DroneEntity> droneEntityList) {
         this.id = id;
@@ -25,13 +26,4 @@ public class DroneModel {
     public static DroneEntity getEntity(DroneModel d) {
         return new DroneEntity(d.id, d.x, d.y, d.port, d.battery);
     }
-
-    public List<DroneEntity> getDroneList() {
-        return droneList;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
 }

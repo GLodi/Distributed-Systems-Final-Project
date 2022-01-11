@@ -11,7 +11,7 @@ public class DroneModel {
     public final int y;
     public final int battery;
     public final List<DroneEntity> droneList;
-    public boolean isMaster;
+    public int master;
     public int nextId;
 
     public DroneModel(int id, int port, List<DroneEntity> droneEntityList) {

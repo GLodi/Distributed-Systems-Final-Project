@@ -4,10 +4,8 @@ import admin.entities.DroneEntity;
 import drones.DroneSingleton;
 import drones.eventbus.ErrorMessage;
 import drones.eventbus.EventBus;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
+import drones.eventbus.GreetingsMessage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +13,10 @@ public class GreetingsLogic extends Thread {
 
     @Override
     public void run() {
-        DroneEntity own = DroneSingleton.getInstance().getDroneEntity();
+        DroneEntity own = new DroneEntity(DroneSingleton.getInstance().getDroneEntity());
         List<DroneEntity> droneEntityList = new ArrayList<>(DroneSingleton.getInstance().getDroneList());
         droneEntityList.removeIf(d -> d.getId() == own.getId());
-        int port = DroneSingleton.getInstance().getPort();
 
-        startServer(port, own);
         greetEveryone(droneEntityList, own);
     }
 
@@ -30,18 +26,20 @@ public class GreetingsLogic extends Thread {
             System.out.println("GreetingsLogic greetEveryone greeting " + droneEntity.getId());
             try {
                 greetingsClientList.add(new GreetingsClient(own, droneEntity));
-                greetingsClientList.stream().reduce((f, s) -> s).get().run();
+                greetingsClientList.stream().reduce((f, s) -> s).get().start();
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.println("GreetingsLogic greetEveryone ESECUZIONE FALLITA su " + droneEntity.getId());
             }
         }
-        System.out.println("GreetingsLogic greeteveryone " + greetingsClientList.size() + " threads running");
+        System.out.println("GreetingsLogic greetEveryone " + greetingsClientList.size() + " threads running");
 
         try {
             for (GreetingsClient greetingsClient : greetingsClientList) {
                 greetingsClient.join();
             }
         } catch (InterruptedException e) {
+            e.printStackTrace();
             EventBus.getInstance().put(new ErrorMessage());
         }
         System.out.println("GreetingsLogic greetEveryone waited for all threads");
@@ -50,21 +48,14 @@ public class GreetingsLogic extends Thread {
         greetingsClientList.stream().filter(gc -> gc.getDroneIdReceived() != 0).forEach(gc -> repliedIds.add(gc.getDroneIdReceived()));
         System.out.println("GreetingsLogic greetEveryone received " + repliedIds.size() + " replies");
 
-        DroneSingleton.getInstance().getDroneList().removeIf(d -> !repliedIds.stream().anyMatch(r -> r == d.getId()) && d.getId() != own.getId());
+        DroneSingleton.getInstance().getDroneList().removeIf(d -> repliedIds.stream().noneMatch(r -> r == d.getId()) && d.getId() != own.getId());
         System.out.println("GreetingsLogic greetEveryone cleaned replies");
-    }
 
-    private void startServer(int port, DroneEntity own) {
-        try {
-            System.out.println("GreetingsLogic server starting");
-            Server server = ServerBuilder.forPort(port)
-                    .addService(new GreetingsServiceImpl(own))
-                    .build();
-            server.start();
-            System.out.println("GreetingsLogic server started");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("GreetingsLogic server ON ERROR" + e.getLocalizedMessage());
+        if (DroneSingleton.getInstance().getDroneList().size() == 1) {
+            System.out.println("GreetingsLogic greetEveryone Alone. Elect myself to master.");
+            DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getId());
+        } else {
+            EventBus.getInstance().put(new GreetingsMessage());
         }
     }
 

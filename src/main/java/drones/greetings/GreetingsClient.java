@@ -6,6 +6,7 @@ import com.progetto.grpc.GreetingsServiceGrpc.GreetingsServiceBlockingStub;
 import com.progetto.grpc.GreetingsServiceOuterClass.Drone;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloRequest;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse;
+import drones.DroneSingleton;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -35,7 +36,12 @@ public class GreetingsClient extends Thread {
                                 .setPort(own.getPort()))
                 .build();
         HelloResponse helloResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).greet(helloRequest);
-        System.out.println("greeting da: " + helloResponse.getId());
+        if (helloResponse.getMaster()) {
+            DroneSingleton.getInstance().setMaster(helloResponse.getId());
+            System.out.println("greeting da master: " + helloResponse.getId());
+        } else {
+            System.out.println("greeting da: " + helloResponse.getId());
+        }
         channel.shutdown();
         System.out.println("GreetingsClient ended");
         this.droneIdReceived = helloResponse.getId();

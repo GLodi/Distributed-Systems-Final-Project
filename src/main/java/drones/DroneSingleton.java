@@ -5,12 +5,17 @@ import drones.election.DroneElectionThread;
 import drones.eventbus.ErrorMessage;
 import drones.eventbus.EventBus;
 import drones.greetings.GreetingsLogic;
+import drones.greetings.GreetingsServiceImpl;
 import drones.insertion.InsertionLogic;
+import drones.insertion.InsertionServiceImpl;
 import drones.order.DroneOrderThread;
 import drones.register.RegistrationLogic;
 import drones.sensors.DroneSensorsThread;
 import drones.stats.DroneStatsThread;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 public class DroneSingleton {
@@ -42,7 +47,7 @@ public class DroneSingleton {
     public void startRegisterService(int id, String address, int port) {
         try {
             registrationLogic = new RegistrationLogic(id, address, port);
-            registrationLogic.run();
+            registrationLogic.start();
             registrationLogic.join();
             droneModel = registrationLogic.getDroneModel();
         } catch (Exception e) {
@@ -54,8 +59,7 @@ public class DroneSingleton {
     public void startGreetingsService() {
         try {
             greetingsLogic = new GreetingsLogic();
-            greetingsLogic.run();
-            greetingsLogic.join();
+            greetingsLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startGreetingsService esecuzione fallita");
             EventBus.getInstance().put(new ErrorMessage());
@@ -65,8 +69,7 @@ public class DroneSingleton {
     public void startInsertionService() {
         try {
             insertionLogic = new InsertionLogic();
-            insertionLogic.run();
-            insertionLogic.join();
+            insertionLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startInsertionService esecuzione fallita");
             EventBus.getInstance().put(new ErrorMessage());
@@ -78,6 +81,21 @@ public class DroneSingleton {
             if (EventBus.getInstance().take("ERROR") != null) {
 
             }
+        }
+    }
+
+    public synchronized void startGRPCServers() {
+        try {
+            System.out.println("GRPC servers starting");
+            Server server = ServerBuilder.forPort(DroneSingleton.getInstance().getPort())
+                    .addService(new InsertionServiceImpl())
+                    .addService(new GreetingsServiceImpl())
+                    .build();
+            server.start();
+            System.out.println("GRPC servers started");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("GRPC server ERROR:" + e.getLocalizedMessage());
         }
     }
 
@@ -122,5 +140,17 @@ public class DroneSingleton {
 
     public synchronized int getNextId() {
         return droneModel.nextId;
+    }
+
+    public synchronized void setNextId(int nextId) {
+        droneModel.nextId = nextId;
+    }
+
+    public synchronized int getMaster() {
+        return droneModel.master;
+    }
+
+    public synchronized void setMaster(int master) {
+        droneModel.master = master;
     }
 }

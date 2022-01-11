@@ -4,22 +4,30 @@ import java.util.Scanner;
 
 public class DroneMain {
 
+    private static int id;
+    private static String address;
+    private static int port;
+
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         System.out.println("--------------");
         System.out.println("Enter ID (empty = 1):");
-        String id = keyboard.nextLine();
-        if (id.isEmpty()) {
-            id = "1";
+        String ids = keyboard.nextLine();
+        if (ids.isEmpty()) {
+            id = 1;
+        } else {
+            id = Integer.parseInt(ids);
         }
 
-        int defaultPort = 8888 + 1111 * (Integer.valueOf(id) - 1);
+        int defaultPort = 8888 + 1111 * (id - 1);
 
         System.out.println("--------------");
         System.out.println("Enter port for drone communication (empty = " + defaultPort + "):");
-        String port = keyboard.nextLine();
-        if (port.isEmpty()) {
-            port = String.valueOf(defaultPort);
+        String ports = keyboard.nextLine();
+        if (ports.isEmpty()) {
+            port = defaultPort;
+        } else {
+            port = Integer.valueOf(ports);
         }
 
         System.out.println("--------------");
@@ -32,19 +40,16 @@ public class DroneMain {
         // START
         //DroneSingleton.getInstance().listenForErrors();
 
-        DroneSingleton.getInstance().startRegisterService(Integer.parseInt(id), address, Integer.parseInt(port));
+        DroneSingleton.getInstance().startRegisterService(id, address, port);
         if (!DroneSingleton.getInstance().initiated()) {
             System.out.println("Unable to connect. Closing.");
             return;
         }
 
-        // TODO: PER LA COMUNICAZIONE TRA THREAD USA UN EVENT BUS PUB/SUB
-        //      sviluppalo come producer/consumer ma i consumer si sottoscrivono a specifici messaggi
+        DroneSingleton.getInstance().startGRPCServers();
 
-        // TODO: greet everyone for 5 sec.
         DroneSingleton.getInstance().startGreetingsService();
 
-        // TODO: send insertion request to closest id to get into ring
         DroneSingleton.getInstance().startInsertionService();
 
         // TODO: check su anello.
@@ -77,7 +82,5 @@ public class DroneMain {
                 break;
             }
         }
-
     }
-
 }

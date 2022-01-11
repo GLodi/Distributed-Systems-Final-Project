@@ -1,43 +1,20 @@
 package drones.insertion;
 
-import admin.entities.DroneEntity;
-import drones.DroneSingleton;
-
-import java.util.ArrayList;
-import java.util.List;
+import drones.insertion.listeners.GreetingsListener;
 
 public class InsertionLogic extends Thread {
     @Override
     public void run() {
-        DroneEntity own = DroneSingleton.getInstance().getDroneEntity();
-
-        requestInsert(own.getId());
-        startServer();
+        listenToAllGreetings();
     }
 
-    private void requestInsert(int id) {
-        System.out.println("InsertionLogic requestInsert started");
-        List<DroneEntity> droneEntityList = new ArrayList<>(DroneSingleton.getInstance().getDroneList());
-        droneEntityList.removeIf(d -> d.getId() >= id);
-
-        if (droneEntityList.size() == 0) {
-            System.out.println("InsertionLogic requestInsert ended no insertion needed");
-            return;
-        }
-
-        DroneEntity toRequestInsertionTo = droneEntityList.get(droneEntityList.size() - 1);
-
+    private void listenToAllGreetings() {
         try {
-            InsertionClient insertionClient = new InsertionClient(id, toRequestInsertionTo);
-            insertionClient.run();
+            GreetingsListener greetingsListener = new GreetingsListener();
+            greetingsListener.start();
         } catch (Exception e) {
-            System.out.println("InsertionLogic requestInsert ESECUZIONE FALLITA verso " + toRequestInsertionTo.getId());
+            e.printStackTrace();
+            System.out.println("InsertionLogic listenToAllGreetings ERROR: " + e.getLocalizedMessage());
         }
-
-        System.out.println("InsertionLogic requestInsert ended");
-    }
-
-    private void startServer() {
-
     }
 }

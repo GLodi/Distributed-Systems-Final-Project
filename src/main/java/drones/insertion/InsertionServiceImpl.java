@@ -14,6 +14,7 @@ public class InsertionServiceImpl extends InsertionServiceImplBase {
                 .setId(DroneSingleton.getInstance().getId())
                 .setNextId(DroneSingleton.getInstance().getNextId())
                 .build();
+        DroneSingleton.getInstance().setNextId(request.getId());
         responseObserver.onNext(response);
         responseObserver.onCompleted();
         System.out.println("InsertionServiceImpl insert request ended");

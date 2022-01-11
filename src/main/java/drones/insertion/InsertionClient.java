@@ -12,8 +12,9 @@ import java.util.concurrent.TimeUnit;
 public class InsertionClient extends Thread {
     private final int ownId;
     private final DroneEntity target;
+    private volatile int nextId;
 
-    InsertionClient(int ownId, DroneEntity target) {
+    public InsertionClient(int ownId, DroneEntity target) {
         this.ownId = ownId;
         this.target = target;
     }
@@ -28,7 +29,12 @@ public class InsertionClient extends Thread {
                 .build();
         InsertionResponse insertionResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).insert(insertionRequest);
         System.out.println("InsertionClient response da: " + insertionResponse.getId());
+        nextId = insertionResponse.getId();
         channel.shutdown();
         System.out.println("InsertionClient ended");
+    }
+
+    public int getNextId() {
+        return nextId;
     }
 }

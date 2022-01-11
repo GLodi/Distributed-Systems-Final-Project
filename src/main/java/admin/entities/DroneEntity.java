@@ -9,7 +9,8 @@ public class DroneEntity {
     private int x;
     private int y;
     private int port;
-    private int battery;
+    private int battery = 100;
+    private boolean master = false;
 
     public DroneEntity() {
     }
@@ -78,6 +79,14 @@ public class DroneEntity {
 
     public void setBattery(int battery) {
         this.battery = battery;
+    }
+
+    public boolean isMaster() {
+        return master;
+    }
+
+    public void setMaster(boolean master) {
+        this.master = master;
     }
 
     @Override

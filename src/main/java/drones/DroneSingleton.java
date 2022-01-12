@@ -2,8 +2,8 @@ package drones;
 
 import admin.entities.DroneEntity;
 import drones.election.DroneElectionThread;
-import drones.eventbus.ErrorMessage;
 import drones.eventbus.EventBus;
+import drones.eventbus.messages.ErrorMessage;
 import drones.greetings.GreetingsLogic;
 import drones.greetings.GreetingsServiceImpl;
 import drones.insertion.InsertionLogic;
@@ -138,19 +138,19 @@ public class DroneSingleton {
         return droneModel.id;
     }
 
-    public synchronized int getNextId() {
-        return droneModel.nextId;
+    public synchronized DroneEntity getNext() {
+        return droneModel.next;
     }
 
-    public synchronized void setNextId(int nextId) {
-        droneModel.nextId = nextId;
+    public synchronized void setNext(DroneEntity next) {
+        droneModel.next = next;
     }
 
-    public synchronized int getMaster() {
+    public synchronized DroneEntity getMaster() {
         return droneModel.master;
     }
 
-    public synchronized void setMaster(int master) {
+    public synchronized void setMaster(DroneEntity master) {
         droneModel.master = master;
     }
 }

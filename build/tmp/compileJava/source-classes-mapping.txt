@@ -1,22 +1,121 @@
-Main.java
- Main
-admin/models/Statistic.java
- admin.models.Statistic
-admin/models/Drone.java
- admin.models.Drone
-admin/utils/Constants.java
- admin.utils.Constants
-admin/server/services/StatsService.java
- admin.server.services.StatsService
+com/progetto/grpc/InsertionServiceGrpc.java
+ com.progetto.grpc.InsertionServiceGrpc
+ com.progetto.grpc.InsertionServiceGrpc$1
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceBaseDescriptorSupplier
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceBlockingStub
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceFileDescriptorSupplier
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceFutureStub
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceImplBase
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceMethodDescriptorSupplier
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceStub
+ com.progetto.grpc.InsertionServiceGrpc$MethodHandlers
+drones/eventbus/messages/ElectedMessage.java
+ drones.eventbus.messages.ElectedMessage
+drones/election/ElectionStateEnum.java
+ drones.election.ElectionStateEnum
+com/progetto/grpc/InsertionServiceOuterClass.java
+ com.progetto.grpc.InsertionServiceOuterClass
+ com.progetto.grpc.InsertionServiceOuterClass$1
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest$1
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest$Builder
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequestOrBuilder
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$1
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$Builder
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponseOrBuilder
+drones/insertion/InsertionServiceImpl.java
+ drones.insertion.InsertionServiceImpl
+drones/recharge/DroneRechargeThread.java
+ drones.recharge.DroneRechargeThread
+drones/greetings/GreetingsServiceImpl.java
+ drones.greetings.GreetingsServiceImpl
+drones/insertion/InsertionLogic.java
+ drones.insertion.InsertionLogic
+drones/DroneSingleton.java
+ drones.DroneSingleton
+drones/stats/DroneStatsThread.java
+ drones.stats.DroneStatsThread
+drones/eventbus/messages/ErrorMessage.java
+ drones.eventbus.messages.ErrorMessage
+drones/DroneMain.java
+ drones.DroneMain
+drones/insertion/InsertionClient.java
+ drones.insertion.InsertionClient
+dronazon/DronazonPub.java
+ dronazon.DronazonPub
+drones/eventbus/messages/InsertionMessage.java
+ drones.eventbus.messages.InsertionMessage
+drones/register/RegistrationLogic.java
+ drones.register.RegistrationLogic
+ drones.register.RegistrationLogic$1
+admin/server/beans/Statistics.java
+ admin.server.beans.Statistics
+drones/eventbus/messages/GreetingsMessage.java
+ drones.eventbus.messages.GreetingsMessage
+com/progetto/grpc/GreetingsServiceGrpc.java
+ com.progetto.grpc.GreetingsServiceGrpc
+ com.progetto.grpc.GreetingsServiceGrpc$1
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceBaseDescriptorSupplier
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceBlockingStub
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceFileDescriptorSupplier
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceFutureStub
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceImplBase
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceMethodDescriptorSupplier
+ com.progetto.grpc.GreetingsServiceGrpc$GreetingsServiceStub
+ com.progetto.grpc.GreetingsServiceGrpc$MethodHandlers
+drones/eventbus/Message.java
+ drones.eventbus.Message
+InsertionRequest.java
+ InsertionRequest
+drones/eventbus/EventBus.java
+ drones.eventbus.EventBus
+admin/entities/DroneEntity.java
+ admin.entities.DroneEntity
+com/progetto/grpc/DroneOuterClass.java
+ com.progetto.grpc.DroneOuterClass
+ com.progetto.grpc.DroneOuterClass$1
+ com.progetto.grpc.DroneOuterClass$Drone
+ com.progetto.grpc.DroneOuterClass$Drone$1
+ com.progetto.grpc.DroneOuterClass$Drone$Builder
+ com.progetto.grpc.DroneOuterClass$DroneOrBuilder
+drones/order/DroneOrderThread.java
+ drones.order.DroneOrderThread
+drones/election/DroneElectionThread.java
+ drones.election.DroneElectionThread
+drones/sensors/DroneSensorsThread.java
+ drones.sensors.DroneSensorsThread
+drones/insertion/listeners/GreetingsListener.java
+ drones.insertion.listeners.GreetingsListener
+drones/DroneModel.java
+ drones.DroneModel
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin
+drones/checkalive/DroneChechAliveThread.java
+ drones.checkalive.DroneChechAliveThread
 admin/server/services/DroneService.java
  admin.server.services.DroneService
+ admin.server.services.DroneService$1
 admin/server/beans/Drones.java
  admin.server.beans.Drones
 admin/server/ServerAdmin.java
  admin.server.ServerAdmin
-admin/messages/DroneAccepted.java
- admin.messages.DroneAccepted
-admin/server/beans/Statistics.java
- admin.server.beans.Statistics
-admin/client/ClientAdmin.java
- admin.client.ClientAdmin
+admin/entities/StatisticEntity.java
+ admin.entities.StatisticEntity
+com/progetto/grpc/GreetingsServiceOuterClass.java
+ com.progetto.grpc.GreetingsServiceOuterClass
+ com.progetto.grpc.GreetingsServiceOuterClass$1
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloRequest
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloRequest$1
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloRequest$Builder
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloRequestOrBuilder
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloResponse
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloResponse$1
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloResponse$Builder
+ com.progetto.grpc.GreetingsServiceOuterClass$HelloResponseOrBuilder
+admin/server/services/StatsService.java
+ admin.server.services.StatsService
+drones/greetings/GreetingsClient.java
+ drones.greetings.GreetingsClient
+drones/greetings/GreetingsLogic.java
+ drones.greetings.GreetingsLogic

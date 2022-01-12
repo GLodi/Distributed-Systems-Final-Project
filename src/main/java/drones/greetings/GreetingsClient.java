@@ -1,9 +1,9 @@
 package drones.greetings;
 
 import admin.entities.DroneEntity;
+import com.progetto.grpc.DroneOuterClass.Drone;
 import com.progetto.grpc.GreetingsServiceGrpc;
 import com.progetto.grpc.GreetingsServiceGrpc.GreetingsServiceBlockingStub;
-import com.progetto.grpc.GreetingsServiceOuterClass.Drone;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloRequest;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse;
 import drones.DroneSingleton;
@@ -36,8 +36,8 @@ public class GreetingsClient extends Thread {
                                 .setPort(own.getPort()))
                 .build();
         HelloResponse helloResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).greet(helloRequest);
-        if (helloResponse.getMaster()) {
-            DroneSingleton.getInstance().setMaster(helloResponse.getId());
+        if (helloResponse.hasField(HelloResponse.getDescriptor().findFieldByName("master"))) {
+            DroneSingleton.getInstance().setMaster(new DroneEntity(helloResponse.getMaster()));
             System.out.println("greeting da master: " + helloResponse.getId());
         } else {
             System.out.println("greeting da: " + helloResponse.getId());

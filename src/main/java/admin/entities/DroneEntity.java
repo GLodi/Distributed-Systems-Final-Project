@@ -1,5 +1,7 @@
 package admin.entities;
 
+import com.progetto.grpc.DroneOuterClass;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
@@ -10,7 +12,6 @@ public class DroneEntity {
     private int y;
     private int port;
     private int battery = 100;
-    private boolean master = false;
 
     public DroneEntity() {
     }
@@ -34,6 +35,13 @@ public class DroneEntity {
         this.y = d.y;
         this.port = d.port;
         this.battery = d.battery;
+    }
+
+    public DroneEntity(DroneOuterClass.Drone d) {
+        this.id = d.getId();
+        this.x = d.getX();
+        this.y = d.getY();
+        this.port = d.getPort();
     }
 
     public void setCoordinates(int x, int y) {
@@ -81,12 +89,8 @@ public class DroneEntity {
         this.battery = battery;
     }
 
-    public boolean isMaster() {
-        return master;
-    }
-
-    public void setMaster(boolean master) {
-        this.master = master;
+    public DroneOuterClass.Drone toDrone() {
+        return DroneOuterClass.Drone.newBuilder().setId(id).setX(x).setY(y).setPort(port).build();
     }
 
     @Override

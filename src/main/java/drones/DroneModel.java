@@ -11,8 +11,8 @@ public class DroneModel {
     public final int y;
     public final int battery;
     public final List<DroneEntity> droneList;
-    public int master;
-    public int nextId;
+    public DroneEntity master;
+    public DroneEntity next;
 
     public DroneModel(int id, int port, List<DroneEntity> droneEntityList) {
         this.id = id;

@@ -2,9 +2,9 @@ package drones.greetings;
 
 import admin.entities.DroneEntity;
 import drones.DroneSingleton;
-import drones.eventbus.ErrorMessage;
 import drones.eventbus.EventBus;
-import drones.eventbus.GreetingsMessage;
+import drones.eventbus.messages.ErrorMessage;
+import drones.eventbus.messages.GreetingsMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class GreetingsLogic extends Thread {
 
         if (DroneSingleton.getInstance().getDroneList().size() == 1) {
             System.out.println("GreetingsLogic greetEveryone Alone. Elect myself to master.");
-            DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getId());
+            DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
         } else {
             EventBus.getInstance().put(new GreetingsMessage());
         }

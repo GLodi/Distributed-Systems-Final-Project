@@ -3,7 +3,7 @@ package drones.insertion.listeners;
 import admin.entities.DroneEntity;
 import drones.DroneSingleton;
 import drones.eventbus.EventBus;
-import drones.eventbus.GreetingsMessage;
+import drones.eventbus.messages.GreetingsMessage;
 import drones.insertion.InsertionClient;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class GreetingsListener extends Thread {
 
         InsertionClient insertionClient = null;
         try {
-            insertionClient = new InsertionClient(ownId, toRequestInsertionTo);
+            insertionClient = new InsertionClient(toRequestInsertionTo);
             insertionClient.start();
             insertionClient.join();
         } catch (Exception e) {
@@ -49,7 +49,7 @@ public class GreetingsListener extends Thread {
             return;
         }
 
-        DroneSingleton.getInstance().setNextId(insertionClient.getNextId());
+        DroneSingleton.getInstance().setNext(insertionClient.getNext());
 
         System.out.println("InsertionLogic requestInsert ended");
     }

@@ -10,8 +10,13 @@ public class GreetingsServiceImpl extends GreetingsServiceImplBase {
     @Override
     public void greet(HelloRequest request, StreamObserver<HelloResponse> responseObserver) {
         System.out.println("GreetingsServiceImpl greet received from " + request.getDrone().getId());
-        HelloResponse response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId())
-                .setMaster(DroneSingleton.getInstance().getMaster() == DroneSingleton.getInstance().getId()).build();
+        HelloResponse response;
+        if (DroneSingleton.getInstance().getMaster().getId() == DroneSingleton.getInstance().getId()) {
+            response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId())
+                    .setMaster(DroneSingleton.getInstance().getMaster().toDrone()).build();
+        } else {
+            response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId()).build();
+        }
         responseObserver.onNext(response);
         responseObserver.onCompleted();
         System.out.println("GreetingsServiceImpl greet ended");

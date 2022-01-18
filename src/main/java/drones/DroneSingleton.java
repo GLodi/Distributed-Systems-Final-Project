@@ -1,13 +1,14 @@
 package drones;
 
 import admin.entities.DroneEntity;
-import drones.election.DroneElectionThread;
+import drones.checkmasteralive.CheckMasterAliveLogic;
+import drones.checkmasteralive.CheckMasterAliveServiceImpl;
+import drones.election.ElectionLogic;
+import drones.election.ElectionServiceImpl;
 import drones.eventbus.EventBus;
 import drones.eventbus.messages.ErrorMessage;
 import drones.greetings.GreetingsLogic;
 import drones.greetings.GreetingsServiceImpl;
-import drones.insertion.InsertionLogic;
-import drones.insertion.InsertionServiceImpl;
 import drones.order.DroneOrderThread;
 import drones.register.RegistrationLogic;
 import drones.sensors.DroneSensorsThread;
@@ -16,6 +17,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 public class DroneSingleton {
@@ -28,8 +30,8 @@ public class DroneSingleton {
 
     private RegistrationLogic registrationLogic;
     private GreetingsLogic greetingsLogic;
-    private InsertionLogic insertionLogic;
-    private DroneElectionThread droneElectionThread;
+    private CheckMasterAliveLogic checkMasterAliveLogic;
+    private ElectionLogic electionLogic;
     private DroneOrderThread droneOrderThread;
     private DroneSensorsThread droneSensorsThread;
     private DroneStatsThread droneStatsThread;
@@ -66,13 +68,21 @@ public class DroneSingleton {
         }
     }
 
-    public void startInsertionService() {
+    public void startCheckMasterAliveService() {
         try {
-            insertionLogic = new InsertionLogic();
-            insertionLogic.start();
+            checkMasterAliveLogic = new CheckMasterAliveLogic();
+            checkMasterAliveLogic.start();
         } catch (Exception e) {
-            System.out.println("DroneSingleton startInsertionService esecuzione fallita");
-            EventBus.getInstance().put(new ErrorMessage());
+            System.out.println("DroneSingleton startCheckMasterAliveService esecuzione fallita");
+        }
+    }
+
+    public void startElectionService() {
+        try {
+            electionLogic = new ElectionLogic();
+            electionLogic.start();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startElectionService esecuzione fallita");
         }
     }
 
@@ -88,8 +98,9 @@ public class DroneSingleton {
         try {
             System.out.println("GRPC servers starting");
             Server server = ServerBuilder.forPort(DroneSingleton.getInstance().getPort())
-                    .addService(new InsertionServiceImpl())
                     .addService(new GreetingsServiceImpl())
+                    .addService(new CheckMasterAliveServiceImpl())
+                    .addService(new ElectionServiceImpl())
                     .build();
             server.start();
             System.out.println("GRPC servers started");
@@ -104,8 +115,8 @@ public class DroneSingleton {
         if (greetingsLogic != null) {
             greetingsLogic.interrupt();
         }
-        if (droneElectionThread != null) {
-            droneElectionThread.interrupt();
+        if (electionLogic != null) {
+            electionLogic.interrupt();
         }
         if (droneOrderThread != null) {
             droneOrderThread.interrupt();
@@ -138,19 +149,28 @@ public class DroneSingleton {
         return droneModel.id;
     }
 
-    public synchronized DroneEntity getNext() {
-        return droneModel.next;
-    }
-
-    public synchronized void setNext(DroneEntity next) {
-        droneModel.next = next;
-    }
-
     public synchronized DroneEntity getMaster() {
         return droneModel.master;
     }
 
     public synchronized void setMaster(DroneEntity master) {
         droneModel.master = master;
+    }
+
+    public synchronized void setParticipant() {
+        droneModel.electionParticipant = true;
+    }
+
+    public synchronized void setNonParticipant() {
+        droneModel.electionParticipant = false;
+    }
+
+    public synchronized boolean isParticipant() {
+        return droneModel.electionParticipant;
+    }
+
+    public synchronized void addToRing(DroneEntity droneEntity) {
+        droneModel.droneList.add(droneEntity);
+        droneModel.droneList.sort(Comparator.comparingInt(DroneEntity::getId));
     }
 }

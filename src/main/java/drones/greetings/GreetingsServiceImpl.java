@@ -1,5 +1,6 @@
 package drones.greetings;
 
+import admin.entities.DroneEntity;
 import com.progetto.grpc.GreetingsServiceGrpc.GreetingsServiceImplBase;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloRequest;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse;
@@ -17,6 +18,7 @@ public class GreetingsServiceImpl extends GreetingsServiceImplBase {
         } else {
             response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId()).build();
         }
+        DroneSingleton.getInstance().addToRing(new DroneEntity(request.getDrone()));
         responseObserver.onNext(response);
         responseObserver.onCompleted();
         System.out.println("GreetingsServiceImpl greet ended");

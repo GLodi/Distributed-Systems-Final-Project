@@ -21,6 +21,7 @@ public class EventBus {
 
     public synchronized void put(Message message) {
         buffer.add(message);
+        System.out.println("EVENTBUS message: " + message.kind + " at " + message.timestamp);
         notifyAll();
     }
 

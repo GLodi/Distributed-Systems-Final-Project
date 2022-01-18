@@ -4,7 +4,7 @@ import admin.entities.DroneEntity;
 import drones.DroneSingleton;
 import drones.eventbus.EventBus;
 import drones.eventbus.messages.ErrorMessage;
-import drones.eventbus.messages.GreetingsMessage;
+import drones.eventbus.messages.GreetedEveryoneMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class GreetingsLogic extends Thread {
             System.out.println("GreetingsLogic greetEveryone Alone. Elect myself to master.");
             DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
         } else {
-            EventBus.getInstance().put(new GreetingsMessage());
+            EventBus.getInstance().put(new GreetedEveryoneMessage());
         }
     }
 

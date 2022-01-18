@@ -641,21 +641,6 @@ public final class InsertionServiceOuterClass {
      * @return The id.
      */
     int getId();
-
-    /**
-     * <code>.com.progetto.grpc.Drone next = 2;</code>
-     * @return Whether the next field is set.
-     */
-    boolean hasNext();
-    /**
-     * <code>.com.progetto.grpc.Drone next = 2;</code>
-     * @return The next.
-     */
-    com.progetto.grpc.DroneOuterClass.Drone getNext();
-    /**
-     * <code>.com.progetto.grpc.Drone next = 2;</code>
-     */
-    com.progetto.grpc.DroneOuterClass.DroneOrBuilder getNextOrBuilder();
   }
   /**
    * Protobuf type {@code com.progetto.grpc.InsertionResponse}
@@ -707,19 +692,6 @@ public final class InsertionServiceOuterClass {
               id_ = input.readUInt32();
               break;
             }
-            case 18: {
-              com.progetto.grpc.DroneOuterClass.Drone.Builder subBuilder = null;
-              if (next_ != null) {
-                subBuilder = next_.toBuilder();
-              }
-              next_ = input.readMessage(com.progetto.grpc.DroneOuterClass.Drone.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(next_);
-                next_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -762,29 +734,6 @@ public final class InsertionServiceOuterClass {
       return id_;
     }
 
-    public static final int NEXT_FIELD_NUMBER = 2;
-    private com.progetto.grpc.DroneOuterClass.Drone next_;
-    /**
-     * <code>.com.progetto.grpc.Drone next = 2;</code>
-     * @return Whether the next field is set.
-     */
-    public boolean hasNext() {
-      return next_ != null;
-    }
-    /**
-     * <code>.com.progetto.grpc.Drone next = 2;</code>
-     * @return The next.
-     */
-    public com.progetto.grpc.DroneOuterClass.Drone getNext() {
-      return next_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : next_;
-    }
-    /**
-     * <code>.com.progetto.grpc.Drone next = 2;</code>
-     */
-    public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getNextOrBuilder() {
-      return getNext();
-    }
-
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -802,9 +751,6 @@ public final class InsertionServiceOuterClass {
       if (id_ != 0) {
         output.writeUInt32(1, id_);
       }
-      if (next_ != null) {
-        output.writeMessage(2, getNext());
-      }
       unknownFields.writeTo(output);
     }
 
@@ -817,10 +763,6 @@ public final class InsertionServiceOuterClass {
       if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, id_);
-      }
-      if (next_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getNext());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -839,11 +781,6 @@ public final class InsertionServiceOuterClass {
 
       if (getId()
           != other.getId()) return false;
-      if (hasNext() != other.hasNext()) return false;
-      if (hasNext()) {
-        if (!getNext()
-            .equals(other.getNext())) return false;
-      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -857,10 +794,6 @@ public final class InsertionServiceOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      if (hasNext()) {
-        hash = (37 * hash) + NEXT_FIELD_NUMBER;
-        hash = (53 * hash) + getNext().hashCode();
-      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -996,12 +929,6 @@ public final class InsertionServiceOuterClass {
         super.clear();
         id_ = 0;
 
-        if (nextBuilder_ == null) {
-          next_ = null;
-        } else {
-          next_ = null;
-          nextBuilder_ = null;
-        }
         return this;
       }
 
@@ -1029,11 +956,6 @@ public final class InsertionServiceOuterClass {
       public com.progetto.grpc.InsertionServiceOuterClass.InsertionResponse buildPartial() {
         com.progetto.grpc.InsertionServiceOuterClass.InsertionResponse result = new com.progetto.grpc.InsertionServiceOuterClass.InsertionResponse(this);
         result.id_ = id_;
-        if (nextBuilder_ == null) {
-          result.next_ = next_;
-        } else {
-          result.next_ = nextBuilder_.build();
-        }
         onBuilt();
         return result;
       }
@@ -1084,9 +1006,6 @@ public final class InsertionServiceOuterClass {
         if (other == com.progetto.grpc.InsertionServiceOuterClass.InsertionResponse.getDefaultInstance()) return this;
         if (other.getId() != 0) {
           setId(other.getId());
-        }
-        if (other.hasNext()) {
-          mergeNext(other.getNext());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1145,125 +1064,6 @@ public final class InsertionServiceOuterClass {
         id_ = 0;
         onChanged();
         return this;
-      }
-
-      private com.progetto.grpc.DroneOuterClass.Drone next_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> nextBuilder_;
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       * @return Whether the next field is set.
-       */
-      public boolean hasNext() {
-        return nextBuilder_ != null || next_ != null;
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       * @return The next.
-       */
-      public com.progetto.grpc.DroneOuterClass.Drone getNext() {
-        if (nextBuilder_ == null) {
-          return next_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : next_;
-        } else {
-          return nextBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      public Builder setNext(com.progetto.grpc.DroneOuterClass.Drone value) {
-        if (nextBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          next_ = value;
-          onChanged();
-        } else {
-          nextBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      public Builder setNext(
-          com.progetto.grpc.DroneOuterClass.Drone.Builder builderForValue) {
-        if (nextBuilder_ == null) {
-          next_ = builderForValue.build();
-          onChanged();
-        } else {
-          nextBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      public Builder mergeNext(com.progetto.grpc.DroneOuterClass.Drone value) {
-        if (nextBuilder_ == null) {
-          if (next_ != null) {
-            next_ =
-              com.progetto.grpc.DroneOuterClass.Drone.newBuilder(next_).mergeFrom(value).buildPartial();
-          } else {
-            next_ = value;
-          }
-          onChanged();
-        } else {
-          nextBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      public Builder clearNext() {
-        if (nextBuilder_ == null) {
-          next_ = null;
-          onChanged();
-        } else {
-          next_ = null;
-          nextBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      public com.progetto.grpc.DroneOuterClass.Drone.Builder getNextBuilder() {
-        
-        onChanged();
-        return getNextFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getNextOrBuilder() {
-        if (nextBuilder_ != null) {
-          return nextBuilder_.getMessageOrBuilder();
-        } else {
-          return next_ == null ?
-              com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : next_;
-        }
-      }
-      /**
-       * <code>.com.progetto.grpc.Drone next = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> 
-          getNextFieldBuilder() {
-        if (nextBuilder_ == null) {
-          nextBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder>(
-                  getNext(),
-                  getParentForChildren(),
-                  isClean());
-          next_ = null;
-        }
-        return nextBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1340,8 +1140,7 @@ public final class InsertionServiceOuterClass {
       "\n\026InsertionService.proto\022\021com.progetto.g" +
       "rpc\032\013Drone.proto\">\n\020InsertionRequest\022*\n\010" +
       "toInsert\030\001 \001(\0132\030.com.progetto.grpc.Drone" +
-      "\"G\n\021InsertionResponse\022\n\n\002id\030\001 \001(\r\022&\n\004nex" +
-      "t\030\002 \001(\0132\030.com.progetto.grpc.Drone2g\n\020Ins" +
+      "\"\037\n\021InsertionResponse\022\n\n\002id\030\001 \001(\r2g\n\020Ins" +
       "ertionService\022S\n\006insert\022#.com.progetto.g" +
       "rpc.InsertionRequest\032$.com.progetto.grpc" +
       ".InsertionResponseb\006proto3"
@@ -1362,7 +1161,7 @@ public final class InsertionServiceOuterClass {
     internal_static_com_progetto_grpc_InsertionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_InsertionResponse_descriptor,
-        new java.lang.String[] { "Id", "Next", });
+        new java.lang.String[] { "Id", });
     com.progetto.grpc.DroneOuterClass.getDescriptor();
   }
 

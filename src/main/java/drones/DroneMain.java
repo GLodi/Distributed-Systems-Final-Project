@@ -50,15 +50,12 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startGreetingsService();
 
-        DroneSingleton.getInstance().startInsertionService();
+        DroneSingleton.getInstance().startCheckMasterAliveService();
 
-        // TODO: check su anello.
-        //  Se unico:
-        //      si elegge master. METTI WAIT/NOTIFY SUL DIVENTARE MASTER COSI' I THREAD SI SVEGLIANO
-        //  else:
-        //      insertion process
+        DroneSingleton.getInstance().startElectionService();
 
         // TODO: thread election. capisce se non c'e' + master. wait/notify appena se ne accorge
+        //      ELETTO DRONE CON BATTERIA PIU' ALTA, SE UGUALE ID MAGGIORE
 
         // TODO: thread avvia sensore per rilevamento inquinamento
 

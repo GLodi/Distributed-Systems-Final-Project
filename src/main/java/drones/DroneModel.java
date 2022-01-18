@@ -12,7 +12,7 @@ public class DroneModel {
     public final int battery;
     public final List<DroneEntity> droneList;
     public DroneEntity master;
-    public DroneEntity next;
+    public boolean electionParticipant = false;
 
     public DroneModel(int id, int port, List<DroneEntity> droneEntityList) {
         this.id = id;

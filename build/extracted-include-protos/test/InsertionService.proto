@@ -9,7 +9,6 @@ message InsertionRequest {
 
 message InsertionResponse {
   uint32 id = 1;
-  Drone next = 2;
 }
 
 service InsertionService {

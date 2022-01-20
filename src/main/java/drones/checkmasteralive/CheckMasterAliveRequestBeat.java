@@ -25,6 +25,7 @@ public class CheckMasterAliveRequestBeat extends Thread {
 
             @Override
             public void onError(Throwable throwable) {
+                channel.shutdownNow();
                 System.out.println("CheckMasterAlive RequestBeat MASTER CADUTO: " + throwable.getLocalizedMessage());
                 EventBus.getInstance().put(new ElectionMessage(DroneSingleton.getInstance().getId()));
             }

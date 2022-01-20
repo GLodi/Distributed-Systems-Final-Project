@@ -7,17 +7,18 @@ import java.util.List;
 public class DroneModel {
     public final int id;
     public final int port;
-    public final int x;
-    public final int y;
-    public final int battery;
-    public final List<DroneEntity> droneList;
+    public int x;
+    public int y;
+    public int battery;
+    public List<DroneEntity> droneList;
     public DroneEntity master;
     public boolean electionParticipant = false;
+    public boolean isBeingElected = false;
 
-    public DroneModel(int id, int port, List<DroneEntity> droneEntityList) {
+    public DroneModel(int id, int x, int y, int port, List<DroneEntity> droneEntityList) {
         this.id = id;
-        this.x = droneEntityList.stream().filter(d -> d.getId() == id).findFirst().get().getX();
-        this.y = droneEntityList.stream().filter(d -> d.getId() == id).findFirst().get().getY();
+        this.x = x;
+        this.y = y;
         this.droneList = droneEntityList;
         this.battery = 100;
         this.port = port;

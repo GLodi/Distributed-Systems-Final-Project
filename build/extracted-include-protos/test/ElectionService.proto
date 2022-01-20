@@ -1,22 +1,25 @@
 syntax = "proto3";
 package com.progetto.grpc;
 
+import 'Drone.proto';
+
 message ElectionRequest {
   uint32 id = 1;
   uint32 electionId = 2;
+  uint32 battery = 3;
 }
 
 message ElectionResponse {}
 
 message ElectedRequest {
-  uint32 id = 1;
-  uint32 electedId = 2;
+  Drone newMaster = 1;
 }
 
-message ElectedResponse {}
+message ElectedResponse {
+  Drone newSlave = 1;
+}
 
 service ElectionService {
   rpc forwardElection(ElectionRequest) returns (ElectionResponse);
   rpc forwardElected(ElectedRequest) returns (ElectedResponse);
-
 }

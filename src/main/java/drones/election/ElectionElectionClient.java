@@ -6,6 +6,8 @@ import com.progetto.grpc.ElectionServiceGrpc.ElectionServiceBlockingStub;
 import com.progetto.grpc.ElectionServiceOuterClass.ElectionRequest;
 import com.progetto.grpc.ElectionServiceOuterClass.ElectionResponse;
 import drones.DroneSingleton;
+import drones.eventbus.EventBus;
+import drones.eventbus.messages.ConfirmedElectedMessage;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -26,7 +28,6 @@ public class ElectionElectionClient extends Thread {
         System.out.println("ElectionElectionClient started");
         int ownId = DroneSingleton.getInstance().getId();
         List<DroneEntity> droneEntityList = new ArrayList<>(DroneSingleton.getInstance().getDroneList());
-        droneEntityList.removeIf(d -> d.getId() == ownId);
 
         List<DroneEntity> orderedEntityList = new ArrayList<>();
         droneEntityList.stream().filter(d -> d.getId() > ownId).forEach(orderedEntityList::add);
@@ -44,23 +45,25 @@ public class ElectionElectionClient extends Thread {
             try {
                 ElectionResponse electionResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).forwardElection(electionRequest);
             } catch (StatusRuntimeException e) {
-                System.out.println("ElectionElectionClient ERROR FORWARDING TO " + droneEntity.getId() + ". Moving to next in ring.");
+                System.out.println("ElectionElectionClient ERROR FORWARDING " + electionRequest.getElectionId() + " TO " + droneEntity.getId() + ". Moving to next in ring.");
                 channel.shutdown();
                 failCount += 1;
                 continue;
             }
-            System.out.println("ElectionElectionClient SUCCESSFUL FORWARDING TO " + droneEntity.getId());
+            System.out.println("ElectionElectionClient SUCCESSFULLY FORWARDED " + electionRequest.getElectionId() + " TO " + droneEntity.getId());
             channel.shutdown();
             break;
         }
 
-        // TODO: if all error, select myself as master
-        if (failCount == orderedEntityList.size()) {
-
-        }
-
         if (channel != null && !channel.isShutdown()) {
             channel.shutdown();
+        }
+
+        if (failCount == orderedEntityList.size()) {
+            System.out.println("ElectionElectionClient no one is answering, assuming last so elect myself to master");
+            DroneSingleton.getInstance().setDroneList(new ArrayList<>());
+            DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
+            EventBus.getInstance().put(new ConfirmedElectedMessage());
         }
 
         System.out.println("ElectionElectionClient ended");

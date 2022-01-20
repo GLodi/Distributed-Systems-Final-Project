@@ -5,6 +5,7 @@ import drones.eventbus.Message;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+// called when the drone is requested to forward an election message to the first neightbour available
 public class ElectionMessage extends Message {
     public final int electionId;
 

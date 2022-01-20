@@ -15,7 +15,6 @@ public class GreetingsLogic extends Thread {
     public void run() {
         DroneEntity own = new DroneEntity(DroneSingleton.getInstance().getDroneEntity());
         List<DroneEntity> droneEntityList = new ArrayList<>(DroneSingleton.getInstance().getDroneList());
-        droneEntityList.removeIf(d -> d.getId() == own.getId());
 
         greetEveryone(droneEntityList, own);
     }
@@ -48,10 +47,10 @@ public class GreetingsLogic extends Thread {
         greetingsClientList.stream().filter(gc -> gc.getDroneIdReceived() != 0).forEach(gc -> repliedIds.add(gc.getDroneIdReceived()));
         System.out.println("GreetingsLogic greetEveryone received " + repliedIds.size() + " replies");
 
-        DroneSingleton.getInstance().getDroneList().removeIf(d -> repliedIds.stream().noneMatch(r -> r == d.getId()) && d.getId() != own.getId());
+        DroneSingleton.getInstance().getDroneList().removeIf(d -> repliedIds.stream().noneMatch(r -> r == d.getId()));
         System.out.println("GreetingsLogic greetEveryone cleaned replies");
 
-        if (DroneSingleton.getInstance().getDroneList().size() == 1) {
+        if (DroneSingleton.getInstance().getDroneList().size() == 0) {
             System.out.println("GreetingsLogic greetEveryone Alone. Elect myself to master.");
             DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
         } else {

@@ -17,6 +17,7 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -137,6 +138,10 @@ public class DroneSingleton {
         return droneModel.droneList;
     }
 
+    public synchronized void setDroneList(List<DroneEntity> droneEntityList) {
+        droneModel.droneList = new ArrayList<>(droneEntityList);
+    }
+
     public synchronized DroneEntity getDroneEntity() {
         return DroneModel.getEntity(droneModel);
     }
@@ -172,5 +177,13 @@ public class DroneSingleton {
     public synchronized void addToRing(DroneEntity droneEntity) {
         droneModel.droneList.add(droneEntity);
         droneModel.droneList.sort(Comparator.comparingInt(DroneEntity::getId));
+    }
+
+    public synchronized void setIsBeingElected(boolean b) {
+        droneModel.isBeingElected = b;
+    }
+
+    public synchronized boolean isBeingElected() {
+        return droneModel.isBeingElected;
     }
 }

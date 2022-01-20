@@ -11,7 +11,7 @@ public class DroneEntity {
     private int x;
     private int y;
     private int port;
-    private int battery = 100;
+    private int battery;
 
     public DroneEntity() {
     }
@@ -90,7 +90,7 @@ public class DroneEntity {
     }
 
     public DroneOuterClass.Drone toDrone() {
-        return DroneOuterClass.Drone.newBuilder().setId(id).setX(x).setY(y).setPort(port).build();
+        return DroneOuterClass.Drone.newBuilder().setId(id).setX(x).setY(y).setPort(port).setBattery(battery).build();
     }
 
     @Override

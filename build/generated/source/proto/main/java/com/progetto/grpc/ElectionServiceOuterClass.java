@@ -29,6 +29,12 @@ public final class ElectionServiceOuterClass {
      * @return The electionId.
      */
     int getElectionId();
+
+    /**
+     * <code>uint32 battery = 3;</code>
+     * @return The battery.
+     */
+    int getBattery();
   }
   /**
    * Protobuf type {@code com.progetto.grpc.ElectionRequest}
@@ -85,6 +91,11 @@ public final class ElectionServiceOuterClass {
               electionId_ = input.readUInt32();
               break;
             }
+            case 24: {
+
+              battery_ = input.readUInt32();
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -137,6 +148,16 @@ public final class ElectionServiceOuterClass {
       return electionId_;
     }
 
+    public static final int BATTERY_FIELD_NUMBER = 3;
+    private int battery_;
+    /**
+     * <code>uint32 battery = 3;</code>
+     * @return The battery.
+     */
+    public int getBattery() {
+      return battery_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -157,6 +178,9 @@ public final class ElectionServiceOuterClass {
       if (electionId_ != 0) {
         output.writeUInt32(2, electionId_);
       }
+      if (battery_ != 0) {
+        output.writeUInt32(3, battery_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -173,6 +197,10 @@ public final class ElectionServiceOuterClass {
       if (electionId_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(2, electionId_);
+      }
+      if (battery_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, battery_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -193,6 +221,8 @@ public final class ElectionServiceOuterClass {
           != other.getId()) return false;
       if (getElectionId()
           != other.getElectionId()) return false;
+      if (getBattery()
+          != other.getBattery()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -208,6 +238,8 @@ public final class ElectionServiceOuterClass {
       hash = (53 * hash) + getId();
       hash = (37 * hash) + ELECTIONID_FIELD_NUMBER;
       hash = (53 * hash) + getElectionId();
+      hash = (37 * hash) + BATTERY_FIELD_NUMBER;
+      hash = (53 * hash) + getBattery();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -345,6 +377,8 @@ public final class ElectionServiceOuterClass {
 
         electionId_ = 0;
 
+        battery_ = 0;
+
         return this;
       }
 
@@ -373,6 +407,7 @@ public final class ElectionServiceOuterClass {
         com.progetto.grpc.ElectionServiceOuterClass.ElectionRequest result = new com.progetto.grpc.ElectionServiceOuterClass.ElectionRequest(this);
         result.id_ = id_;
         result.electionId_ = electionId_;
+        result.battery_ = battery_;
         onBuilt();
         return result;
       }
@@ -426,6 +461,9 @@ public final class ElectionServiceOuterClass {
         }
         if (other.getElectionId() != 0) {
           setElectionId(other.getElectionId());
+        }
+        if (other.getBattery() != 0) {
+          setBattery(other.getBattery());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -512,6 +550,36 @@ public final class ElectionServiceOuterClass {
       public Builder clearElectionId() {
         
         electionId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int battery_ ;
+      /**
+       * <code>uint32 battery = 3;</code>
+       * @return The battery.
+       */
+      public int getBattery() {
+        return battery_;
+      }
+      /**
+       * <code>uint32 battery = 3;</code>
+       * @param value The battery to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBattery(int value) {
+        
+        battery_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 battery = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBattery() {
+        
+        battery_ = 0;
         onChanged();
         return this;
       }
@@ -997,10 +1065,19 @@ public final class ElectionServiceOuterClass {
     int getId();
 
     /**
-     * <code>uint32 electedId = 2;</code>
-     * @return The electedId.
+     * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+     * @return Whether the newMaster field is set.
      */
-    int getElectedId();
+    boolean hasNewMaster();
+    /**
+     * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+     * @return The newMaster.
+     */
+    com.progetto.grpc.DroneOuterClass.Drone getNewMaster();
+    /**
+     * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+     */
+    com.progetto.grpc.DroneOuterClass.DroneOrBuilder getNewMasterOrBuilder();
   }
   /**
    * Protobuf type {@code com.progetto.grpc.ElectedRequest}
@@ -1052,9 +1129,17 @@ public final class ElectionServiceOuterClass {
               id_ = input.readUInt32();
               break;
             }
-            case 16: {
+            case 18: {
+              com.progetto.grpc.DroneOuterClass.Drone.Builder subBuilder = null;
+              if (newMaster_ != null) {
+                subBuilder = newMaster_.toBuilder();
+              }
+              newMaster_ = input.readMessage(com.progetto.grpc.DroneOuterClass.Drone.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(newMaster_);
+                newMaster_ = subBuilder.buildPartial();
+              }
 
-              electedId_ = input.readUInt32();
               break;
             }
             default: {
@@ -1099,14 +1184,27 @@ public final class ElectionServiceOuterClass {
       return id_;
     }
 
-    public static final int ELECTEDID_FIELD_NUMBER = 2;
-    private int electedId_;
+    public static final int NEWMASTER_FIELD_NUMBER = 2;
+    private com.progetto.grpc.DroneOuterClass.Drone newMaster_;
     /**
-     * <code>uint32 electedId = 2;</code>
-     * @return The electedId.
+     * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+     * @return Whether the newMaster field is set.
      */
-    public int getElectedId() {
-      return electedId_;
+    public boolean hasNewMaster() {
+      return newMaster_ != null;
+    }
+    /**
+     * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+     * @return The newMaster.
+     */
+    public com.progetto.grpc.DroneOuterClass.Drone getNewMaster() {
+      return newMaster_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : newMaster_;
+    }
+    /**
+     * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+     */
+    public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getNewMasterOrBuilder() {
+      return getNewMaster();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1126,8 +1224,8 @@ public final class ElectionServiceOuterClass {
       if (id_ != 0) {
         output.writeUInt32(1, id_);
       }
-      if (electedId_ != 0) {
-        output.writeUInt32(2, electedId_);
+      if (newMaster_ != null) {
+        output.writeMessage(2, getNewMaster());
       }
       unknownFields.writeTo(output);
     }
@@ -1142,9 +1240,9 @@ public final class ElectionServiceOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(1, id_);
       }
-      if (electedId_ != 0) {
+      if (newMaster_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, electedId_);
+          .computeMessageSize(2, getNewMaster());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1163,8 +1261,11 @@ public final class ElectionServiceOuterClass {
 
       if (getId()
           != other.getId()) return false;
-      if (getElectedId()
-          != other.getElectedId()) return false;
+      if (hasNewMaster() != other.hasNewMaster()) return false;
+      if (hasNewMaster()) {
+        if (!getNewMaster()
+            .equals(other.getNewMaster())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1178,8 +1279,10 @@ public final class ElectionServiceOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId();
-      hash = (37 * hash) + ELECTEDID_FIELD_NUMBER;
-      hash = (53 * hash) + getElectedId();
+      if (hasNewMaster()) {
+        hash = (37 * hash) + NEWMASTER_FIELD_NUMBER;
+        hash = (53 * hash) + getNewMaster().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1315,8 +1418,12 @@ public final class ElectionServiceOuterClass {
         super.clear();
         id_ = 0;
 
-        electedId_ = 0;
-
+        if (newMasterBuilder_ == null) {
+          newMaster_ = null;
+        } else {
+          newMaster_ = null;
+          newMasterBuilder_ = null;
+        }
         return this;
       }
 
@@ -1344,7 +1451,11 @@ public final class ElectionServiceOuterClass {
       public com.progetto.grpc.ElectionServiceOuterClass.ElectedRequest buildPartial() {
         com.progetto.grpc.ElectionServiceOuterClass.ElectedRequest result = new com.progetto.grpc.ElectionServiceOuterClass.ElectedRequest(this);
         result.id_ = id_;
-        result.electedId_ = electedId_;
+        if (newMasterBuilder_ == null) {
+          result.newMaster_ = newMaster_;
+        } else {
+          result.newMaster_ = newMasterBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -1396,8 +1507,8 @@ public final class ElectionServiceOuterClass {
         if (other.getId() != 0) {
           setId(other.getId());
         }
-        if (other.getElectedId() != 0) {
-          setElectedId(other.getElectedId());
+        if (other.hasNewMaster()) {
+          mergeNewMaster(other.getNewMaster());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1458,34 +1569,123 @@ public final class ElectionServiceOuterClass {
         return this;
       }
 
-      private int electedId_ ;
+      private com.progetto.grpc.DroneOuterClass.Drone newMaster_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> newMasterBuilder_;
       /**
-       * <code>uint32 electedId = 2;</code>
-       * @return The electedId.
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       * @return Whether the newMaster field is set.
        */
-      public int getElectedId() {
-        return electedId_;
+      public boolean hasNewMaster() {
+        return newMasterBuilder_ != null || newMaster_ != null;
       }
       /**
-       * <code>uint32 electedId = 2;</code>
-       * @param value The electedId to set.
-       * @return This builder for chaining.
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       * @return The newMaster.
        */
-      public Builder setElectedId(int value) {
-        
-        electedId_ = value;
-        onChanged();
+      public com.progetto.grpc.DroneOuterClass.Drone getNewMaster() {
+        if (newMasterBuilder_ == null) {
+          return newMaster_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : newMaster_;
+        } else {
+          return newMasterBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       */
+      public Builder setNewMaster(com.progetto.grpc.DroneOuterClass.Drone value) {
+        if (newMasterBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          newMaster_ = value;
+          onChanged();
+        } else {
+          newMasterBuilder_.setMessage(value);
+        }
+
         return this;
       }
       /**
-       * <code>uint32 electedId = 2;</code>
-       * @return This builder for chaining.
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
        */
-      public Builder clearElectedId() {
-        
-        electedId_ = 0;
-        onChanged();
+      public Builder setNewMaster(
+          com.progetto.grpc.DroneOuterClass.Drone.Builder builderForValue) {
+        if (newMasterBuilder_ == null) {
+          newMaster_ = builderForValue.build();
+          onChanged();
+        } else {
+          newMasterBuilder_.setMessage(builderForValue.build());
+        }
+
         return this;
+      }
+      /**
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       */
+      public Builder mergeNewMaster(com.progetto.grpc.DroneOuterClass.Drone value) {
+        if (newMasterBuilder_ == null) {
+          if (newMaster_ != null) {
+            newMaster_ =
+              com.progetto.grpc.DroneOuterClass.Drone.newBuilder(newMaster_).mergeFrom(value).buildPartial();
+          } else {
+            newMaster_ = value;
+          }
+          onChanged();
+        } else {
+          newMasterBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       */
+      public Builder clearNewMaster() {
+        if (newMasterBuilder_ == null) {
+          newMaster_ = null;
+          onChanged();
+        } else {
+          newMaster_ = null;
+          newMasterBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       */
+      public com.progetto.grpc.DroneOuterClass.Drone.Builder getNewMasterBuilder() {
+        
+        onChanged();
+        return getNewMasterFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       */
+      public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getNewMasterOrBuilder() {
+        if (newMasterBuilder_ != null) {
+          return newMasterBuilder_.getMessageOrBuilder();
+        } else {
+          return newMaster_ == null ?
+              com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : newMaster_;
+        }
+      }
+      /**
+       * <code>.com.progetto.grpc.Drone newMaster = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> 
+          getNewMasterFieldBuilder() {
+        if (newMasterBuilder_ == null) {
+          newMasterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder>(
+                  getNewMaster(),
+                  getParentForChildren(),
+                  isClean());
+          newMaster_ = null;
+        }
+        return newMasterBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1988,26 +2188,29 @@ public final class ElectionServiceOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\025ElectionService.proto\022\021com.progetto.gr" +
-      "pc\"1\n\017ElectionRequest\022\n\n\002id\030\001 \001(\r\022\022\n\nele" +
-      "ctionId\030\002 \001(\r\"\022\n\020ElectionResponse\"/\n\016Ele" +
-      "ctedRequest\022\n\n\002id\030\001 \001(\r\022\021\n\telectedId\030\002 \001" +
-      "(\r\"\021\n\017ElectedResponse2\306\001\n\017ElectionServic" +
-      "e\022Z\n\017forwardElection\022\".com.progetto.grpc" +
-      ".ElectionRequest\032#.com.progetto.grpc.Ele" +
-      "ctionResponse\022W\n\016forwardElected\022!.com.pr" +
-      "ogetto.grpc.ElectedRequest\032\".com.progett" +
-      "o.grpc.ElectedResponseb\006proto3"
+      "pc\032\013Drone.proto\"B\n\017ElectionRequest\022\n\n\002id" +
+      "\030\001 \001(\r\022\022\n\nelectionId\030\002 \001(\r\022\017\n\007battery\030\003 " +
+      "\001(\r\"\022\n\020ElectionResponse\"I\n\016ElectedReques" +
+      "t\022\n\n\002id\030\001 \001(\r\022+\n\tnewMaster\030\002 \001(\0132\030.com.p" +
+      "rogetto.grpc.Drone\"\021\n\017ElectedResponse2\306\001" +
+      "\n\017ElectionService\022Z\n\017forwardElection\022\".c" +
+      "om.progetto.grpc.ElectionRequest\032#.com.p" +
+      "rogetto.grpc.ElectionResponse\022W\n\016forward" +
+      "Elected\022!.com.progetto.grpc.ElectedReque" +
+      "st\032\".com.progetto.grpc.ElectedResponseb\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.progetto.grpc.DroneOuterClass.getDescriptor(),
         });
     internal_static_com_progetto_grpc_ElectionRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_com_progetto_grpc_ElectionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_ElectionRequest_descriptor,
-        new java.lang.String[] { "Id", "ElectionId", });
+        new java.lang.String[] { "Id", "ElectionId", "Battery", });
     internal_static_com_progetto_grpc_ElectionResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_progetto_grpc_ElectionResponse_fieldAccessorTable = new
@@ -2019,13 +2222,14 @@ public final class ElectionServiceOuterClass {
     internal_static_com_progetto_grpc_ElectedRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_ElectedRequest_descriptor,
-        new java.lang.String[] { "Id", "ElectedId", });
+        new java.lang.String[] { "Id", "NewMaster", });
     internal_static_com_progetto_grpc_ElectedResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_progetto_grpc_ElectedResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_ElectedResponse_descriptor,
         new java.lang.String[] { });
+    com.progetto.grpc.DroneOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

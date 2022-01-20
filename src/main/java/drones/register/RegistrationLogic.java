@@ -9,6 +9,7 @@ import com.sun.jersey.api.json.JSONConfiguration;
 import drones.DroneModel;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationLogic extends Thread {
@@ -60,7 +61,13 @@ public class RegistrationLogic extends Thread {
         System.out.println(clientResponse.toString());
         List<DroneEntity> droneEntityList = clientResponse.getEntity(new GenericType<List<DroneEntity>>() {
         });
-        this.droneModel = new DroneModel(id, port, droneEntityList);
+        int x = droneEntityList.stream().filter(d -> d.getId() == id).findFirst().get().getX();
+        int y = droneEntityList.stream().filter(d -> d.getId() == id).findFirst().get().getY();
+        droneEntityList.removeIf(d -> d.getId() == id);
+        if (droneEntityList.size() == 0) {
+            droneEntityList = new ArrayList<>();
+        }
+        this.droneModel = new DroneModel(id, x, y, port, droneEntityList);
 
         System.out.println("DroneRegisterThread ended");
     }

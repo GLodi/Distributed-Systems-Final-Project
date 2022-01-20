@@ -1,7 +1,6 @@
 package drones.greetings;
 
 import admin.entities.DroneEntity;
-import com.progetto.grpc.DroneOuterClass.Drone;
 import com.progetto.grpc.GreetingsServiceGrpc;
 import com.progetto.grpc.GreetingsServiceGrpc.GreetingsServiceBlockingStub;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloRequest;
@@ -28,12 +27,7 @@ public class GreetingsClient extends Thread {
         final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:" + target.getPort()).usePlaintext().build();
         GreetingsServiceBlockingStub stub = GreetingsServiceGrpc.newBlockingStub(channel);
         HelloRequest helloRequest = HelloRequest.newBuilder()
-                .setDrone(
-                        Drone.newBuilder()
-                                .setId(own.getId())
-                                .setX(own.getX())
-                                .setY(own.getY())
-                                .setPort(own.getPort()))
+                .setDrone(DroneSingleton.getInstance().getDroneEntity().toDrone())
                 .build();
         HelloResponse helloResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).greet(helloRequest);
         if (helloResponse.hasField(HelloResponse.getDescriptor().findFieldByName("master"))) {

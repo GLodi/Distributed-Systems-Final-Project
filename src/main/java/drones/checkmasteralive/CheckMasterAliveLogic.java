@@ -1,20 +1,32 @@
 package drones.checkmasteralive;
 
 import drones.checkmasteralive.listeners.GreetedEveryoneListener;
+import drones.checkmasteralive.listeners.NewMasterListener;
 
 public class CheckMasterAliveLogic extends Thread {
     @Override
     public void run() {
-        listenToHeartbeatRequests();
+        listenToGreetedEveryoneMessages();
+        listenToNewMasterMessages();
     }
 
-    private void listenToHeartbeatRequests() {
+    private void listenToGreetedEveryoneMessages() {
         try {
             GreetedEveryoneListener greetedEveryoneListener = new GreetedEveryoneListener();
             greetedEveryoneListener.start();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("CheckMasterAliveLogic listenToHeartbeatRequests ERROR: " + e.getLocalizedMessage());
+            System.out.println("CheckMasterAliveLogic listenToGreetedEveryoneMessages ERROR: " + e.getLocalizedMessage());
+        }
+    }
+
+    private void listenToNewMasterMessages() {
+        try {
+            NewMasterListener newMasterListener = new NewMasterListener();
+            newMasterListener.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("CheckMasterAliveLogic listenToNewMasterMessages ERROR: " + e.getLocalizedMessage());
         }
     }
 }

@@ -12,14 +12,14 @@ public class ElectionListener extends Thread {
             ElectionMessage message = (ElectionMessage) EventBus.getInstance().take("ELECTION");
             if (message != null) {
                 System.out.println("Election ElectionListener ELECTION message received");
-                processElectionMessage(message.electionId);
+                processElectionMessage(message.electionId, message.battery);
             }
         }
     }
 
-    private void processElectionMessage(int electionId) {
+    private void processElectionMessage(int electionId, int battery) {
         try {
-            ElectionElectionClient electionElectionClient = new ElectionElectionClient(electionId);
+            ElectionElectionClient electionElectionClient = new ElectionElectionClient(electionId, battery);
             electionElectionClient.start();
         } catch (Exception e) {
             e.printStackTrace();

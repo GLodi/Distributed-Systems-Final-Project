@@ -20,7 +20,7 @@ public class DroneModel {
         this.x = x;
         this.y = y;
         this.droneList = droneEntityList;
-        this.battery = 100;
+        this.battery = 100 - 10 * id;
         this.port = port;
     }
 

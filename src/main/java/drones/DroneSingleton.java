@@ -186,4 +186,8 @@ public class DroneSingleton {
     public synchronized boolean isBeingElected() {
         return droneModel.isBeingElected;
     }
+
+    public synchronized int getBattery() {
+        return droneModel.battery;
+    }
 }

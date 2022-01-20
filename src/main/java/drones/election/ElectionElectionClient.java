@@ -18,9 +18,11 @@ import java.util.concurrent.TimeUnit;
 
 public class ElectionElectionClient extends Thread {
     private final int electionId;
+    private final int battery;
 
-    public ElectionElectionClient(int electionId) {
+    public ElectionElectionClient(int electionId, int battery) {
         this.electionId = electionId;
+        this.battery = battery;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ElectionElectionClient extends Thread {
         for (DroneEntity droneEntity : orderedEntityList) {
             channel = ManagedChannelBuilder.forTarget("localhost:" + droneEntity.getPort()).usePlaintext().build();
             ElectionServiceBlockingStub stub = ElectionServiceGrpc.newBlockingStub(channel);
-            ElectionRequest electionRequest = ElectionRequest.newBuilder().setId(ownId).setElectionId(electionId).build();
+            ElectionRequest electionRequest = ElectionRequest.newBuilder().setId(ownId).setElectionId(electionId).setBattery(battery).build();
             try {
                 ElectionResponse electionResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).forwardElection(electionRequest);
             } catch (StatusRuntimeException e) {

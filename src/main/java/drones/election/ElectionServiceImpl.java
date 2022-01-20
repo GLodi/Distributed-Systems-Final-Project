@@ -17,24 +17,29 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
     @Override
     public void forwardElection(ElectionRequest request, StreamObserver<ElectionResponse> responseObserver) {
         int ownId = DroneSingleton.getInstance().getId();
-        System.out.println("ElectionServiceImpl forwardElection forward received from " + request.getId() + " with electionId " + request.getElectionId());
+        int ownBattery = DroneSingleton.getInstance().getBattery();
+        System.out.println("ElectionServiceImpl forwardElection forward received from " + request.getId() +
+                " with electionId " + request.getElectionId() +
+                " and battery " + request.getBattery());
 
         // TODO: da modificare, viene eletto quello con batteria maggiore, se uguale id maggiore
-        if (request.getElectionId() > ownId) {
+        if (request.getBattery() > ownBattery || (request.getBattery() == ownBattery && request.getElectionId() > ownId)) {
             // forward message unchanged
             System.out.println("ElectionServiceImpl forwardElection FORWARD MESSAGE UNCHANGED: " + request.getElectionId());
             DroneSingleton.getInstance().setParticipant();
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();
-            EventBus.getInstance().put(new ElectionMessage(request.getElectionId()));
-        } else if (request.getElectionId() < ownId && !DroneSingleton.getInstance().isParticipant()) {
+            EventBus.getInstance().put(new ElectionMessage(request.getElectionId(), request.getBattery()));
+        } else if (!DroneSingleton.getInstance().isParticipant() && request.getBattery() < ownBattery
+                || (request.getBattery() == ownBattery && request.getElectionId() < ownId)) {
             // set electionId = id and forward
             System.out.println("ElectionServiceImpl forwardElection SET ELECTION ID: " + ownId);
             DroneSingleton.getInstance().setParticipant();
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();
-            EventBus.getInstance().put(new ElectionMessage(ownId));
-        } else if (request.getElectionId() < ownId && DroneSingleton.getInstance().isParticipant()) {
+            EventBus.getInstance().put(new ElectionMessage(ownId, ownBattery));
+        } else if (DroneSingleton.getInstance().isParticipant() && request.getBattery() < ownBattery
+                || (request.getBattery() == ownBattery && request.getElectionId() < ownId)) {
             System.out.println("ElectionServiceImpl forwardElection DISCARDING ELECTION MESSAGE: " + request.getElectionId());
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();

@@ -10,7 +10,6 @@ import drones.DroneSingleton;
 import drones.eventbus.EventBus;
 import drones.eventbus.messages.ElectedMessage;
 import drones.eventbus.messages.ElectionMessage;
-import drones.eventbus.messages.NewMasterMessage;
 import io.grpc.stub.StreamObserver;
 
 public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImplBase {
@@ -63,7 +62,7 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
             responseObserver.onNext(ElectedResponse.newBuilder().build());
             responseObserver.onCompleted();
             EventBus.getInstance().put(new ElectedMessage(request.getId(), new DroneEntity(request.getNewMaster())));
-            EventBus.getInstance().put(new NewMasterMessage());
+            //EventBus.getInstance().put(new NewMasterMessage());
         } else {
             System.out.println("ElectionServiceImpl forwardElected received my own ELECTED. ELECTION OVER");
             responseObserver.onNext(ElectedResponse.newBuilder().build());

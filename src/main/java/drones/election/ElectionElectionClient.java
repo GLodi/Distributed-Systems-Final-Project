@@ -36,7 +36,7 @@ public class ElectionElectionClient extends Thread {
         droneEntityList.stream().filter(d -> d.getId() < ownId).forEach(orderedEntityList::add);
 
         System.out.println("ElectionElectionClient sending electionId: " + electionId + " to:");
-        orderedEntityList.stream().forEach(d -> System.out.println(d.getId()));
+        orderedEntityList.forEach(d -> System.out.println(d.getId()));
 
         ManagedChannel channel = null;
         int failCount = 0;

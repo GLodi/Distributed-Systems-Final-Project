@@ -35,18 +35,8 @@ public class RegistrationLogic extends Thread {
         }
     }
 
-    private ClientResponse getRequest(Client client, String url) {
-        WebResource webResource = client.resource(url);
-        try {
-            return webResource.type("application/json").get(ClientResponse.class);
-        } catch (ClientHandlerException e) {
-            System.out.println("Server non disponibile");
-            return null;
-        }
-    }
-
     public void run() {
-        System.out.println("DroneRegisterThread started");
+        System.out.println("RegisterLogic started");
 
         ClientConfig config = new DefaultClientConfig();
         config.getClasses().add(JacksonJaxbJsonProvider.class);
@@ -67,9 +57,9 @@ public class RegistrationLogic extends Thread {
         if (droneEntityList.size() == 0) {
             droneEntityList = new ArrayList<>();
         }
-        this.droneModel = new DroneModel(id, x, y, port, droneEntityList);
+        this.droneModel = new DroneModel(id, x, y, address, port, droneEntityList);
 
-        System.out.println("DroneRegisterThread ended");
+        System.out.println("RegisterLogic ended");
     }
 
     public DroneModel getDroneModel() {

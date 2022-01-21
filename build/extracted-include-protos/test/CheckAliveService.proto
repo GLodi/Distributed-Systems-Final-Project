@@ -1,0 +1,12 @@
+syntax = "proto3";
+package com.progetto.grpc;
+
+message HeartbeatRequest {
+  uint32 id = 1;
+}
+
+message HeartbeatResponse {}
+
+service CheckAliveService {
+  rpc beat(HeartbeatRequest) returns (stream HeartbeatResponse);
+}

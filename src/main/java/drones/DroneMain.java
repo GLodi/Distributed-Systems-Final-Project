@@ -50,20 +50,15 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startGreetingsService();
 
-        DroneSingleton.getInstance().startCheckMasterAliveService();
+        DroneSingleton.getInstance().startCheckAliveService();
 
         DroneSingleton.getInstance().startElectionService();
-
-        // TODO: thread election. capisce se non c'e' + master. wait/notify appena se ne accorge
-        //      ELETTO DRONE CON BATTERIA PIU' ALTA, SE UGUALE ID MAGGIORE
 
         // TODO: thread avvia sensore per rilevamento inquinamento
 
         // TODO: thread per inviare statistiche a master (GRPC) SE NON MASTER
 
         // TODO: thread recharge
-
-        // TODO: thread di checkalive
 
         // SE SEI MASTER USA ESEMPIO CHATSERVICEIMPL PER GESTIRE LA COMUNICAZIONE CON TUTTI I DRONI IN GRPC
         // TODO: SE MASTER. TUTTI IN WAIT/NOTIFY SU isMaster VARIABLE
@@ -74,9 +69,8 @@ public class DroneMain {
             System.out.println("Press q to exit:");
             String command = keyboard.nextLine();
             if (command.equals("q")) {
-                // JOIN, INTERRUPT VARI THREAD DA SINGLETON E CHIUDI
                 DroneSingleton.getInstance().interruptAll();
-                break;
+                return;
             }
         }
     }

@@ -5,6 +5,8 @@ import com.progetto.grpc.GreetingsServiceGrpc.GreetingsServiceImplBase;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloRequest;
 import com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse;
 import drones.DroneSingleton;
+import drones.eventbus.EventBus;
+import drones.eventbus.messages.InsertionMessage;
 import io.grpc.stub.StreamObserver;
 
 public class GreetingsServiceImpl extends GreetingsServiceImplBase {
@@ -19,6 +21,7 @@ public class GreetingsServiceImpl extends GreetingsServiceImplBase {
             response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId()).build();
         }
         DroneSingleton.getInstance().addToRing(new DroneEntity(request.getDrone()));
+        EventBus.getInstance().put(new InsertionMessage(new DroneEntity(request.getDrone())));
         responseObserver.onNext(response);
         responseObserver.onCompleted();
         System.out.println("GreetingsServiceImpl greet ended");

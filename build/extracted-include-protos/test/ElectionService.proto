@@ -12,12 +12,11 @@ message ElectionRequest {
 message ElectionResponse {}
 
 message ElectedRequest {
-  Drone newMaster = 1;
+  uint32 id = 1;
+  Drone newMaster = 2;
 }
 
-message ElectedResponse {
-  Drone newSlave = 1;
-}
+message ElectedResponse {}
 
 service ElectionService {
   rpc forwardElection(ElectionRequest) returns (ElectionResponse);

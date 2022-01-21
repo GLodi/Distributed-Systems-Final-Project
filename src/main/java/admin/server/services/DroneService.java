@@ -18,10 +18,10 @@ public class DroneService {
     public Response addDrone(DroneEntity d) {
         try {
             System.out.println("POST /drones/add called");
-            GenericEntity droneEntities = new GenericEntity<List<DroneEntity>>(Drones.getInstance().add(d)) {
+            GenericEntity<List<DroneEntity>> droneEntities = new GenericEntity<List<DroneEntity>>(Drones.getInstance().add(d)) {
             };
             System.out.println("POST /drones/add list");
-            Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
+            Drones.getInstance().getDroneList().forEach(drone -> System.out.println(drone.getId()));
             System.out.println("POST /drones/add ended");
             System.out.println();
             return Response.ok(droneEntities).build();
@@ -39,7 +39,7 @@ public class DroneService {
         System.out.println("GET /drones/get/{id} called");
         DroneEntity d = Drones.getInstance().getById(id);
         System.out.println("GET /drones/get/{id} list:");
-        Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
+        Drones.getInstance().getDroneList().forEach(drone -> System.out.println(drone.getId()));
         if (d != null) {
             System.out.println("GET /drones/get/{id} ended with: " + d);
             System.out.println();
@@ -59,7 +59,7 @@ public class DroneService {
         System.out.println("DELETE /drones/delete called");
         boolean b = Drones.getInstance().remove(d);
         System.out.println("DELETE /drones/delete list:");
-        Drones.getInstance().getDroneList().stream().forEach(drone -> System.out.println(drone.getId()));
+        Drones.getInstance().getDroneList().forEach(drone -> System.out.println(drone.getId()));
         if (b) {
             System.out.println("DELETE /drones/delete ended with: " + b);
             System.out.println();

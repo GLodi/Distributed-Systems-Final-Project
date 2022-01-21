@@ -1,8 +1,9 @@
 package drones;
 
 import admin.entities.DroneEntity;
-import drones.checkmasteralive.CheckMasterAliveLogic;
-import drones.checkmasteralive.CheckMasterAliveServiceImpl;
+import drones.checkalive.CheckAliveLogic;
+import drones.checkalive.CheckAliveServiceImpl;
+import drones.closing.ClosingLogic;
 import drones.election.ElectionLogic;
 import drones.election.ElectionServiceImpl;
 import drones.eventbus.EventBus;
@@ -31,8 +32,9 @@ public class DroneSingleton {
 
     private RegistrationLogic registrationLogic;
     private GreetingsLogic greetingsLogic;
-    private CheckMasterAliveLogic checkMasterAliveLogic;
+    private CheckAliveLogic checkAliveLogic;
     private ElectionLogic electionLogic;
+    private ClosingLogic closingLogic;
     private DroneOrderThread droneOrderThread;
     private DroneSensorsThread droneSensorsThread;
     private DroneStatsThread droneStatsThread;
@@ -69,12 +71,12 @@ public class DroneSingleton {
         }
     }
 
-    public void startCheckMasterAliveService() {
+    public void startCheckAliveService() {
         try {
-            checkMasterAliveLogic = new CheckMasterAliveLogic();
-            checkMasterAliveLogic.start();
+            checkAliveLogic = new CheckAliveLogic();
+            checkAliveLogic.start();
         } catch (Exception e) {
-            System.out.println("DroneSingleton startCheckMasterAliveService esecuzione fallita");
+            System.out.println("DroneSingleton startCheckAliveService esecuzione fallita");
         }
     }
 
@@ -84,6 +86,16 @@ public class DroneSingleton {
             electionLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startElectionService esecuzione fallita");
+        }
+    }
+
+    public void startClosingService() {
+        try {
+            closingLogic = new ClosingLogic(droneModel.id, droneModel.serverAddress, droneModel.port);
+            closingLogic.start();
+            closingLogic.join();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startClosingService esecuzione fallita");
         }
     }
 
@@ -100,7 +112,7 @@ public class DroneSingleton {
             System.out.println("GRPC servers starting");
             Server server = ServerBuilder.forPort(DroneSingleton.getInstance().getPort())
                     .addService(new GreetingsServiceImpl())
-                    .addService(new CheckMasterAliveServiceImpl())
+                    .addService(new CheckAliveServiceImpl())
                     .addService(new ElectionServiceImpl())
                     .build();
             server.start();
@@ -113,8 +125,18 @@ public class DroneSingleton {
 
     // TODO: subscribe to eventbus for error handling. If error message shows up, kill all threads.
     public synchronized void interruptAll() {
+        startClosingService();
         if (greetingsLogic != null) {
             greetingsLogic.interrupt();
+        }
+        if (registrationLogic != null) {
+            registrationLogic.interrupt();
+        }
+        if (checkAliveLogic != null) {
+            checkAliveLogic.interrupt();
+        }
+        if (closingLogic != null) {
+            closingLogic.interrupt();
         }
         if (electionLogic != null) {
             electionLogic.interrupt();
@@ -177,6 +199,10 @@ public class DroneSingleton {
     public synchronized void addToRing(DroneEntity droneEntity) {
         droneModel.droneList.add(droneEntity);
         droneModel.droneList.sort(Comparator.comparingInt(DroneEntity::getId));
+    }
+
+    public synchronized void removeFromRing(int id) {
+        droneModel.droneList.removeIf(d -> d.getId() == id);
     }
 
     public synchronized void setIsBeingElected(boolean b) {

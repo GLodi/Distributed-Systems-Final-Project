@@ -24,7 +24,7 @@ public class GreetingsLogic extends Thread {
         for (DroneEntity droneEntity : droneEntityList) {
             System.out.println("GreetingsLogic greetEveryone greeting " + droneEntity.getId());
             try {
-                greetingsClientList.add(new GreetingsClient(own, droneEntity));
+                greetingsClientList.add(new GreetingsClient(droneEntity));
                 greetingsClientList.stream().reduce((f, s) -> s).get().start();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -43,11 +43,12 @@ public class GreetingsLogic extends Thread {
         }
         System.out.println("GreetingsLogic greetEveryone waited for all threads");
 
-        List<Integer> repliedIds = new ArrayList<>();
-        greetingsClientList.stream().filter(gc -> gc.getDroneIdReceived() != 0).forEach(gc -> repliedIds.add(gc.getDroneIdReceived()));
-        System.out.println("GreetingsLogic greetEveryone received " + repliedIds.size() + " replies");
+        List<DroneEntity> repliedDrones = new ArrayList<>();
+        greetingsClientList.stream().filter(gc -> gc.getDroneReceived() != null).forEach(gc -> repliedDrones.add(gc.getDroneReceived()));
+        System.out.println("GreetingsLogic greetEveryone received " + repliedDrones.size() + " replies");
 
-        DroneSingleton.getInstance().getDroneList().removeIf(d -> repliedIds.stream().noneMatch(r -> r == d.getId()));
+        DroneSingleton.getInstance().setDroneList(repliedDrones);
+        //DroneSingleton.getInstance().getDroneList().removeIf(d -> repliedDrones.stream().noneMatch(r -> r.getId() == d.getId()));
         System.out.println("GreetingsLogic greetEveryone cleaned replies");
 
         if (DroneSingleton.getInstance().getDroneList().size() == 0) {

@@ -12,12 +12,10 @@ import io.grpc.ManagedChannelBuilder;
 import java.util.concurrent.TimeUnit;
 
 public class GreetingsClient extends Thread {
-    private final DroneEntity own;
     private final DroneEntity target;
-    private volatile int droneIdReceived;
+    private volatile DroneEntity droneReceived = null;
 
-    GreetingsClient(DroneEntity own, DroneEntity target) {
-        this.own = own;
+    GreetingsClient(DroneEntity target) {
         this.target = target;
     }
 
@@ -30,18 +28,18 @@ public class GreetingsClient extends Thread {
                 .setDrone(DroneSingleton.getInstance().getDroneEntity().toDrone())
                 .build();
         HelloResponse helloResponse = stub.withDeadlineAfter(5000, TimeUnit.MILLISECONDS).greet(helloRequest);
-        if (helloResponse.hasField(HelloResponse.getDescriptor().findFieldByName("master"))) {
-            DroneSingleton.getInstance().setMaster(new DroneEntity(helloResponse.getMaster()));
-            System.out.println("greeting da master: " + helloResponse.getId());
+        if (helloResponse.getIsMaster()) {
+            DroneSingleton.getInstance().setMaster(new DroneEntity(helloResponse.getDrone()));
+            System.out.println("greeting da master: " + helloResponse.getDrone().getId());
         } else {
-            System.out.println("greeting da: " + helloResponse.getId());
+            System.out.println("greeting da: " + helloResponse.getDrone().getId());
         }
         channel.shutdown();
         System.out.println("GreetingsClient ended");
-        this.droneIdReceived = helloResponse.getId();
+        this.droneReceived = new DroneEntity(helloResponse.getDrone());
     }
 
-    public int getDroneIdReceived() {
-        return droneIdReceived;
+    public DroneEntity getDroneReceived() {
+        return droneReceived;
     }
 }

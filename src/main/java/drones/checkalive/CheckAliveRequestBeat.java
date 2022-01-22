@@ -21,7 +21,7 @@ public class CheckAliveRequestBeat extends Thread {
 
     @Override
     public void run() {
-        System.out.println("CheckAlive RequestBeat requesting beat");
+        System.out.println("CheckAlive RequestBeat requesting beat to " + droneToCheck.getId());
         final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:" + droneToCheck.getPort()).usePlaintext().build();
         CheckAliveServiceStub stub = CheckAliveServiceGrpc.newStub(channel);
         HeartbeatRequest request = HeartbeatRequest.newBuilder().setId(DroneSingleton.getInstance().getId()).build();

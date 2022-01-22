@@ -22,8 +22,8 @@ com/progetto/grpc/InsertionServiceOuterClass.java
  com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$1
  com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$Builder
  com.progetto.grpc.InsertionServiceOuterClass$InsertionResponseOrBuilder
-admin/server/ServerAdmin.java
- admin.server.ServerAdmin
+drones/greetings/GreetingsServiceImpl.java
+ drones.greetings.GreetingsServiceImpl
 drones/eventbus/messages/ElectionMessage.java
  drones.eventbus.messages.ElectionMessage
 com/progetto/grpc/CheckAliveServiceGrpc.java
@@ -37,16 +37,19 @@ com/progetto/grpc/CheckAliveServiceGrpc.java
  com.progetto.grpc.CheckAliveServiceGrpc$CheckAliveServiceMethodDescriptorSupplier
  com.progetto.grpc.CheckAliveServiceGrpc$CheckAliveServiceStub
  com.progetto.grpc.CheckAliveServiceGrpc$MethodHandlers
-drones/election/ElectionLogic.java
- drones.election.ElectionLogic
+admin/entities/StatisticEntity.java
+ admin.entities.StatisticEntity
+drones/closing/ClosingLogic.java
+ drones.closing.ClosingLogic
 drones/eventbus/messages/ErrorMessage.java
  drones.eventbus.messages.ErrorMessage
-drones/election/listeners/ElectionListener.java
- drones.election.listeners.ElectionListener
-admin/entities/DroneEntity.java
- admin.entities.DroneEntity
-drones/checkalive/listeners/GreetedEveryoneListener.java
- drones.checkalive.listeners.GreetedEveryoneListener
+drones/election/ElectionServiceImpl.java
+ drones.election.ElectionServiceImpl
+drones/checkalive/listeners/InsertionListener.java
+ drones.checkalive.listeners.InsertionListener
+drones/register/RegistrationLogic.java
+ drones.register.RegistrationLogic
+ drones.register.RegistrationLogic$1
 admin/server/beans/Statistics.java
  admin.server.beans.Statistics
 com/progetto/grpc/GreetingsServiceGrpc.java
@@ -82,8 +85,8 @@ com/progetto/grpc/DroneOuterClass.java
  com.progetto.grpc.DroneOuterClass$DroneOrBuilder
 drones/order/DroneOrderThread.java
  drones.order.DroneOrderThread
-admin/server/beans/Drones.java
- admin.server.beans.Drones
+drones/checkalive/CheckAliveServiceImpl.java
+ drones.checkalive.CheckAliveServiceImpl
 drones/sensors/DroneSensorsThread.java
  drones.sensors.DroneSensorsThread
 com/progetto/grpc/CheckAliveServiceOuterClass.java
@@ -97,12 +100,13 @@ com/progetto/grpc/CheckAliveServiceOuterClass.java
  com.progetto.grpc.CheckAliveServiceOuterClass$HeartbeatResponse$1
  com.progetto.grpc.CheckAliveServiceOuterClass$HeartbeatResponse$Builder
  com.progetto.grpc.CheckAliveServiceOuterClass$HeartbeatResponseOrBuilder
-drones/checkalive/CheckAliveServiceImpl.java
- drones.checkalive.CheckAliveServiceImpl
+admin/server/services/DroneService.java
+ admin.server.services.DroneService
+ admin.server.services.DroneService$1
 drones/eventbus/messages/GreetedEveryoneMessage.java
  drones.eventbus.messages.GreetedEveryoneMessage
-InsertionRequest.java
- InsertionRequest
+drones/checkalive/CheckAliveEveryone.java
+ drones.checkalive.CheckAliveEveryone
 com/progetto/grpc/CheckMasterAliveServiceGrpc.java
  com.progetto.grpc.CheckMasterAliveServiceGrpc
  com.progetto.grpc.CheckMasterAliveServiceGrpc$1
@@ -131,12 +135,12 @@ com/progetto/grpc/GreetingsServiceOuterClass.java
  com.progetto.grpc.GreetingsServiceOuterClass$HelloResponseOrBuilder
 drones/checkalive/CheckAliveLogic.java
  drones.checkalive.CheckAliveLogic
-drones/eventbus/Message.java
- drones.eventbus.Message
+drones/election/ElectionElectedClient.java
+ drones.election.ElectionElectedClient
 drones/recharge/DroneRechargeThread.java
  drones.recharge.DroneRechargeThread
-admin/entities/StatisticEntity.java
- admin.entities.StatisticEntity
+drones/election/listeners/ElectionListener.java
+ drones.election.listeners.ElectionListener
 drones/stats/DroneStatsThread.java
  drones.stats.DroneStatsThread
 com/progetto/grpc/ElectionServiceOuterClass.java
@@ -158,14 +162,17 @@ com/progetto/grpc/ElectionServiceOuterClass.java
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$1
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$Builder
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponseOrBuilder
-admin/client/ClientAdmin.java
- admin.client.ClientAdmin
-drones/election/listeners/ElectedListener.java
- drones.election.listeners.ElectedListener
+drones/DroneMain.java
+ drones.DroneMain
+drones/checkalive/listeners/GreetedEveryoneListener.java
+ drones.checkalive.listeners.GreetedEveryoneListener
 dronazon/DronazonPub.java
  dronazon.DronazonPub
 drones/eventbus/messages/InsertionMessage.java
  drones.eventbus.messages.InsertionMessage
+drones/checkalive/CheckAliveRequestBeat.java
+ drones.checkalive.CheckAliveRequestBeat
+ drones.checkalive.CheckAliveRequestBeat$1
 com/progetto/grpc/CheckMasterAliveServiceOuterClass.java
  com.progetto.grpc.CheckMasterAliveServiceOuterClass
  com.progetto.grpc.CheckMasterAliveServiceOuterClass$1
@@ -177,36 +184,29 @@ com/progetto/grpc/CheckMasterAliveServiceOuterClass.java
  com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse$1
  com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse$Builder
  com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponseOrBuilder
-drones/checkalive/listeners/InsertionListener.java
- drones.checkalive.listeners.InsertionListener
-drones/checkalive/CheckAliveRequestBeat.java
- drones.checkalive.CheckAliveRequestBeat
- drones.checkalive.CheckAliveRequestBeat$1
-drones/election/ElectionElectedClient.java
- drones.election.ElectionElectedClient
-drones/greetings/GreetingsServiceImpl.java
- drones.greetings.GreetingsServiceImpl
-drones/greetings/GreetingsClient.java
- drones.greetings.GreetingsClient
-drones/DroneMain.java
- drones.DroneMain
-drones/greetings/GreetingsLogic.java
- drones.greetings.GreetingsLogic
-drones/election/ElectionServiceImpl.java
- drones.election.ElectionServiceImpl
+drones/eventbus/Message.java
+ drones.eventbus.Message
+InsertionRequest.java
+ InsertionRequest
+admin/entities/DroneEntity.java
+ admin.entities.DroneEntity
+drones/election/listeners/ElectedListener.java
+ drones.election.listeners.ElectedListener
 drones/DroneModel.java
  drones.DroneModel
 drones/election/ElectionElectionClient.java
  drones.election.ElectionElectionClient
-admin/server/services/DroneService.java
- admin.server.services.DroneService
- admin.server.services.DroneService$1
-drones/checkalive/CheckAliveEveryone.java
- drones.checkalive.CheckAliveEveryone
-drones/register/RegistrationLogic.java
- drones.register.RegistrationLogic
- drones.register.RegistrationLogic$1
-drones/closing/ClosingLogic.java
- drones.closing.ClosingLogic
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin
+admin/server/beans/Drones.java
+ admin.server.beans.Drones
+drones/election/ElectionLogic.java
+ drones.election.ElectionLogic
+admin/server/ServerAdmin.java
+ admin.server.ServerAdmin
+drones/greetings/GreetingsClient.java
+ drones.greetings.GreetingsClient
+drones/greetings/GreetingsLogic.java
+ drones.greetings.GreetingsLogic
 drones/DroneSingleton.java
  drones.DroneSingleton

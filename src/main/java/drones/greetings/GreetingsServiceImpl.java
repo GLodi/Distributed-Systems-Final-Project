@@ -15,10 +15,9 @@ public class GreetingsServiceImpl extends GreetingsServiceImplBase {
         System.out.println("GreetingsServiceImpl greet received from " + request.getDrone().getId());
         HelloResponse response;
         if (DroneSingleton.getInstance().getMaster().getId() == DroneSingleton.getInstance().getId()) {
-            response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId())
-                    .setMaster(DroneSingleton.getInstance().getMaster().toDrone()).build();
+            response = HelloResponse.newBuilder().setIsMaster(true).setDrone(DroneSingleton.getInstance().getDroneEntity().toDrone()).build();
         } else {
-            response = HelloResponse.newBuilder().setId(DroneSingleton.getInstance().getId()).build();
+            response = HelloResponse.newBuilder().setIsMaster(false).setDrone(DroneSingleton.getInstance().getDroneEntity().toDrone()).build();
         }
         DroneSingleton.getInstance().addToRing(new DroneEntity(request.getDrone()));
         EventBus.getInstance().put(new InsertionMessage(new DroneEntity(request.getDrone())));

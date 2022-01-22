@@ -8,8 +8,8 @@ message HelloRequest {
 }
 
 message HelloResponse {
-  uint32 id = 1;
-  Drone master = 2;
+  Drone drone = 1;
+  bool isMaster = 2;
 }
 
 service GreetingsService {

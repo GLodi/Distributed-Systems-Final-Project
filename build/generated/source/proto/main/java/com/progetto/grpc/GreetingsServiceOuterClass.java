@@ -637,25 +637,25 @@ public final class GreetingsServiceOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
+     * <code>.com.progetto.grpc.Drone drone = 1;</code>
+     * @return Whether the drone field is set.
      */
-    int getId();
+    boolean hasDrone();
+    /**
+     * <code>.com.progetto.grpc.Drone drone = 1;</code>
+     * @return The drone.
+     */
+    com.progetto.grpc.DroneOuterClass.Drone getDrone();
+    /**
+     * <code>.com.progetto.grpc.Drone drone = 1;</code>
+     */
+    com.progetto.grpc.DroneOuterClass.DroneOrBuilder getDroneOrBuilder();
 
     /**
-     * <code>.com.progetto.grpc.Drone master = 2;</code>
-     * @return Whether the master field is set.
+     * <code>bool isMaster = 2;</code>
+     * @return The isMaster.
      */
-    boolean hasMaster();
-    /**
-     * <code>.com.progetto.grpc.Drone master = 2;</code>
-     * @return The master.
-     */
-    com.progetto.grpc.DroneOuterClass.Drone getMaster();
-    /**
-     * <code>.com.progetto.grpc.Drone master = 2;</code>
-     */
-    com.progetto.grpc.DroneOuterClass.DroneOrBuilder getMasterOrBuilder();
+    boolean getIsMaster();
   }
   /**
    * Protobuf type {@code com.progetto.grpc.HelloResponse}
@@ -702,22 +702,22 @@ public final class GreetingsServiceOuterClass {
             case 0:
               done = true;
               break;
-            case 8: {
+            case 10: {
+              com.progetto.grpc.DroneOuterClass.Drone.Builder subBuilder = null;
+              if (drone_ != null) {
+                subBuilder = drone_.toBuilder();
+              }
+              drone_ = input.readMessage(com.progetto.grpc.DroneOuterClass.Drone.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(drone_);
+                drone_ = subBuilder.buildPartial();
+              }
 
-              id_ = input.readUInt32();
               break;
             }
-            case 18: {
-              com.progetto.grpc.DroneOuterClass.Drone.Builder subBuilder = null;
-              if (master_ != null) {
-                subBuilder = master_.toBuilder();
-              }
-              master_ = input.readMessage(com.progetto.grpc.DroneOuterClass.Drone.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(master_);
-                master_ = subBuilder.buildPartial();
-              }
+            case 16: {
 
+              isMaster_ = input.readBool();
               break;
             }
             default: {
@@ -752,37 +752,37 @@ public final class GreetingsServiceOuterClass {
               com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse.class, com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse.Builder.class);
     }
 
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
+    public static final int DRONE_FIELD_NUMBER = 1;
+    private com.progetto.grpc.DroneOuterClass.Drone drone_;
     /**
-     * <code>uint32 id = 1;</code>
-     * @return The id.
+     * <code>.com.progetto.grpc.Drone drone = 1;</code>
+     * @return Whether the drone field is set.
      */
-    public int getId() {
-      return id_;
+    public boolean hasDrone() {
+      return drone_ != null;
+    }
+    /**
+     * <code>.com.progetto.grpc.Drone drone = 1;</code>
+     * @return The drone.
+     */
+    public com.progetto.grpc.DroneOuterClass.Drone getDrone() {
+      return drone_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : drone_;
+    }
+    /**
+     * <code>.com.progetto.grpc.Drone drone = 1;</code>
+     */
+    public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getDroneOrBuilder() {
+      return getDrone();
     }
 
-    public static final int MASTER_FIELD_NUMBER = 2;
-    private com.progetto.grpc.DroneOuterClass.Drone master_;
+    public static final int ISMASTER_FIELD_NUMBER = 2;
+    private boolean isMaster_;
     /**
-     * <code>.com.progetto.grpc.Drone master = 2;</code>
-     * @return Whether the master field is set.
+     * <code>bool isMaster = 2;</code>
+     * @return The isMaster.
      */
-    public boolean hasMaster() {
-      return master_ != null;
-    }
-    /**
-     * <code>.com.progetto.grpc.Drone master = 2;</code>
-     * @return The master.
-     */
-    public com.progetto.grpc.DroneOuterClass.Drone getMaster() {
-      return master_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : master_;
-    }
-    /**
-     * <code>.com.progetto.grpc.Drone master = 2;</code>
-     */
-    public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getMasterOrBuilder() {
-      return getMaster();
+    public boolean getIsMaster() {
+      return isMaster_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -799,11 +799,11 @@ public final class GreetingsServiceOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (id_ != 0) {
-        output.writeUInt32(1, id_);
+      if (drone_ != null) {
+        output.writeMessage(1, getDrone());
       }
-      if (master_ != null) {
-        output.writeMessage(2, getMaster());
+      if (isMaster_ != false) {
+        output.writeBool(2, isMaster_);
       }
       unknownFields.writeTo(output);
     }
@@ -814,13 +814,13 @@ public final class GreetingsServiceOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (id_ != 0) {
+      if (drone_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
+          .computeMessageSize(1, getDrone());
       }
-      if (master_ != null) {
+      if (isMaster_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getMaster());
+          .computeBoolSize(2, isMaster_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -837,13 +837,13 @@ public final class GreetingsServiceOuterClass {
       }
       com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse other = (com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse) obj;
 
-      if (getId()
-          != other.getId()) return false;
-      if (hasMaster() != other.hasMaster()) return false;
-      if (hasMaster()) {
-        if (!getMaster()
-            .equals(other.getMaster())) return false;
+      if (hasDrone() != other.hasDrone()) return false;
+      if (hasDrone()) {
+        if (!getDrone()
+            .equals(other.getDrone())) return false;
       }
+      if (getIsMaster()
+          != other.getIsMaster()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -855,12 +855,13 @@ public final class GreetingsServiceOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
-      if (hasMaster()) {
-        hash = (37 * hash) + MASTER_FIELD_NUMBER;
-        hash = (53 * hash) + getMaster().hashCode();
+      if (hasDrone()) {
+        hash = (37 * hash) + DRONE_FIELD_NUMBER;
+        hash = (53 * hash) + getDrone().hashCode();
       }
+      hash = (37 * hash) + ISMASTER_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getIsMaster());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -994,14 +995,14 @@ public final class GreetingsServiceOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        id_ = 0;
-
-        if (masterBuilder_ == null) {
-          master_ = null;
+        if (droneBuilder_ == null) {
+          drone_ = null;
         } else {
-          master_ = null;
-          masterBuilder_ = null;
+          drone_ = null;
+          droneBuilder_ = null;
         }
+        isMaster_ = false;
+
         return this;
       }
 
@@ -1028,12 +1029,12 @@ public final class GreetingsServiceOuterClass {
       @java.lang.Override
       public com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse buildPartial() {
         com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse result = new com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse(this);
-        result.id_ = id_;
-        if (masterBuilder_ == null) {
-          result.master_ = master_;
+        if (droneBuilder_ == null) {
+          result.drone_ = drone_;
         } else {
-          result.master_ = masterBuilder_.build();
+          result.drone_ = droneBuilder_.build();
         }
+        result.isMaster_ = isMaster_;
         onBuilt();
         return result;
       }
@@ -1082,11 +1083,11 @@ public final class GreetingsServiceOuterClass {
 
       public Builder mergeFrom(com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse other) {
         if (other == com.progetto.grpc.GreetingsServiceOuterClass.HelloResponse.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
+        if (other.hasDrone()) {
+          mergeDrone(other.getDrone());
         }
-        if (other.hasMaster()) {
-          mergeMaster(other.getMaster());
+        if (other.getIsMaster() != false) {
+          setIsMaster(other.getIsMaster());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1117,153 +1118,153 @@ public final class GreetingsServiceOuterClass {
         return this;
       }
 
-      private int id_ ;
-      /**
-       * <code>uint32 id = 1;</code>
-       * @return The id.
-       */
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>uint32 id = 1;</code>
-       * @param value The id to set.
-       * @return This builder for chaining.
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 id = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.progetto.grpc.DroneOuterClass.Drone master_;
+      private com.progetto.grpc.DroneOuterClass.Drone drone_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> masterBuilder_;
+          com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> droneBuilder_;
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
-       * @return Whether the master field is set.
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
+       * @return Whether the drone field is set.
        */
-      public boolean hasMaster() {
-        return masterBuilder_ != null || master_ != null;
+      public boolean hasDrone() {
+        return droneBuilder_ != null || drone_ != null;
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
-       * @return The master.
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
+       * @return The drone.
        */
-      public com.progetto.grpc.DroneOuterClass.Drone getMaster() {
-        if (masterBuilder_ == null) {
-          return master_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : master_;
+      public com.progetto.grpc.DroneOuterClass.Drone getDrone() {
+        if (droneBuilder_ == null) {
+          return drone_ == null ? com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : drone_;
         } else {
-          return masterBuilder_.getMessage();
+          return droneBuilder_.getMessage();
         }
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
-      public Builder setMaster(com.progetto.grpc.DroneOuterClass.Drone value) {
-        if (masterBuilder_ == null) {
+      public Builder setDrone(com.progetto.grpc.DroneOuterClass.Drone value) {
+        if (droneBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          master_ = value;
+          drone_ = value;
           onChanged();
         } else {
-          masterBuilder_.setMessage(value);
+          droneBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
-      public Builder setMaster(
+      public Builder setDrone(
           com.progetto.grpc.DroneOuterClass.Drone.Builder builderForValue) {
-        if (masterBuilder_ == null) {
-          master_ = builderForValue.build();
+        if (droneBuilder_ == null) {
+          drone_ = builderForValue.build();
           onChanged();
         } else {
-          masterBuilder_.setMessage(builderForValue.build());
+          droneBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
-      public Builder mergeMaster(com.progetto.grpc.DroneOuterClass.Drone value) {
-        if (masterBuilder_ == null) {
-          if (master_ != null) {
-            master_ =
-              com.progetto.grpc.DroneOuterClass.Drone.newBuilder(master_).mergeFrom(value).buildPartial();
+      public Builder mergeDrone(com.progetto.grpc.DroneOuterClass.Drone value) {
+        if (droneBuilder_ == null) {
+          if (drone_ != null) {
+            drone_ =
+              com.progetto.grpc.DroneOuterClass.Drone.newBuilder(drone_).mergeFrom(value).buildPartial();
           } else {
-            master_ = value;
+            drone_ = value;
           }
           onChanged();
         } else {
-          masterBuilder_.mergeFrom(value);
+          droneBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
-      public Builder clearMaster() {
-        if (masterBuilder_ == null) {
-          master_ = null;
+      public Builder clearDrone() {
+        if (droneBuilder_ == null) {
+          drone_ = null;
           onChanged();
         } else {
-          master_ = null;
-          masterBuilder_ = null;
+          drone_ = null;
+          droneBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
-      public com.progetto.grpc.DroneOuterClass.Drone.Builder getMasterBuilder() {
+      public com.progetto.grpc.DroneOuterClass.Drone.Builder getDroneBuilder() {
         
         onChanged();
-        return getMasterFieldBuilder().getBuilder();
+        return getDroneFieldBuilder().getBuilder();
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
-      public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getMasterOrBuilder() {
-        if (masterBuilder_ != null) {
-          return masterBuilder_.getMessageOrBuilder();
+      public com.progetto.grpc.DroneOuterClass.DroneOrBuilder getDroneOrBuilder() {
+        if (droneBuilder_ != null) {
+          return droneBuilder_.getMessageOrBuilder();
         } else {
-          return master_ == null ?
-              com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : master_;
+          return drone_ == null ?
+              com.progetto.grpc.DroneOuterClass.Drone.getDefaultInstance() : drone_;
         }
       }
       /**
-       * <code>.com.progetto.grpc.Drone master = 2;</code>
+       * <code>.com.progetto.grpc.Drone drone = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder> 
-          getMasterFieldBuilder() {
-        if (masterBuilder_ == null) {
-          masterBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getDroneFieldBuilder() {
+        if (droneBuilder_ == null) {
+          droneBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.progetto.grpc.DroneOuterClass.Drone, com.progetto.grpc.DroneOuterClass.Drone.Builder, com.progetto.grpc.DroneOuterClass.DroneOrBuilder>(
-                  getMaster(),
+                  getDrone(),
                   getParentForChildren(),
                   isClean());
-          master_ = null;
+          drone_ = null;
         }
-        return masterBuilder_;
+        return droneBuilder_;
+      }
+
+      private boolean isMaster_ ;
+      /**
+       * <code>bool isMaster = 2;</code>
+       * @return The isMaster.
+       */
+      public boolean getIsMaster() {
+        return isMaster_;
+      }
+      /**
+       * <code>bool isMaster = 2;</code>
+       * @param value The isMaster to set.
+       * @return This builder for chaining.
+       */
+      public Builder setIsMaster(boolean value) {
+        
+        isMaster_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool isMaster = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearIsMaster() {
+        
+        isMaster_ = false;
+        onChanged();
+        return this;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1339,12 +1340,12 @@ public final class GreetingsServiceOuterClass {
     java.lang.String[] descriptorData = {
       "\n\026GreetingsService.proto\022\021com.progetto.g" +
       "rpc\032\013Drone.proto\"7\n\014HelloRequest\022\'\n\005dron" +
-      "e\030\001 \001(\0132\030.com.progetto.grpc.Drone\"E\n\rHel" +
-      "loResponse\022\n\n\002id\030\001 \001(\r\022(\n\006master\030\002 \001(\0132\030" +
-      ".com.progetto.grpc.Drone2^\n\020GreetingsSer" +
-      "vice\022J\n\005greet\022\037.com.progetto.grpc.HelloR" +
-      "equest\032 .com.progetto.grpc.HelloResponse" +
-      "b\006proto3"
+      "e\030\001 \001(\0132\030.com.progetto.grpc.Drone\"J\n\rHel" +
+      "loResponse\022\'\n\005drone\030\001 \001(\0132\030.com.progetto" +
+      ".grpc.Drone\022\020\n\010isMaster\030\002 \001(\0102^\n\020Greetin" +
+      "gsService\022J\n\005greet\022\037.com.progetto.grpc.H" +
+      "elloRequest\032 .com.progetto.grpc.HelloRes" +
+      "ponseb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1362,7 +1363,7 @@ public final class GreetingsServiceOuterClass {
     internal_static_com_progetto_grpc_HelloResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_HelloResponse_descriptor,
-        new java.lang.String[] { "Id", "Master", });
+        new java.lang.String[] { "Drone", "IsMaster", });
     com.progetto.grpc.DroneOuterClass.getDescriptor();
   }
 

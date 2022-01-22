@@ -42,6 +42,7 @@ public class DroneEntity {
         this.x = d.getX();
         this.y = d.getY();
         this.port = d.getPort();
+        this.battery = d.getBattery();
     }
 
     public void setCoordinates(int x, int y) {

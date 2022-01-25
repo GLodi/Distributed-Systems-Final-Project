@@ -35,7 +35,7 @@ public class ElectionElectedClient extends Thread {
         droneEntityList.stream().filter(d -> d.getId() < ownId).forEach(orderedEntityList::add);
 
         System.out.println("ElectionElectedClient sending electedId: " + electedId + " to:");
-        orderedEntityList.stream().forEach(d -> System.out.println(d.getId()));
+        orderedEntityList.forEach(d -> System.out.println(d.getId()));
 
         ManagedChannel channel = null;
         int failCount = 0;
@@ -61,13 +61,13 @@ public class ElectionElectedClient extends Thread {
         }
 
         if (failCount == orderedEntityList.size()) {
-            System.out.println("ElectionElectionClient no one is answering, assuming last so elect myself to master");
+            System.out.println("ElectionElectedClient no one is answering, assuming last so elect myself to master");
             DroneSingleton.getInstance().setDroneList(new ArrayList<>());
             DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
             EventBus.getInstance().put(new ConfirmedElectedMessage());
         }
 
-        System.out.println("ElectionElectionClient ended");
+        System.out.println("ElectionElectedClient ended");
     }
 
 }

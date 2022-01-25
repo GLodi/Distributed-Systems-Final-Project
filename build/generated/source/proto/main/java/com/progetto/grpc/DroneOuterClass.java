@@ -47,6 +47,12 @@ public final class DroneOuterClass {
      * @return The battery.
      */
     int getBattery();
+
+    /**
+     * <code>bool delivering = 6;</code>
+     * @return The delivering.
+     */
+    boolean getDelivering();
   }
   /**
    * Protobuf type {@code com.progetto.grpc.Drone}
@@ -116,6 +122,11 @@ public final class DroneOuterClass {
             case 40: {
 
               battery_ = input.readUInt32();
+              break;
+            }
+            case 48: {
+
+              delivering_ = input.readBool();
               break;
             }
             default: {
@@ -200,6 +211,16 @@ public final class DroneOuterClass {
       return battery_;
     }
 
+    public static final int DELIVERING_FIELD_NUMBER = 6;
+    private boolean delivering_;
+    /**
+     * <code>bool delivering = 6;</code>
+     * @return The delivering.
+     */
+    public boolean getDelivering() {
+      return delivering_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -228,6 +249,9 @@ public final class DroneOuterClass {
       }
       if (battery_ != 0) {
         output.writeUInt32(5, battery_);
+      }
+      if (delivering_ != false) {
+        output.writeBool(6, delivering_);
       }
       unknownFields.writeTo(output);
     }
@@ -258,6 +282,10 @@ public final class DroneOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(5, battery_);
       }
+      if (delivering_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, delivering_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -283,6 +311,8 @@ public final class DroneOuterClass {
           != other.getPort()) return false;
       if (getBattery()
           != other.getBattery()) return false;
+      if (getDelivering()
+          != other.getDelivering()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -304,6 +334,9 @@ public final class DroneOuterClass {
       hash = (53 * hash) + getPort();
       hash = (37 * hash) + BATTERY_FIELD_NUMBER;
       hash = (53 * hash) + getBattery();
+      hash = (37 * hash) + DELIVERING_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getDelivering());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -447,6 +480,8 @@ public final class DroneOuterClass {
 
         battery_ = 0;
 
+        delivering_ = false;
+
         return this;
       }
 
@@ -478,6 +513,7 @@ public final class DroneOuterClass {
         result.y_ = y_;
         result.port_ = port_;
         result.battery_ = battery_;
+        result.delivering_ = delivering_;
         onBuilt();
         return result;
       }
@@ -540,6 +576,9 @@ public final class DroneOuterClass {
         }
         if (other.getBattery() != 0) {
           setBattery(other.getBattery());
+        }
+        if (other.getDelivering() != false) {
+          setDelivering(other.getDelivering());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -719,6 +758,36 @@ public final class DroneOuterClass {
         onChanged();
         return this;
       }
+
+      private boolean delivering_ ;
+      /**
+       * <code>bool delivering = 6;</code>
+       * @return The delivering.
+       */
+      public boolean getDelivering() {
+        return delivering_;
+      }
+      /**
+       * <code>bool delivering = 6;</code>
+       * @param value The delivering to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDelivering(boolean value) {
+        
+        delivering_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool delivering = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDelivering() {
+        
+        delivering_ = false;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -786,9 +855,10 @@ public final class DroneOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013Drone.proto\022\021com.progetto.grpc\"H\n\005Dron" +
+      "\n\013Drone.proto\022\021com.progetto.grpc\"\\\n\005Dron" +
       "e\022\n\n\002id\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\022\014\n\004p" +
-      "ort\030\004 \001(\r\022\017\n\007battery\030\005 \001(\rb\006proto3"
+      "ort\030\004 \001(\r\022\017\n\007battery\030\005 \001(\r\022\022\n\ndelivering" +
+      "\030\006 \001(\010b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -799,7 +869,7 @@ public final class DroneOuterClass {
     internal_static_com_progetto_grpc_Drone_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_Drone_descriptor,
-        new java.lang.String[] { "Id", "X", "Y", "Port", "Battery", });
+        new java.lang.String[] { "Id", "X", "Y", "Port", "Battery", "Delivering", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -48,11 +48,14 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startGRPCServers();
 
-        DroneSingleton.getInstance().startGreetingsService();
-
         DroneSingleton.getInstance().startCheckAliveService();
 
         DroneSingleton.getInstance().startElectionService();
+
+        DroneSingleton.getInstance().startOrderService();
+
+        // need to do last
+        DroneSingleton.getInstance().startGreetingsService();
 
         // TODO: thread avvia sensore per rilevamento inquinamento
 

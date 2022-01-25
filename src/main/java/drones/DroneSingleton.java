@@ -10,7 +10,9 @@ import drones.eventbus.EventBus;
 import drones.eventbus.messages.ErrorMessage;
 import drones.greetings.GreetingsLogic;
 import drones.greetings.GreetingsServiceImpl;
-import drones.order.DroneOrderThread;
+import drones.order.client.OrderServiceImpl;
+import drones.order.master.OrderLogic;
+import drones.order.master.OrderMQTTThread;
 import drones.register.RegistrationLogic;
 import drones.sensors.DroneSensorsThread;
 import drones.stats.DroneStatsThread;
@@ -35,7 +37,8 @@ public class DroneSingleton {
     private CheckAliveLogic checkAliveLogic;
     private ElectionLogic electionLogic;
     private ClosingLogic closingLogic;
-    private DroneOrderThread droneOrderThread;
+    private OrderLogic orderLogic;
+    private OrderMQTTThread orderMQTTThread;
     private DroneSensorsThread droneSensorsThread;
     private DroneStatsThread droneStatsThread;
 
@@ -99,6 +102,30 @@ public class DroneSingleton {
         }
     }
 
+    public void startOrderService() {
+        try {
+            orderLogic = new OrderLogic();
+            orderLogic.start();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startOrderService esecuzione fallita");
+        }
+    }
+
+    public void startOrderMQTTThread() {
+        try {
+            orderMQTTThread = new OrderMQTTThread();
+            orderMQTTThread.start();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startOrderMQTTThread esecuzione fallita");
+        }
+    }
+
+    public void stopOrderMQTTThread() {
+        if (orderMQTTThread != null) {
+            orderMQTTThread.interrupt();
+        }
+    }
+
     public void listenForErrors() {
         while (true) {
             if (EventBus.getInstance().take("ERROR") != null) {
@@ -114,6 +141,7 @@ public class DroneSingleton {
                     .addService(new GreetingsServiceImpl())
                     .addService(new CheckAliveServiceImpl())
                     .addService(new ElectionServiceImpl())
+                    .addService(new OrderServiceImpl())
                     .build();
             server.start();
             System.out.println("GRPC servers started");
@@ -141,8 +169,11 @@ public class DroneSingleton {
         if (electionLogic != null) {
             electionLogic.interrupt();
         }
-        if (droneOrderThread != null) {
-            droneOrderThread.interrupt();
+        if (orderLogic != null) {
+            orderLogic.interrupt();
+        }
+        if (orderMQTTThread != null) {
+            orderMQTTThread.interrupt();
         }
         if (droneSensorsThread != null) {
             droneSensorsThread.interrupt();
@@ -205,15 +236,21 @@ public class DroneSingleton {
         droneModel.droneList.removeIf(d -> d.getId() == id);
     }
 
-    public synchronized void setIsBeingElected(boolean b) {
-        droneModel.isBeingElected = b;
-    }
-
-    public synchronized boolean isBeingElected() {
-        return droneModel.isBeingElected;
-    }
-
     public synchronized int getBattery() {
         return droneModel.battery;
+    }
+
+    public synchronized void makeDelivery(int x, int y) {
+        droneModel.x = x;
+        droneModel.y = y;
+        droneModel.battery -= 10;
+    }
+
+    public synchronized int getX() {
+        return droneModel.x;
+    }
+
+    public synchronized int getY() {
+        return droneModel.y;
     }
 }

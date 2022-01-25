@@ -34,9 +34,14 @@ public class DronazonPub {
             System.out.println(clientId + " Connected");
 
             while (true) {
-                int randomX = (int) (Math.random() * 10);
-                int randomY = (int) (Math.random() * 10);
-                String payload = String.valueOf(deliveryId) + ',' + randomX + ',' + randomY;
+                int pickupX, pickupY, dropX, dropY;
+                do {
+                    pickupX = (int) (Math.random() * 10);
+                    pickupY = (int) (Math.random() * 10);
+                    dropX = (int) (Math.random() * 10);
+                    dropY = (int) (Math.random() * 10);
+                } while (pickupX != dropX && pickupY != dropY);
+                String payload = String.valueOf(deliveryId) + ',' + pickupX + ',' + pickupY + ',' + dropX + ',' + dropY;
                 MqttMessage message = new MqttMessage(payload.getBytes());
 
                 // Set the QoS on the Message

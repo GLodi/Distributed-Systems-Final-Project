@@ -12,6 +12,7 @@ public class DroneEntity {
     private int y;
     private int port;
     private int battery;
+    private boolean delivering;
 
     public DroneEntity() {
     }
@@ -35,6 +36,7 @@ public class DroneEntity {
         this.y = d.y;
         this.port = d.port;
         this.battery = d.battery;
+        this.delivering = d.delivering;
     }
 
     public DroneEntity(DroneOuterClass.Drone d) {
@@ -90,8 +92,16 @@ public class DroneEntity {
         this.battery = battery;
     }
 
+    public boolean isDelivering() {
+        return delivering;
+    }
+
+    public void setDelivering(boolean delivering) {
+        this.delivering = delivering;
+    }
+
     public DroneOuterClass.Drone toDrone() {
-        return DroneOuterClass.Drone.newBuilder().setId(id).setX(x).setY(y).setPort(port).setBattery(battery).build();
+        return DroneOuterClass.Drone.newBuilder().setId(id).setX(x).setY(y).setPort(port).setBattery(battery).setDelivering(delivering).build();
     }
 
     @Override

@@ -14,7 +14,7 @@ public class DroneModel {
     public List<DroneEntity> droneList;
     public DroneEntity master;
     public boolean electionParticipant = false;
-    public boolean isBeingElected = false;
+
 
     public DroneModel(int id, int x, int y, String address, int port, List<DroneEntity> droneEntityList) {
         this.id = id;

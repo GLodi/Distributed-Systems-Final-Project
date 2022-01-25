@@ -8,6 +8,7 @@ import com.progetto.grpc.ElectionServiceOuterClass.ElectionRequest;
 import com.progetto.grpc.ElectionServiceOuterClass.ElectionResponse;
 import drones.DroneSingleton;
 import drones.eventbus.EventBus;
+import drones.eventbus.messages.ConfirmedElectedMessage;
 import drones.eventbus.messages.ElectedMessage;
 import drones.eventbus.messages.ElectionMessage;
 import io.grpc.stub.StreamObserver;
@@ -67,6 +68,7 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
             System.out.println("ElectionServiceImpl forwardElected received my own ELECTED. ELECTION OVER");
             responseObserver.onNext(ElectedResponse.newBuilder().build());
             responseObserver.onCompleted();
+            EventBus.getInstance().put(new ConfirmedElectedMessage());
         }
 
     }

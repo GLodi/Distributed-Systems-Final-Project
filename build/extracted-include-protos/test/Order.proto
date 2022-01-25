@@ -1,0 +1,10 @@
+syntax = "proto3";
+package com.progetto.grpc;
+
+message Order {
+  uint32 id = 1;
+  uint32 pickupX = 2;
+  uint32 pickupY = 3;
+  uint32 dropX = 4;
+  uint32 dropY = 5;
+}

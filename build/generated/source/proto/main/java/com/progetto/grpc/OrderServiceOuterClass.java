@@ -1570,9 +1570,9 @@ public final class OrderServiceOuterClass {
       "\0224\n\020arrivalTimestamp\030\001 \001(\0132\032.google.prot" +
       "obuf.Timestamp\022\014\n\004newX\030\002 \001(\r\022\014\n\004newY\030\003 \001" +
       "(\r\022\r\n\005kmRun\030\004 \001(\001\022\027\n\017residualBattery\030\006 \001" +
-      "(\r2e\n\014OrderService\022U\n\014makeDelivery\022\037.com" +
+      "(\r2a\n\014OrderService\022Q\n\014makeDelivery\022\037.com" +
       ".progetto.grpc.OrderRequest\032 .com.proget" +
-      "to.grpc.OrderResponse(\0010\001b\006proto3"
+      "to.grpc.OrderResponseb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

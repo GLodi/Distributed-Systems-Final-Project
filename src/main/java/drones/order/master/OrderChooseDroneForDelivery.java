@@ -32,13 +32,21 @@ public class OrderChooseDroneForDelivery extends Thread {
             candidates.sort(new Comparator<DroneEntity>() {
                 @Override
                 public int compare(DroneEntity o1, DroneEntity o2) {
-                    return Double.compare(distance(o1, o.getPickupX(), o.getPickupY()), distance(o2, o.getPickupX(), o.getPickupY()));
+                    int result = Double.compare(distance(o1, o.getPickupX(), o.getPickupY()), distance(o2, o.getPickupX(), o.getPickupY()));
+                    if (result == 0) {
+                        result = Double.compare(o2.getBattery(), o1.getBattery());
+                    }
+                    if (result == 0) {
+                        result = Double.compare(o2.getId(), o1.getId());
+                    }
+                    return result;
                 }
             });
 
 
             //System.out.println("ORDINATO: ");
-            //candidates.forEach(c -> System.out.println(c.getId() + " x: " + c.getX() + " y: " + c.getY()));
+            //candidates.forEach(c -> System.out.println(c.getId() + " x: " + c.getX() + " y: " + c.getY() +
+            //        " dist: " + distance(c, o.getPickupX(), o.getPickupY())));
 
 
         } else {

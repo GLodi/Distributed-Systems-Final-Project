@@ -18,5 +18,5 @@ message OrderResponse {
 }
 
 service OrderService {
-  rpc makeDelivery(stream OrderRequest) returns (stream OrderResponse);
+  rpc makeDelivery(OrderRequest) returns (OrderResponse);
 }

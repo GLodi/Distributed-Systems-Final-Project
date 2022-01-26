@@ -40,6 +40,13 @@ public class CheckAliveRequestBeat extends Thread {
                     System.out.println("CheckAlive RequestBeat MASTER CADUTO: " + throwable.getLocalizedMessage());
                     EventBus.getInstance().put(new ElectionMessage(DroneSingleton.getInstance().getId(), DroneSingleton.getInstance().getBattery()));
                 }
+
+                try {
+                    CheckAliveInformServer checkAliveInformServer = new CheckAliveInformServer(droneToCheck);
+                    checkAliveInformServer.start();
+                } catch (Exception e) {
+                    System.out.println("CheckAlive CheckAliveInformServer esecuzione fallita");
+                }
             }
 
             @Override

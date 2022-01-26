@@ -30,6 +30,7 @@ public class DroneSingleton {
 
     // TODO: split this into multiple models, (handled by singletons) so that accessing one piece of info
     //      doesn't require the sync of the entire DroneSingleton
+    // TODO: use manual locks to lower granularity of synchronized access
     private DroneModel droneModel;
 
     private RegistrationLogic registrationLogic;
@@ -252,5 +253,9 @@ public class DroneSingleton {
 
     public synchronized int getY() {
         return droneModel.y;
+    }
+
+    public synchronized String getServerAddress() {
+        return droneModel.serverAddress;
     }
 }

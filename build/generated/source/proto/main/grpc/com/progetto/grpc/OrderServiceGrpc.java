@@ -34,7 +34,7 @@ public final class OrderServiceGrpc {
       fullMethodName = SERVICE_NAME + '/' + "makeDelivery",
       requestType = com.progetto.grpc.OrderServiceOuterClass.OrderRequest.class,
       responseType = com.progetto.grpc.OrderServiceOuterClass.OrderResponse.class,
-      methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<com.progetto.grpc.OrderServiceOuterClass.OrderRequest,
       com.progetto.grpc.OrderServiceOuterClass.OrderResponse> getMakeDeliveryMethod() {
     io.grpc.MethodDescriptor<com.progetto.grpc.OrderServiceOuterClass.OrderRequest, com.progetto.grpc.OrderServiceOuterClass.OrderResponse> getMakeDeliveryMethod;
@@ -43,7 +43,7 @@ public final class OrderServiceGrpc {
         if ((getMakeDeliveryMethod = OrderServiceGrpc.getMakeDeliveryMethod) == null) {
           OrderServiceGrpc.getMakeDeliveryMethod = getMakeDeliveryMethod =
               io.grpc.MethodDescriptor.<com.progetto.grpc.OrderServiceOuterClass.OrderRequest, com.progetto.grpc.OrderServiceOuterClass.OrderResponse>newBuilder()
-              .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "makeDelivery"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
@@ -87,16 +87,16 @@ public final class OrderServiceGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<com.progetto.grpc.OrderServiceOuterClass.OrderRequest> makeDelivery(
+    public void makeDelivery(com.progetto.grpc.OrderServiceOuterClass.OrderRequest request,
         io.grpc.stub.StreamObserver<com.progetto.grpc.OrderServiceOuterClass.OrderResponse> responseObserver) {
-      return asyncUnimplementedStreamingCall(getMakeDeliveryMethod(), responseObserver);
+      asyncUnimplementedUnaryCall(getMakeDeliveryMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getMakeDeliveryMethod(),
-            asyncBidiStreamingCall(
+            asyncUnaryCall(
               new MethodHandlers<
                 com.progetto.grpc.OrderServiceOuterClass.OrderRequest,
                 com.progetto.grpc.OrderServiceOuterClass.OrderResponse>(
@@ -125,10 +125,10 @@ public final class OrderServiceGrpc {
 
     /**
      */
-    public io.grpc.stub.StreamObserver<com.progetto.grpc.OrderServiceOuterClass.OrderRequest> makeDelivery(
+    public void makeDelivery(com.progetto.grpc.OrderServiceOuterClass.OrderRequest request,
         io.grpc.stub.StreamObserver<com.progetto.grpc.OrderServiceOuterClass.OrderResponse> responseObserver) {
-      return asyncBidiStreamingCall(
-          getChannel().newCall(getMakeDeliveryMethod(), getCallOptions()), responseObserver);
+      asyncUnaryCall(
+          getChannel().newCall(getMakeDeliveryMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -149,6 +149,13 @@ public final class OrderServiceGrpc {
         io.grpc.CallOptions callOptions) {
       return new OrderServiceBlockingStub(channel, callOptions);
     }
+
+    /**
+     */
+    public com.progetto.grpc.OrderServiceOuterClass.OrderResponse makeDelivery(com.progetto.grpc.OrderServiceOuterClass.OrderRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getMakeDeliveryMethod(), getCallOptions(), request);
+    }
   }
 
   /**
@@ -167,6 +174,14 @@ public final class OrderServiceGrpc {
     protected OrderServiceFutureStub build(io.grpc.Channel channel,
         io.grpc.CallOptions callOptions) {
       return new OrderServiceFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.progetto.grpc.OrderServiceOuterClass.OrderResponse> makeDelivery(
+        com.progetto.grpc.OrderServiceOuterClass.OrderRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getMakeDeliveryMethod(), getCallOptions()), request);
     }
   }
 
@@ -189,6 +204,10 @@ public final class OrderServiceGrpc {
     @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
+        case METHODID_MAKE_DELIVERY:
+          serviceImpl.makeDelivery((com.progetto.grpc.OrderServiceOuterClass.OrderRequest) request,
+              (io.grpc.stub.StreamObserver<com.progetto.grpc.OrderServiceOuterClass.OrderResponse>) responseObserver);
+          break;
         default:
           throw new AssertionError();
       }
@@ -199,9 +218,6 @@ public final class OrderServiceGrpc {
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
-        case METHODID_MAKE_DELIVERY:
-          return (io.grpc.stub.StreamObserver<Req>) serviceImpl.makeDelivery(
-              (io.grpc.stub.StreamObserver<com.progetto.grpc.OrderServiceOuterClass.OrderResponse>) responseObserver);
         default:
           throw new AssertionError();
       }

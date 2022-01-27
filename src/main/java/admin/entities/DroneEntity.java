@@ -22,12 +22,13 @@ public class DroneEntity {
         this.port = port;
     }
 
-    public DroneEntity(int id, int x, int y, int port, int battery) {
+    public DroneEntity(int id, int x, int y, int port, int battery, boolean delivering) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.port = port;
         this.battery = battery;
+        this.delivering = delivering;
     }
 
     public DroneEntity(DroneEntity d) {

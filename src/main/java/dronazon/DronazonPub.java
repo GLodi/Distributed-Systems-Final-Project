@@ -40,7 +40,7 @@ public class DronazonPub {
                     pickupY = (int) (Math.random() * 10);
                     dropX = (int) (Math.random() * 10);
                     dropY = (int) (Math.random() * 10);
-                } while (pickupX != dropX && pickupY != dropY);
+                } while (pickupX == dropX && pickupY == dropY);
                 String payload = String.valueOf(deliveryId) + ',' + pickupX + ',' + pickupY + ',' + dropX + ',' + dropY;
                 MqttMessage message = new MqttMessage(payload.getBytes());
 
@@ -51,7 +51,7 @@ public class DronazonPub {
                 client.publish(topic, message);
                 System.out.println(clientId + " Message published");
                 deliveryId += 1;
-                Thread.sleep(5000);
+                Thread.sleep(2500);
             }
 
             //if (client.isConnected())

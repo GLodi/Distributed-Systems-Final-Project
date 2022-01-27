@@ -13,9 +13,9 @@ import drones.greetings.GreetingsServiceImpl;
 import drones.order.client.OrderServiceImpl;
 import drones.order.master.OrderLogic;
 import drones.order.master.OrderMQTTThread;
+import drones.order.master.OrderQueue;
+import drones.recharge.RechargeLogic;
 import drones.register.RegistrationLogic;
-import drones.sensors.DroneSensorsThread;
-import drones.stats.DroneStatsThread;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -28,20 +28,8 @@ public class DroneSingleton {
 
     private static DroneSingleton instance;
 
-    // TODO: split this into multiple models, (handled by singletons) so that accessing one piece of info
-    //      doesn't require the sync of the entire DroneSingleton
-    // TODO: use manual locks to lower granularity of synchronized access
+    // TODO: MUOVI droneModel.electionParticipant nel modulo election e droneModel.delivering in order VEDI RECHARGEQUEUE
     private DroneModel droneModel;
-
-    private RegistrationLogic registrationLogic;
-    private GreetingsLogic greetingsLogic;
-    private CheckAliveLogic checkAliveLogic;
-    private ElectionLogic electionLogic;
-    private ClosingLogic closingLogic;
-    private OrderLogic orderLogic;
-    private OrderMQTTThread orderMQTTThread;
-    private DroneSensorsThread droneSensorsThread;
-    private DroneStatsThread droneStatsThread;
 
     private DroneSingleton() {
     }
@@ -55,7 +43,7 @@ public class DroneSingleton {
 
     public void startRegisterService(int id, String address, int port) {
         try {
-            registrationLogic = new RegistrationLogic(id, address, port);
+            RegistrationLogic registrationLogic = new RegistrationLogic(id, address, port);
             registrationLogic.start();
             registrationLogic.join();
             droneModel = registrationLogic.getDroneModel();
@@ -67,7 +55,7 @@ public class DroneSingleton {
 
     public void startGreetingsService() {
         try {
-            greetingsLogic = new GreetingsLogic();
+            GreetingsLogic greetingsLogic = new GreetingsLogic();
             greetingsLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startGreetingsService esecuzione fallita");
@@ -77,7 +65,7 @@ public class DroneSingleton {
 
     public void startCheckAliveService() {
         try {
-            checkAliveLogic = new CheckAliveLogic();
+            CheckAliveLogic checkAliveLogic = new CheckAliveLogic();
             checkAliveLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startCheckAliveService esecuzione fallita");
@@ -86,7 +74,7 @@ public class DroneSingleton {
 
     public void startElectionService() {
         try {
-            electionLogic = new ElectionLogic();
+            ElectionLogic electionLogic = new ElectionLogic();
             electionLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startElectionService esecuzione fallita");
@@ -95,9 +83,10 @@ public class DroneSingleton {
 
     public void startClosingService() {
         try {
-            closingLogic = new ClosingLogic(droneModel.id, droneModel.serverAddress, droneModel.port);
+            ClosingLogic closingLogic = new ClosingLogic(droneModel.id, droneModel.serverAddress, droneModel.port);
             closingLogic.start();
             closingLogic.join();
+            interruptAll();
         } catch (Exception e) {
             System.out.println("DroneSingleton startClosingService esecuzione fallita");
         }
@@ -105,7 +94,7 @@ public class DroneSingleton {
 
     public void startOrderService() {
         try {
-            orderLogic = new OrderLogic();
+            OrderLogic orderLogic = new OrderLogic();
             orderLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startOrderService esecuzione fallita");
@@ -114,24 +103,19 @@ public class DroneSingleton {
 
     public void startOrderMQTTThread() {
         try {
-            orderMQTTThread = new OrderMQTTThread();
+            OrderMQTTThread orderMQTTThread = new OrderMQTTThread();
             orderMQTTThread.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startOrderMQTTThread esecuzione fallita");
         }
     }
 
-    public void stopOrderMQTTThread() {
-        if (orderMQTTThread != null) {
-            orderMQTTThread.interrupt();
-        }
-    }
-
-    public void listenForErrors() {
-        while (true) {
-            if (EventBus.getInstance().take("ERROR") != null) {
-
-            }
+    public void startRechargeService() {
+        try {
+            RechargeLogic rechargeLogic = new RechargeLogic();
+            rechargeLogic.start();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startRechargeService esecuzione fallita");
         }
     }
 
@@ -152,36 +136,10 @@ public class DroneSingleton {
         }
     }
 
-    // TODO: subscribe to eventbus for error handling. If error message shows up, kill all threads.
     public synchronized void interruptAll() {
+        OrderQueue.getInstance().clear();
         startClosingService();
-        if (greetingsLogic != null) {
-            greetingsLogic.interrupt();
-        }
-        if (registrationLogic != null) {
-            registrationLogic.interrupt();
-        }
-        if (checkAliveLogic != null) {
-            checkAliveLogic.interrupt();
-        }
-        if (closingLogic != null) {
-            closingLogic.interrupt();
-        }
-        if (electionLogic != null) {
-            electionLogic.interrupt();
-        }
-        if (orderLogic != null) {
-            orderLogic.interrupt();
-        }
-        if (orderMQTTThread != null) {
-            orderMQTTThread.interrupt();
-        }
-        if (droneSensorsThread != null) {
-            droneSensorsThread.interrupt();
-        }
-        if (droneStatsThread != null) {
-            droneStatsThread.interrupt();
-        }
+        System.exit(0);
     }
 
     public synchronized boolean initiated() {
@@ -216,18 +174,6 @@ public class DroneSingleton {
         droneModel.master = master;
     }
 
-    public synchronized void setParticipant() {
-        droneModel.electionParticipant = true;
-    }
-
-    public synchronized void setNonParticipant() {
-        droneModel.electionParticipant = false;
-    }
-
-    public synchronized boolean isParticipant() {
-        return droneModel.electionParticipant;
-    }
-
     public synchronized void addToRing(DroneEntity droneEntity) {
         droneModel.droneList.add(droneEntity);
         droneModel.droneList.sort(Comparator.comparingInt(DroneEntity::getId));
@@ -257,5 +203,26 @@ public class DroneSingleton {
 
     public synchronized String getServerAddress() {
         return droneModel.serverAddress;
+    }
+
+    public synchronized void setDelivering(int id, boolean b) {
+        if (droneModel.droneList.stream().anyMatch(d -> d.getId() == id)) {
+            droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setDelivering(b);
+        } else if (droneModel.id == id) {
+            droneModel.delivering = b;
+        }
+    }
+
+    public synchronized boolean isRecharging() {
+        return droneModel.recharging;
+    }
+
+    public synchronized void setRecharging(boolean b) {
+        droneModel.recharging = b;
+    }
+
+    public synchronized void updateDrone(int id, int x, int y, int battery) {
+        droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setCoordinates(x, y);
+        droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setBattery(battery);
     }
 }

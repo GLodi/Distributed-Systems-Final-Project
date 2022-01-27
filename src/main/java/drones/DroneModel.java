@@ -13,8 +13,8 @@ public class DroneModel {
     public int battery;
     public List<DroneEntity> droneList;
     public DroneEntity master;
-    public boolean electionParticipant = false;
-
+    public boolean delivering = false;
+    public boolean recharging = false;
 
     public DroneModel(int id, int x, int y, String address, int port, List<DroneEntity> droneEntityList) {
         this.id = id;
@@ -27,6 +27,6 @@ public class DroneModel {
     }
 
     public static DroneEntity getEntity(DroneModel d) {
-        return new DroneEntity(d.id, d.x, d.y, d.port, d.battery);
+        return new DroneEntity(d.id, d.x, d.y, d.port, d.battery, d.delivering);
     }
 }

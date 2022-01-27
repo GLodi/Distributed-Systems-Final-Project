@@ -26,19 +26,19 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
         if (request.getBattery() > ownBattery || (request.getBattery() == ownBattery && request.getElectionId() > ownId)) {
             // forward message unchanged
             System.out.println("ElectionServiceImpl forwardElection FORWARD MESSAGE UNCHANGED: " + request.getElectionId());
-            DroneSingleton.getInstance().setParticipant();
+            ElectionSingleton.getInstance().setParticipant();
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();
             EventBus.getInstance().put(new ElectionMessage(request.getElectionId(), request.getBattery()));
-        } else if (!DroneSingleton.getInstance().isParticipant() && request.getBattery() < ownBattery
+        } else if (!ElectionSingleton.getInstance().isParticipant() && request.getBattery() < ownBattery
                 || (request.getBattery() == ownBattery && request.getElectionId() < ownId)) {
             // set electionId = id and forward
             System.out.println("ElectionServiceImpl forwardElection SET ELECTION ID: " + ownId);
-            DroneSingleton.getInstance().setParticipant();
+            ElectionSingleton.getInstance().setParticipant();
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();
             EventBus.getInstance().put(new ElectionMessage(ownId, ownBattery));
-        } else if (DroneSingleton.getInstance().isParticipant() && request.getBattery() < ownBattery
+        } else if (ElectionSingleton.getInstance().isParticipant() && request.getBattery() < ownBattery
                 || (request.getBattery() == ownBattery && request.getElectionId() < ownId)) {
             System.out.println("ElectionServiceImpl forwardElection DISCARDING ELECTION MESSAGE: " + request.getElectionId());
             responseObserver.onNext(ElectionResponse.newBuilder().build());
@@ -47,7 +47,7 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
             // EventBus put ElectedMessage
             System.out.println("ElectionServiceImpl forwardElection ELECTED ID: " + ownId);
             DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
-            DroneSingleton.getInstance().setNonParticipant();
+            ElectionSingleton.getInstance().setNonParticipant();
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();
             EventBus.getInstance().put(new ElectedMessage(DroneSingleton.getInstance().getId(), DroneSingleton.getInstance().getDroneEntity()));
@@ -58,7 +58,7 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
     public void forwardElected(ElectedRequest request, StreamObserver<ElectedResponse> responseObserver) {
         System.out.println("ElectionServiceImpl forwardElected forward received from " + request.getId());
         if (request.getId() != DroneSingleton.getInstance().getId()) {
-            DroneSingleton.getInstance().setNonParticipant();
+            ElectionSingleton.getInstance().setNonParticipant();
             DroneSingleton.getInstance().setMaster(new DroneEntity(request.getNewMaster()));
             responseObserver.onNext(ElectedResponse.newBuilder().build());
             responseObserver.onCompleted();

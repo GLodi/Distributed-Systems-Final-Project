@@ -1,5 +1,8 @@
 package drones;
 
+import drones.eventbus.EventBus;
+import drones.eventbus.messages.BroadcastRechargeMessage;
+
 import java.util.Scanner;
 
 public class DroneMain {
@@ -63,6 +66,8 @@ public class DroneMain {
 
         // TODO: thread recharge
 
+        // TODO: usa orologi logici per garantire happened-before?
+
         // SE SEI MASTER USA ESEMPIO CHATSERVICEIMPL PER GESTIRE LA COMUNICAZIONE CON TUTTI I DRONI IN GRPC
         // TODO: SE MASTER. TUTTI IN WAIT/NOTIFY SU isMaster VARIABLE
         //      thread per ricevere ordini da MQTT (se drone e' master)
@@ -74,6 +79,9 @@ public class DroneMain {
             if (command.equals("q")) {
                 DroneSingleton.getInstance().interruptAll();
                 return;
+            }
+            if (command.equals("recharge")) {
+                EventBus.getInstance().put(new BroadcastRechargeMessage());
             }
         }
     }

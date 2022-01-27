@@ -1,5 +1,7 @@
 package drones.order;
 
+import com.progetto.grpc.OrderOuterClass;
+
 public class Order {
     private int id;
     private int pickupX;
@@ -53,5 +55,9 @@ public class Order {
 
     public void setDropY(int dropY) {
         this.dropY = dropY;
+    }
+
+    public OrderOuterClass.Order toOrder() {
+        return OrderOuterClass.Order.newBuilder().setId(id).setDropX(dropX).setDropY(dropY).setPickupX(pickupX).setPickupY(pickupY).build();
     }
 }

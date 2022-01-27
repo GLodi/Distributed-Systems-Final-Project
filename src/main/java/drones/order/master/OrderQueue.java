@@ -15,11 +15,19 @@ public class OrderQueue {
         return instance;
     }
 
+    public synchronized int size() {
+        return queue.size();
+    }
+
     public synchronized void put(Order o) {
         queue.add(o);
     }
 
     public synchronized Order pop() {
         return queue.remove(0);
+    }
+
+    public synchronized void clear() {
+        queue.clear();
     }
 }

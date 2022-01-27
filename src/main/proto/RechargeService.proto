@@ -1,0 +1,24 @@
+syntax = "proto3";
+package com.progetto.grpc;
+import "google/protobuf/timestamp.proto";
+
+message RechargeRequest {
+  uint32 id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message RechargeResponse {
+}
+
+message InformMasterRequest {
+  uint32 id = 1;
+}
+
+message InformMasterResponse {
+  
+}
+
+service RechargeService {
+  rpc broadcastRecharge(RechargeRequest) returns (RechargeResponse);
+  rpc informMaster(InformMasterRequest) returns (InformMasterResponse);
+}

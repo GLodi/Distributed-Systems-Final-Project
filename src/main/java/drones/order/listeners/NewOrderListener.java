@@ -12,14 +12,14 @@ public class NewOrderListener extends Thread {
             NewOrderMessage message = (NewOrderMessage) EventBus.getInstance().take("NEW_ORDER");
             if (message != null) {
                 System.out.println("Order NewOrderListener NEW_ORDER message received");
-                chooseDroneForDelivery(message);
+                chooseDroneForDelivery();
             }
         }
     }
 
-    private void chooseDroneForDelivery(NewOrderMessage message) {
+    private void chooseDroneForDelivery() {
         try {
-            OrderChooseDroneForDelivery orderChooseDroneForDelivery = new OrderChooseDroneForDelivery(message);
+            OrderChooseDroneForDelivery orderChooseDroneForDelivery = new OrderChooseDroneForDelivery();
             orderChooseDroneForDelivery.start();
         } catch (Exception e) {
             e.printStackTrace();

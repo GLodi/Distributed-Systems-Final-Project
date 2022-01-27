@@ -14,7 +14,12 @@ public class OrderServiceImpl extends OrderServiceImplBase {
     @Override
     public void makeDelivery(OrderRequest request, StreamObserver<OrderResponse> responseObserver) {
         System.out.println("Order OrderServiceImpl received order " + request.getOrder().getId());
-        // as client, simulate delivery with 5 sec sleep
+
+        if (DroneSingleton.getInstance().getBattery() < 15 || DroneSingleton.getInstance().isRecharging()) {
+            responseObserver.onError(new Throwable("Order OrderServiceImpl REFUSE WORK"));
+            return;
+        }
+
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
@@ -37,11 +42,14 @@ public class OrderServiceImpl extends OrderServiceImplBase {
                 .setNewY(DroneSingleton.getInstance().getY())
                 .setKmRun(kmRun)
                 .build());
+        System.out.println("Order OrderServiceImpl done delivering " + request.getOrder().getId());
 
-        if (DroneSingleton.getInstance().getBattery() <= 15) {
-            DroneSingleton.getInstance().startClosingService();
-        }
         responseObserver.onCompleted();
+
+        if (DroneSingleton.getInstance().getBattery() < 15) {
+            DroneSingleton.getInstance().interruptAll();
+            System.out.println("Order OrderServiceImpl BATTERY DEAD AFTER ORDER " + request.getOrder().getId());
+        }
     }
 
     private double distance(int x1, int y1, int x2, int y2) {

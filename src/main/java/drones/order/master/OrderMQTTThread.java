@@ -8,9 +8,10 @@ import org.eclipse.paho.client.mqttv3.*;
 import java.sql.Timestamp;
 
 public class OrderMQTTThread extends Thread {
+    private MqttClient client;
+
     @Override
     public void run() {
-        MqttClient client;
         String broker = "tcp://localhost:1883";
         String clientId = MqttClient.generateClientId();
         String topic = "dronazon/smarticity/orders";
@@ -77,5 +78,15 @@ public class OrderMQTTThread extends Thread {
         }
 
 
+    }
+
+    @Override
+    public void interrupt() {
+        try {
+            client.disconnect();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+        super.interrupt();
     }
 }

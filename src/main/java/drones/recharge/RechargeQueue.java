@@ -9,6 +9,7 @@ public class RechargeQueue {
 
     private RechargeStateEnum rechargeStateEnum = RechargeStateEnum.NOT_RECHARGING;
     private Recharge ownRequest;
+    private int okCounter = 0;
 
     public synchronized static RechargeQueue getInstance() {
         if (instance == null)
@@ -54,5 +55,17 @@ public class RechargeQueue {
 
     public synchronized void setOwnRequest(Recharge request) {
         ownRequest = request;
+    }
+
+    public synchronized void increaseOkCounter() {
+        okCounter += 1;
+    }
+
+    public synchronized int getOkCounter() {
+        return okCounter;
+    }
+
+    public synchronized void resetOkCounter() {
+        okCounter = 0;
     }
 }

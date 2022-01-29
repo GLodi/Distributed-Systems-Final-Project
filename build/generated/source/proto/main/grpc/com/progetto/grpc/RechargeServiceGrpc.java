@@ -89,6 +89,37 @@ public final class RechargeServiceGrpc {
     return getInformMasterMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest,
+      com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse> getSendOkMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "sendOk",
+      requestType = com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.class,
+      responseType = com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest,
+      com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse> getSendOkMethod() {
+    io.grpc.MethodDescriptor<com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest, com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse> getSendOkMethod;
+    if ((getSendOkMethod = RechargeServiceGrpc.getSendOkMethod) == null) {
+      synchronized (RechargeServiceGrpc.class) {
+        if ((getSendOkMethod = RechargeServiceGrpc.getSendOkMethod) == null) {
+          RechargeServiceGrpc.getSendOkMethod = getSendOkMethod =
+              io.grpc.MethodDescriptor.<com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest, com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "sendOk"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new RechargeServiceMethodDescriptorSupplier("sendOk"))
+              .build();
+        }
+      }
+    }
+    return getSendOkMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -130,6 +161,13 @@ public final class RechargeServiceGrpc {
       asyncUnimplementedUnaryCall(getInformMasterMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void sendOk(com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest request,
+        io.grpc.stub.StreamObserver<com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getSendOkMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -146,6 +184,13 @@ public final class RechargeServiceGrpc {
                 com.progetto.grpc.RechargeServiceOuterClass.InformMasterRequest,
                 com.progetto.grpc.RechargeServiceOuterClass.InformMasterResponse>(
                   this, METHODID_INFORM_MASTER)))
+          .addMethod(
+            getSendOkMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest,
+                com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse>(
+                  this, METHODID_SEND_OK)))
           .build();
     }
   }
@@ -183,6 +228,14 @@ public final class RechargeServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getInformMasterMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void sendOk(com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest request,
+        io.grpc.stub.StreamObserver<com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSendOkMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -215,6 +268,13 @@ public final class RechargeServiceGrpc {
     public com.progetto.grpc.RechargeServiceOuterClass.InformMasterResponse informMaster(com.progetto.grpc.RechargeServiceOuterClass.InformMasterRequest request) {
       return blockingUnaryCall(
           getChannel(), getInformMasterMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse sendOk(com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getSendOkMethod(), getCallOptions(), request);
     }
   }
 
@@ -251,10 +311,19 @@ public final class RechargeServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getInformMasterMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse> sendOk(
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSendOkMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_BROADCAST_RECHARGE = 0;
   private static final int METHODID_INFORM_MASTER = 1;
+  private static final int METHODID_SEND_OK = 2;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -280,6 +349,10 @@ public final class RechargeServiceGrpc {
         case METHODID_INFORM_MASTER:
           serviceImpl.informMaster((com.progetto.grpc.RechargeServiceOuterClass.InformMasterRequest) request,
               (io.grpc.stub.StreamObserver<com.progetto.grpc.RechargeServiceOuterClass.InformMasterResponse>) responseObserver);
+          break;
+        case METHODID_SEND_OK:
+          serviceImpl.sendOk((com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest) request,
+              (io.grpc.stub.StreamObserver<com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -344,6 +417,7 @@ public final class RechargeServiceGrpc {
               .setSchemaDescriptor(new RechargeServiceFileDescriptorSupplier())
               .addMethod(getBroadcastRechargeMethod())
               .addMethod(getInformMasterMethod())
+              .addMethod(getSendOkMethod())
               .build();
         }
       }

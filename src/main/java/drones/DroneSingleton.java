@@ -86,7 +86,6 @@ public class DroneSingleton {
             ClosingLogic closingLogic = new ClosingLogic(droneModel.id, droneModel.serverAddress, droneModel.port);
             closingLogic.start();
             closingLogic.join();
-            interruptAll();
         } catch (Exception e) {
             System.out.println("DroneSingleton startClosingService esecuzione fallita");
         }

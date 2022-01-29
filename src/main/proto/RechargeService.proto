@@ -15,10 +15,19 @@ message InformMasterRequest {
 }
 
 message InformMasterResponse {
-  
+
+}
+
+message SendOkRequest {
+  uint32 id = 1;
+}
+
+message SendOkResponse {
+
 }
 
 service RechargeService {
   rpc broadcastRecharge(RechargeRequest) returns (RechargeResponse);
   rpc informMaster(InformMasterRequest) returns (InformMasterResponse);
+  rpc sendOk(SendOkRequest) returns (SendOkResponse);
 }

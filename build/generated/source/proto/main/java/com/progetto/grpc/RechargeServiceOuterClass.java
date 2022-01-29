@@ -2022,6 +2022,910 @@ public final class RechargeServiceOuterClass {
 
   }
 
+  public interface SendOkRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.progetto.grpc.SendOkRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>uint32 id = 1;</code>
+     * @return The id.
+     */
+    int getId();
+  }
+  /**
+   * Protobuf type {@code com.progetto.grpc.SendOkRequest}
+   */
+  public  static final class SendOkRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.progetto.grpc.SendOkRequest)
+      SendOkRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SendOkRequest.newBuilder() to construct.
+    private SendOkRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SendOkRequest() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SendOkRequest();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SendOkRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              id_ = input.readUInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkRequest_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.class, com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.Builder.class);
+    }
+
+    public static final int ID_FIELD_NUMBER = 1;
+    private int id_;
+    /**
+     * <code>uint32 id = 1;</code>
+     * @return The id.
+     */
+    public int getId() {
+      return id_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0) {
+        output.writeUInt32(1, id_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, id_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest)) {
+        return super.equals(obj);
+      }
+      com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest other = (com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest) obj;
+
+      if (getId()
+          != other.getId()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.progetto.grpc.SendOkRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.progetto.grpc.SendOkRequest)
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkRequest_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.class, com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.Builder.class);
+      }
+
+      // Construct using com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        id_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkRequest_descriptor;
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest getDefaultInstanceForType() {
+        return com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest build() {
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest buildPartial() {
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest result = new com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest(this);
+        result.id_ = id_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest) {
+          return mergeFrom((com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest other) {
+        if (other == com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest.getDefaultInstance()) return this;
+        if (other.getId() != 0) {
+          setId(other.getId());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int id_ ;
+      /**
+       * <code>uint32 id = 1;</code>
+       * @return The id.
+       */
+      public int getId() {
+        return id_;
+      }
+      /**
+       * <code>uint32 id = 1;</code>
+       * @param value The id to set.
+       * @return This builder for chaining.
+       */
+      public Builder setId(int value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 id = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearId() {
+        
+        id_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.progetto.grpc.SendOkRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.progetto.grpc.SendOkRequest)
+    private static final com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest();
+    }
+
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SendOkRequest>
+        PARSER = new com.google.protobuf.AbstractParser<SendOkRequest>() {
+      @java.lang.Override
+      public SendOkRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SendOkRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SendOkRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SendOkRequest> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.progetto.grpc.RechargeServiceOuterClass.SendOkRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SendOkResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.progetto.grpc.SendOkResponse)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.progetto.grpc.SendOkResponse}
+   */
+  public  static final class SendOkResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:com.progetto.grpc.SendOkResponse)
+      SendOkResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SendOkResponse.newBuilder() to construct.
+    private SendOkResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SendOkResponse() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SendOkResponse();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SendOkResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkResponse_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.class, com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.Builder.class);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse)) {
+        return super.equals(obj);
+      }
+      com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse other = (com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse) obj;
+
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.progetto.grpc.SendOkResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.progetto.grpc.SendOkResponse)
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkResponse_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.class, com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.Builder.class);
+      }
+
+      // Construct using com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.progetto.grpc.RechargeServiceOuterClass.internal_static_com_progetto_grpc_SendOkResponse_descriptor;
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse getDefaultInstanceForType() {
+        return com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse build() {
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse buildPartial() {
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse result = new com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse(this);
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse) {
+          return mergeFrom((com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse other) {
+        if (other == com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:com.progetto.grpc.SendOkResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:com.progetto.grpc.SendOkResponse)
+    private static final com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse();
+    }
+
+    public static com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SendOkResponse>
+        PARSER = new com.google.protobuf.AbstractParser<SendOkResponse>() {
+      @java.lang.Override
+      public SendOkResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SendOkResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SendOkResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SendOkResponse> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.progetto.grpc.RechargeServiceOuterClass.SendOkResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_progetto_grpc_RechargeRequest_descriptor;
   private static final 
@@ -2042,6 +2946,16 @@ public final class RechargeServiceOuterClass {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_progetto_grpc_InformMasterResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_progetto_grpc_SendOkRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_progetto_grpc_SendOkRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_progetto_grpc_SendOkResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_progetto_grpc_SendOkResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2056,13 +2970,16 @@ public final class RechargeServiceOuterClass {
       "echargeRequest\022\n\n\002id\030\001 \001(\r\022-\n\ttimestamp\030" +
       "\002 \001(\0132\032.google.protobuf.Timestamp\"\022\n\020Rec" +
       "hargeResponse\"!\n\023InformMasterRequest\022\n\n\002" +
-      "id\030\001 \001(\r\"\026\n\024InformMasterResponse2\320\001\n\017Rec" +
-      "hargeService\022\\\n\021broadcastRecharge\022\".com." +
-      "progetto.grpc.RechargeRequest\032#.com.prog" +
-      "etto.grpc.RechargeResponse\022_\n\014informMast" +
-      "er\022&.com.progetto.grpc.InformMasterReque" +
-      "st\032\'.com.progetto.grpc.InformMasterRespo" +
-      "nseb\006proto3"
+      "id\030\001 \001(\r\"\026\n\024InformMasterResponse\"\033\n\rSend" +
+      "OkRequest\022\n\n\002id\030\001 \001(\r\"\020\n\016SendOkResponse2" +
+      "\237\002\n\017RechargeService\022\\\n\021broadcastRecharge" +
+      "\022\".com.progetto.grpc.RechargeRequest\032#.c" +
+      "om.progetto.grpc.RechargeResponse\022_\n\014inf" +
+      "ormMaster\022&.com.progetto.grpc.InformMast" +
+      "erRequest\032\'.com.progetto.grpc.InformMast" +
+      "erResponse\022M\n\006sendOk\022 .com.progetto.grpc" +
+      ".SendOkRequest\032!.com.progetto.grpc.SendO" +
+      "kResponseb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2092,6 +3009,18 @@ public final class RechargeServiceOuterClass {
     internal_static_com_progetto_grpc_InformMasterResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_InformMasterResponse_descriptor,
+        new java.lang.String[] { });
+    internal_static_com_progetto_grpc_SendOkRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_com_progetto_grpc_SendOkRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_progetto_grpc_SendOkRequest_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_com_progetto_grpc_SendOkResponse_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_com_progetto_grpc_SendOkResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_progetto_grpc_SendOkResponse_descriptor,
         new java.lang.String[] { });
     com.google.protobuf.TimestampProto.getDescriptor();
   }

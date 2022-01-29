@@ -11,7 +11,7 @@ public class BroadcastRechargeListener extends Thread {
         while (!Thread.currentThread().isInterrupted()) {
             ConfirmedElectedMessage message = (ConfirmedElectedMessage) EventBus.getInstance().take("BROADCAST_RECHARGE");
             if (message != null) {
-                System.out.println("Recharge BroadcastRechargeListener CONFIRMED_ELECTED message received");
+                System.out.println("Recharge BroadcastRechargeListener BROADCAST_RECHARGE message received");
                 broadcastRecharge();
             }
         }

@@ -2,8 +2,6 @@ package drones.recharge;
 
 import admin.entities.DroneEntity;
 import drones.DroneSingleton;
-import drones.eventbus.EventBus;
-import drones.eventbus.messages.ErrorMessage;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -15,6 +13,8 @@ public class RechargeBroadcast extends Thread {
     public void run() {
         List<RechargeClient> rechargeClientList = new ArrayList<>();
         List<DroneEntity> droneEntityList = new ArrayList<>(DroneSingleton.getInstance().getDroneList());
+
+        // TODO: if dronelist empty, recharge immediately
 
         RechargeQueue.getInstance().setWantsRecharge();
         RechargeQueue.getInstance().setOwnRequest(new Recharge(DroneSingleton.getInstance().getId(), Timestamp.from(Instant.now())));
@@ -29,34 +29,24 @@ public class RechargeBroadcast extends Thread {
                 System.out.println("RechargeBroadcast broadcasting ESECUZIONE FALLITA su " + droneEntity.getId());
             }
         }
-        System.out.println("RechargeBroadcast broadcasting " + rechargeClientList.size() + " threads running");
+        System.out.println("RechargeBroadcast broadcasting " + rechargeClientList.size() + " threads running. Waiting for permissions to recharge.");
 
-        try {
-            for (RechargeClient rechargeClient : rechargeClientList) {
-                rechargeClient.join();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            EventBus.getInstance().put(new ErrorMessage());
-        }
-        System.out.println("RechargeBroadcast broadcasting waited for all threads");
+        /**
+         RechargeQueue.getInstance().setRecharging();
+         DroneSingleton.getInstance().setRecharging(true);
 
-        // has received all OKs
+         // TODO: NO. Non aspettare, potrebbe metterci un sacco. Crea una nuova chiamata grpc per ritornare l'ok
 
-        System.out.println("RechargeBroadcast PERFORMING RECHARGE");
+         try {
+         Thread.sleep(10000);
+         } catch (InterruptedException e) {
+         e.printStackTrace();
+         }
 
-        RechargeQueue.getInstance().setRecharging();
-        DroneSingleton.getInstance().setRecharging(true);
+         RechargeQueue.getInstance().setNotRecharging();
+         DroneSingleton.getInstance().setRecharging(false);
 
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        RechargeQueue.getInstance().setNotRecharging();
-        DroneSingleton.getInstance().setRecharging(false);
-
-        System.out.println("RechargeBroadcast DONE RECHARGING");
+         System.out.println("RechargeBroadcast DONE RECHARGING");
+         **/
     }
 }

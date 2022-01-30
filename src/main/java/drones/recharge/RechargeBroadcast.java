@@ -2,6 +2,8 @@ package drones.recharge;
 
 import admin.entities.DroneEntity;
 import drones.DroneSingleton;
+import drones.eventbus.EventBus;
+import drones.eventbus.messages.RechargeMessage;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -11,42 +13,29 @@ import java.util.List;
 public class RechargeBroadcast extends Thread {
     @Override
     public void run() {
-        List<RechargeClient> rechargeClientList = new ArrayList<>();
+        System.out.println("RechargeBroadcast broadcasting recharge request");
+        List<RechargeBroadcastClient> rechargeBroadcastClientList = new ArrayList<>();
         List<DroneEntity> droneEntityList = new ArrayList<>(DroneSingleton.getInstance().getDroneList());
 
-        // TODO: if dronelist empty, recharge immediately
+        if (droneEntityList.size() == 0) {
+            EventBus.getInstance().put(new RechargeMessage());
+            System.out.println("RechargeBroadcast ALONE! Recharging.");
+            return;
+        }
 
         RechargeQueue.getInstance().setWantsRecharge();
+        RechargeQueue.getInstance().setOkToReceive(DroneSingleton.getInstance().getDroneList().size());
         RechargeQueue.getInstance().setOwnRequest(new Recharge(DroneSingleton.getInstance().getId(), Timestamp.from(Instant.now())));
 
         for (DroneEntity droneEntity : droneEntityList) {
-            System.out.println("RechargeBroadcast broadcasting recharge request");
             try {
-                rechargeClientList.add(new RechargeClient(droneEntity));
-                rechargeClientList.stream().reduce((f, s) -> s).get().start();
+                rechargeBroadcastClientList.add(new RechargeBroadcastClient(droneEntity));
+                rechargeBroadcastClientList.stream().reduce((f, s) -> s).get().start();
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("RechargeBroadcast broadcasting ESECUZIONE FALLITA su " + droneEntity.getId());
             }
         }
-        System.out.println("RechargeBroadcast broadcasting " + rechargeClientList.size() + " threads running. Waiting for permissions to recharge.");
-
-        /**
-         RechargeQueue.getInstance().setRecharging();
-         DroneSingleton.getInstance().setRecharging(true);
-
-         // TODO: NO. Non aspettare, potrebbe metterci un sacco. Crea una nuova chiamata grpc per ritornare l'ok
-
-         try {
-         Thread.sleep(10000);
-         } catch (InterruptedException e) {
-         e.printStackTrace();
-         }
-
-         RechargeQueue.getInstance().setNotRecharging();
-         DroneSingleton.getInstance().setRecharging(false);
-
-         System.out.println("RechargeBroadcast DONE RECHARGING");
-         **/
+        System.out.println("RechargeBroadcast broadcasting " + rechargeBroadcastClientList.size() + " threads running. Waiting for permissions to recharge.");
     }
 }

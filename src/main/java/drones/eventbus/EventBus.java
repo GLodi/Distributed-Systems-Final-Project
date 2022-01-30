@@ -25,7 +25,6 @@ public class EventBus {
         notifyAll();
     }
 
-    // TODO: TUTTI QUELLI CHE CHIAMANO take() DEVONO CONTROLLARE CHE IL MESSAGGIO NON SIA NULLO
     public synchronized Message take(String kind) {
         Message message = null;
 

@@ -15,6 +15,7 @@ import drones.order.master.OrderLogic;
 import drones.order.master.OrderMQTTThread;
 import drones.order.master.OrderQueue;
 import drones.recharge.RechargeLogic;
+import drones.recharge.RechargeServiceImpl;
 import drones.register.RegistrationLogic;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -126,6 +127,7 @@ public class DroneSingleton {
                     .addService(new CheckAliveServiceImpl())
                     .addService(new ElectionServiceImpl())
                     .addService(new OrderServiceImpl())
+                    .addService(new RechargeServiceImpl())
                     .build();
             server.start();
             System.out.println("GRPC servers started");
@@ -221,7 +223,13 @@ public class DroneSingleton {
     }
 
     public synchronized void updateDrone(int id, int x, int y, int battery) {
-        droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setCoordinates(x, y);
-        droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setBattery(battery);
+        if (droneModel.droneList.stream().anyMatch(d -> d.getId() == id)) {
+            droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setCoordinates(x, y);
+            droneModel.droneList.stream().filter(d -> d.getId() == id).findFirst().get().setBattery(battery);
+        } else if (droneModel.id == id) {
+            droneModel.x = x;
+            droneModel.y = y;
+            droneModel.battery = battery;
+        }
     }
 }

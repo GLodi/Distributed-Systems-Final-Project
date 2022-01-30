@@ -57,14 +57,14 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startOrderService();
 
+        DroneSingleton.getInstance().startRechargeService();
+
         // need to do last
         DroneSingleton.getInstance().startGreetingsService();
 
         // TODO: thread avvia sensore per rilevamento inquinamento
 
         // TODO: thread per inviare statistiche a master (GRPC) SE NON MASTER
-
-        // TODO: thread recharge
 
         // TODO: usa orologi logici per garantire happened-before?
 

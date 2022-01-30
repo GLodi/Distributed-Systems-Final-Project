@@ -1,6 +1,7 @@
 package drones.recharge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RechargeQueue {
     private static RechargeQueue instance;
@@ -10,6 +11,7 @@ public class RechargeQueue {
     private RechargeStateEnum rechargeStateEnum = RechargeStateEnum.NOT_RECHARGING;
     private Recharge ownRequest;
     private int okCounter = 0;
+    private int okToReceive = 0;
 
     public synchronized static RechargeQueue getInstance() {
         if (instance == null)
@@ -25,12 +27,10 @@ public class RechargeQueue {
         queue.add(o);
     }
 
-    public synchronized Recharge pop() {
-        return queue.remove(0);
-    }
-
-    public synchronized void clear() {
+    public synchronized List<Recharge> reset() {
+        ArrayList<Recharge> res = new ArrayList<>(queue);
         queue.clear();
+        return res;
     }
 
     public synchronized void setWantsRecharge() {
@@ -42,7 +42,7 @@ public class RechargeQueue {
     }
 
     public synchronized void setNotRecharging() {
-        rechargeStateEnum = RechargeStateEnum.RECHARGING;
+        rechargeStateEnum = RechargeStateEnum.NOT_RECHARGING;
     }
 
     public synchronized RechargeStateEnum getRechargeState() {
@@ -67,5 +67,13 @@ public class RechargeQueue {
 
     public synchronized void resetOkCounter() {
         okCounter = 0;
+    }
+
+    public synchronized int getOkToReceive() {
+        return okToReceive;
+    }
+
+    public synchronized void setOkToReceive(int ok) {
+        okToReceive = ok;
     }
 }

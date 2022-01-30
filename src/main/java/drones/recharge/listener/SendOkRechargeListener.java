@@ -19,7 +19,7 @@ public class SendOkRechargeListener extends Thread {
 
     private void sendOk(SendOkRechargeMessage message) {
         try {
-            RechargeSendOkClient sendOkClient = new RechargeSendOkClient(message.droneEntity);
+            RechargeSendOkClient sendOkClient = new RechargeSendOkClient(message.id);
             sendOkClient.start();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,7 +1,7 @@
 package drones.recharge.listener;
 
 import drones.eventbus.EventBus;
-import drones.eventbus.messages.ConfirmedElectedMessage;
+import drones.eventbus.messages.BroadcastRechargeMessage;
 import drones.recharge.RechargeBroadcast;
 
 public class BroadcastRechargeListener extends Thread {
@@ -9,7 +9,7 @@ public class BroadcastRechargeListener extends Thread {
     public void run() {
         System.out.println("Recharge BroadcastRechargeListener waiting for BROADCAST_RECHARGE message");
         while (!Thread.currentThread().isInterrupted()) {
-            ConfirmedElectedMessage message = (ConfirmedElectedMessage) EventBus.getInstance().take("BROADCAST_RECHARGE");
+            BroadcastRechargeMessage message = (BroadcastRechargeMessage) EventBus.getInstance().take("BROADCAST_RECHARGE");
             if (message != null) {
                 System.out.println("Recharge BroadcastRechargeListener BROADCAST_RECHARGE message received");
                 broadcastRecharge();

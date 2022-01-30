@@ -18,8 +18,6 @@ public class OrderChooseDroneForDelivery extends Thread {
 
         candidates.removeIf(DroneEntity::isDelivering);
 
-        // TODO: remove if does not have enough battery
-
         if (!candidates.isEmpty()) {
             Order o = OrderQueue.getInstance().pop();
             candidates.sort(new Comparator<DroneEntity>() {

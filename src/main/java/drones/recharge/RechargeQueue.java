@@ -76,4 +76,12 @@ public class RechargeQueue {
     public synchronized void setOkToReceive(int ok) {
         okToReceive = ok;
     }
+
+    public synchronized List<Recharge> rechargeList() {
+        return queue;
+    }
+
+    public synchronized void lowerOkToReceive() {
+        okToReceive -= 1;
+    }
 }

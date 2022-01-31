@@ -10,6 +10,7 @@ public class RechargeLogic extends Thread {
         listenToRecharge();
         listenToInformMaster();
         listenToSendOkToAllRecharge();
+        listenToDroneDead();
     }
 
     private void listenToBroadcastRecharge() {
@@ -39,6 +40,16 @@ public class RechargeLogic extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Recharge RechargeLogic listenToSendOkToAllRecharge ERROR: " + e.getLocalizedMessage());
+        }
+    }
+
+    private void listenToDroneDead() {
+        try {
+            DroneDeadListener droneDeadListener = new DroneDeadListener();
+            droneDeadListener.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Recharge RechargeLogic listenToDroneDead ERROR: " + e.getLocalizedMessage());
         }
     }
 

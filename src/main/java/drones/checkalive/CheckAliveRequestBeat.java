@@ -7,6 +7,7 @@ import com.progetto.grpc.CheckAliveServiceOuterClass.HeartbeatRequest;
 import com.progetto.grpc.CheckAliveServiceOuterClass.HeartbeatResponse;
 import drones.DroneSingleton;
 import drones.eventbus.EventBus;
+import drones.eventbus.messages.DroneDeadMessage;
 import drones.eventbus.messages.ElectionMessage;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -47,6 +48,8 @@ public class CheckAliveRequestBeat extends Thread {
                 } catch (Exception e) {
                     System.out.println("CheckAlive CheckAliveInformServer esecuzione fallita");
                 }
+
+                EventBus.getInstance().put(new DroneDeadMessage(droneToCheck.getId()));
             }
 
             @Override

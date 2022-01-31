@@ -187,8 +187,8 @@ com/progetto/grpc/OrderServiceGrpc.java
  com.progetto.grpc.OrderServiceGrpc$OrderServiceImplBase
  com.progetto.grpc.OrderServiceGrpc$OrderServiceMethodDescriptorSupplier
  com.progetto.grpc.OrderServiceGrpc$OrderServiceStub
-drones/recharge/RechargeQueue.java
- drones.recharge.RechargeQueue
+drones/recharge/listener/InformMasterListener.java
+ drones.recharge.listener.InformMasterListener
 admin/server/services/DroneService.java
  admin.server.services.DroneService
  admin.server.services.DroneService$1
@@ -200,8 +200,8 @@ admin/entities/DroneEntity.java
  admin.entities.DroneEntity
 drones/eventbus/messages/GreetedEveryoneMessage.java
  drones.eventbus.messages.GreetedEveryoneMessage
-drones/checkalive/CheckAliveEveryone.java
- drones.checkalive.CheckAliveEveryone
+drones/order/listeners/DroneDeadListener.java
+ drones.order.listeners.DroneDeadListener
 com/progetto/grpc/CheckMasterAliveServiceGrpc.java
  com.progetto.grpc.CheckMasterAliveServiceGrpc
  com.progetto.grpc.CheckMasterAliveServiceGrpc$1
@@ -293,19 +293,19 @@ drones/eventbus/messages/SendOkRechargeMessage.java
  drones.eventbus.messages.SendOkRechargeMessage
 dronazon/DronazonPub.java
  dronazon.DronazonPub
-drones/recharge/listener/SendOkToAllRechargeListener.java
- drones.recharge.listener.SendOkToAllRechargeListener
-drones/recharge/RechargeBroadcast.java
- drones.recharge.RechargeBroadcast
+drones/election/ElectionElectionClient.java
+ drones.election.ElectionElectionClient
+drones/order/master/OrderChooseDroneForDelivery.java
+ drones.order.master.OrderChooseDroneForDelivery
+ drones.order.master.OrderChooseDroneForDelivery$1
 drones/order/listeners/SendOrderListener.java
  drones.order.listeners.SendOrderListener
 drones/order/listeners/ConfirmedElectedListener.java
  drones.order.listeners.ConfirmedElectedListener
 drones/election/ElectionElectedClient.java
  drones.election.ElectionElectedClient
-drones/recharge/RechargeServiceImpl.java
- drones.recharge.RechargeServiceImpl
- drones.recharge.RechargeServiceImpl$1
+drones/recharge/RechargeSendOkClient.java
+ drones.recharge.RechargeSendOkClient
 drones/election/listeners/ElectionListener.java
  drones.election.listeners.ElectionListener
 drones/greetings/GreetingsServiceImpl.java
@@ -323,35 +323,41 @@ drones/order/master/OrderMQTTThread.java
  drones.order.master.OrderMQTTThread$1
 drones/checkalive/listeners/GreetedEveryoneListener.java
  drones.checkalive.listeners.GreetedEveryoneListener
-drones/checkalive/listeners/InsertionListener.java
- drones.checkalive.listeners.InsertionListener
+drones/recharge/RechargeQueue.java
+ drones.recharge.RechargeQueue
 drones/recharge/listener/RechargeListener.java
  drones.recharge.listener.RechargeListener
-drones/checkalive/CheckAliveRequestBeat.java
- drones.checkalive.CheckAliveRequestBeat
- drones.checkalive.CheckAliveRequestBeat$1
+drones/eventbus/messages/DroneDeadMessage.java
+ drones.eventbus.messages.DroneDeadMessage
 drones/eventbus/EventBus.java
  drones.eventbus.EventBus
 drones/recharge/listener/BroadcastRechargeListener.java
  drones.recharge.listener.BroadcastRechargeListener
 drones/recharge/listener/SendOkRechargeListener.java
  drones.recharge.listener.SendOkRechargeListener
-drones/recharge/RechargeRecharge.java
- drones.recharge.RechargeRecharge
-drones/order/listeners/NewOrderListener.java
- drones.order.listeners.NewOrderListener
 drones/election/listeners/ElectedListener.java
  drones.election.listeners.ElectedListener
-drones/election/ElectionElectionClient.java
- drones.election.ElectionElectionClient
-drones/recharge/listener/InformMasterListener.java
- drones.recharge.listener.InformMasterListener
-drones/recharge/RechargeSendOkClient.java
- drones.recharge.RechargeSendOkClient
-drones/order/master/OrderChooseDroneForDelivery.java
- drones.order.master.OrderChooseDroneForDelivery
- drones.order.master.OrderChooseDroneForDelivery$1
-drones/recharge/RechargeLogic.java
- drones.recharge.RechargeLogic
+drones/order/listeners/NewOrderListener.java
+ drones.order.listeners.NewOrderListener
+drones/recharge/RechargeRecharge.java
+ drones.recharge.RechargeRecharge
+drones/recharge/listener/SendOkToAllRechargeListener.java
+ drones.recharge.listener.SendOkToAllRechargeListener
+drones/recharge/RechargeBroadcast.java
+ drones.recharge.RechargeBroadcast
+drones/checkalive/CheckAliveRequestBeat.java
+ drones.checkalive.CheckAliveRequestBeat
+ drones.checkalive.CheckAliveRequestBeat$1
+drones/recharge/RechargeServiceImpl.java
+ drones.recharge.RechargeServiceImpl
+ drones.recharge.RechargeServiceImpl$1
+drones/checkalive/listeners/InsertionListener.java
+ drones.checkalive.listeners.InsertionListener
 drones/DroneSingleton.java
  drones.DroneSingleton
+drones/checkalive/CheckAliveEveryone.java
+ drones.checkalive.CheckAliveEveryone
+drones/recharge/RechargeLogic.java
+ drones.recharge.RechargeLogic
+drones/recharge/listener/DroneDeadListener.java
+ drones.recharge.listener.DroneDeadListener

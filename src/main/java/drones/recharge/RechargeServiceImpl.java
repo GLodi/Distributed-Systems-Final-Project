@@ -69,14 +69,13 @@ public class RechargeServiceImpl extends RechargeServiceImplBase {
     @Override
     public void sendOk(SendOkRequest request, StreamObserver<SendOkResponse> responseObserver) {
         System.out.println("Recharge RechargeServiceImpl sendOk received from: " + request.getId());
-        // aggiungi ok alla RechargeQueue. Quando counter == droni allora ricarica. alla fine della ricarica chiama informmaster
         responseObserver.onNext(SendOkResponse.newBuilder().build());
         responseObserver.onCompleted();
 
         RechargeQueue.getInstance().increaseOkCounter();
 
         if (RechargeQueue.getInstance().getOkCounter() >= RechargeQueue.getInstance().getOkToReceive() &&
-                RechargeQueue.getInstance().getRechargeState() != RechargeStateEnum.RECHARGING) {
+                RechargeQueue.getInstance().getRechargeState() == RechargeStateEnum.WANTING_TO_RECHARGE) {
             // fai ricarica
             EventBus.getInstance().put(new RechargeMessage());
         }

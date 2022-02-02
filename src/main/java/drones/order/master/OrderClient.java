@@ -9,6 +9,8 @@ import drones.DroneSingleton;
 import drones.eventbus.EventBus;
 import drones.eventbus.messages.NewOrderMessage;
 import drones.eventbus.messages.SendOrderMessage;
+import drones.stats.Stats;
+import drones.stats.StatsSingleton;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -37,9 +39,11 @@ public class OrderClient extends Thread {
                 DroneSingleton.getInstance().setDelivering(droneEntity.getId(), true);
                 OrderResponse orderResponse = stub.withDeadlineAfter(10000, TimeUnit.MILLISECONDS).makeDelivery(orderRequest);
 
-                System.out.println("Order OrderClient reply: " + orderResponse.getArrivalTimestamp());
+                System.out.println("Order OrderClient reply: " + orderResponse.getStats().getArrivalTimestamp());
 
-                // TODO: do smth with answer
+                if (DroneSingleton.getInstance().getId() != DroneSingleton.getInstance().getMaster().getId()) {
+                    StatsSingleton.getInstance().add(new Stats(orderResponse.getStats()));
+                }
 
                 DroneSingleton.getInstance().setDelivering(droneEntity.getId(), false);
             } catch (StatusRuntimeException e) {

@@ -4,7 +4,10 @@ import com.google.protobuf.Timestamp;
 import com.progetto.grpc.OrderServiceGrpc.OrderServiceImplBase;
 import com.progetto.grpc.OrderServiceOuterClass.OrderRequest;
 import com.progetto.grpc.OrderServiceOuterClass.OrderResponse;
+import com.progetto.grpc.StatsOuterClass;
 import drones.DroneSingleton;
+import drones.stats.Stats;
+import drones.stats.StatsSingleton;
 import io.grpc.stub.StreamObserver;
 
 import java.time.Instant;
@@ -32,17 +35,24 @@ public class OrderServiceImpl extends OrderServiceImplBase {
                 distance(request.getOrder().getPickupX(), request.getOrder().getPickupY(),
                         request.getOrder().getDropX(), request.getOrder().getPickupY());
 
-        DroneSingleton.getInstance().makeDelivery(request.getOrder().getDropX(), request.getOrder().getDropY());
+        int residualBattery = DroneSingleton.getInstance().makeDelivery(request.getOrder().getDropX(), request.getOrder().getDropY());
 
         Instant time = Instant.now();
-        // TODO: metti media misurazioni
-        responseObserver.onNext(OrderResponse.newBuilder()
+        StatsOuterClass.Stats stats = StatsOuterClass.Stats.newBuilder()
                 .setArrivalTimestamp(Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build())
                 .setNewX(DroneSingleton.getInstance().getX())
                 .setNewY(DroneSingleton.getInstance().getY())
                 .setKmRun(kmRun)
+                .setOrderId(request.getOrder().getId())
+                .setDroneId(DroneSingleton.getInstance().getId())
+                .setResidualBattery(residualBattery)
+                .build();
+        // TODO: metti media misurazioni
+        responseObserver.onNext(OrderResponse.newBuilder().setStats(stats)
                 .build());
         System.out.println("Order OrderServiceImpl done delivering " + request.getOrder().getId());
+
+        StatsSingleton.getInstance().add(new Stats(stats));
 
         responseObserver.onCompleted();
 

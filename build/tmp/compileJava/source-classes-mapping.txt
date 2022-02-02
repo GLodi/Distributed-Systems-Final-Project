@@ -1,31 +1,3 @@
-drones/order/client/OrderServiceImpl.java
- drones.order.client.OrderServiceImpl
-com/progetto/grpc/InsertionServiceGrpc.java
- com.progetto.grpc.InsertionServiceGrpc
- com.progetto.grpc.InsertionServiceGrpc$1
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceBaseDescriptorSupplier
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceBlockingStub
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceFileDescriptorSupplier
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceFutureStub
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceImplBase
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceMethodDescriptorSupplier
- com.progetto.grpc.InsertionServiceGrpc$InsertionServiceStub
- com.progetto.grpc.InsertionServiceGrpc$MethodHandlers
-drones/DroneModel.java
- drones.DroneModel
-drones/eventbus/messages/ElectedMessage.java
- drones.eventbus.messages.ElectedMessage
-com/progetto/grpc/InsertionServiceOuterClass.java
- com.progetto.grpc.InsertionServiceOuterClass
- com.progetto.grpc.InsertionServiceOuterClass$1
- com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest
- com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest$1
- com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest$Builder
- com.progetto.grpc.InsertionServiceOuterClass$InsertionRequestOrBuilder
- com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse
- com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$1
- com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$Builder
- com.progetto.grpc.InsertionServiceOuterClass$InsertionResponseOrBuilder
 com/progetto/grpc/OrderServiceOuterClass.java
  com.progetto.grpc.OrderServiceOuterClass
  com.progetto.grpc.OrderServiceOuterClass$1
@@ -37,12 +9,14 @@ com/progetto/grpc/OrderServiceOuterClass.java
  com.progetto.grpc.OrderServiceOuterClass$OrderResponse$1
  com.progetto.grpc.OrderServiceOuterClass$OrderResponse$Builder
  com.progetto.grpc.OrderServiceOuterClass$OrderResponseOrBuilder
-admin/server/beans/Drones.java
- admin.server.beans.Drones
-drones/greetings/GreetingsLogic.java
- drones.greetings.GreetingsLogic
+drones/greetings/GreetingsServiceImpl.java
+ drones.greetings.GreetingsServiceImpl
+drones/recharge/RechargeLogic.java
+ drones.recharge.RechargeLogic
 drones/eventbus/messages/ElectionMessage.java
  drones.eventbus.messages.ElectionMessage
+drones/eventbus/messages/SendOkToAllRechargeMessage.java
+ drones.eventbus.messages.SendOkToAllRechargeMessage
 com/progetto/grpc/CheckAliveServiceGrpc.java
  com.progetto.grpc.CheckAliveServiceGrpc
  com.progetto.grpc.CheckAliveServiceGrpc$1
@@ -54,27 +28,19 @@ com/progetto/grpc/CheckAliveServiceGrpc.java
  com.progetto.grpc.CheckAliveServiceGrpc$CheckAliveServiceMethodDescriptorSupplier
  com.progetto.grpc.CheckAliveServiceGrpc$CheckAliveServiceStub
  com.progetto.grpc.CheckAliveServiceGrpc$MethodHandlers
-drones/greetings/GreetingsClient.java
- drones.greetings.GreetingsClient
-drones/closing/ClosingLogic.java
- drones.closing.ClosingLogic
 drones/eventbus/messages/NewOrderMessage.java
  drones.eventbus.messages.NewOrderMessage
 drones/eventbus/messages/ErrorMessage.java
  drones.eventbus.messages.ErrorMessage
-com/progetto/grpc/RechargeServiceGrpc.java
- com.progetto.grpc.RechargeServiceGrpc
- com.progetto.grpc.RechargeServiceGrpc$1
- com.progetto.grpc.RechargeServiceGrpc$MethodHandlers
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceBaseDescriptorSupplier
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceBlockingStub
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceFileDescriptorSupplier
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceFutureStub
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceImplBase
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceMethodDescriptorSupplier
- com.progetto.grpc.RechargeServiceGrpc$RechargeServiceStub
-drones/eventbus/messages/BroadcastRechargeMessage.java
- drones.eventbus.messages.BroadcastRechargeMessage
+drones/election/ElectionServiceImpl.java
+ drones.election.ElectionServiceImpl
+com/progetto/grpc/StatsOuterClass.java
+ com.progetto.grpc.StatsOuterClass
+ com.progetto.grpc.StatsOuterClass$1
+ com.progetto.grpc.StatsOuterClass$Stats
+ com.progetto.grpc.StatsOuterClass$Stats$1
+ com.progetto.grpc.StatsOuterClass$Stats$Builder
+ com.progetto.grpc.StatsOuterClass$StatsOrBuilder
 drones/recharge/RechargeBroadcastClient.java
  drones.recharge.RechargeBroadcastClient
 com/progetto/grpc/OrderOuterClass.java
@@ -84,15 +50,11 @@ com/progetto/grpc/OrderOuterClass.java
  com.progetto.grpc.OrderOuterClass$Order$1
  com.progetto.grpc.OrderOuterClass$Order$Builder
  com.progetto.grpc.OrderOuterClass$OrderOrBuilder
-drones/checkalive/CheckAliveInformServer.java
- drones.checkalive.CheckAliveInformServer
+drones/checkalive/listeners/InsertionListener.java
+ drones.checkalive.listeners.InsertionListener
 drones/register/RegistrationLogic.java
  drones.register.RegistrationLogic
  drones.register.RegistrationLogic$1
-drones/election/ElectionSingleton.java
- drones.election.ElectionSingleton
-admin/server/beans/Statistics.java
- admin.server.beans.Statistics
 com/progetto/grpc/GreetingsServiceGrpc.java
  com.progetto.grpc.GreetingsServiceGrpc
  com.progetto.grpc.GreetingsServiceGrpc$1
@@ -117,35 +79,8 @@ com/progetto/grpc/ElectionServiceGrpc.java
  com.progetto.grpc.ElectionServiceGrpc$ElectionServiceMethodDescriptorSupplier
  com.progetto.grpc.ElectionServiceGrpc$ElectionServiceStub
  com.progetto.grpc.ElectionServiceGrpc$MethodHandlers
-com/progetto/grpc/RechargeServiceOuterClass.java
- com.progetto.grpc.RechargeServiceOuterClass
- com.progetto.grpc.RechargeServiceOuterClass$1
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequest
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequest$1
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequest$Builder
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequestOrBuilder
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponse
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponse$1
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponse$Builder
- com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponseOrBuilder
- com.progetto.grpc.RechargeServiceOuterClass$RechargeRequest
- com.progetto.grpc.RechargeServiceOuterClass$RechargeRequest$1
- com.progetto.grpc.RechargeServiceOuterClass$RechargeRequest$Builder
- com.progetto.grpc.RechargeServiceOuterClass$RechargeRequestOrBuilder
- com.progetto.grpc.RechargeServiceOuterClass$RechargeResponse
- com.progetto.grpc.RechargeServiceOuterClass$RechargeResponse$1
- com.progetto.grpc.RechargeServiceOuterClass$RechargeResponse$Builder
- com.progetto.grpc.RechargeServiceOuterClass$RechargeResponseOrBuilder
- com.progetto.grpc.RechargeServiceOuterClass$SendOkRequest
- com.progetto.grpc.RechargeServiceOuterClass$SendOkRequest$1
- com.progetto.grpc.RechargeServiceOuterClass$SendOkRequest$Builder
- com.progetto.grpc.RechargeServiceOuterClass$SendOkRequestOrBuilder
- com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse
- com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse$1
- com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse$Builder
- com.progetto.grpc.RechargeServiceOuterClass$SendOkResponseOrBuilder
-drones/recharge/RechargeInformMasterClient.java
- drones.recharge.RechargeInformMasterClient
+drones/recharge/listener/BroadcastRechargeListener.java
+ drones.recharge.listener.BroadcastRechargeListener
 com/progetto/grpc/DroneOuterClass.java
  com.progetto.grpc.DroneOuterClass
  com.progetto.grpc.DroneOuterClass$1
@@ -155,12 +90,8 @@ com/progetto/grpc/DroneOuterClass.java
  com.progetto.grpc.DroneOuterClass$DroneOrBuilder
 drones/checkalive/CheckAliveServiceImpl.java
  drones.checkalive.CheckAliveServiceImpl
-admin/entities/StatisticEntity.java
- admin.entities.StatisticEntity
 drones/sensors/DroneSensorsThread.java
  drones.sensors.DroneSensorsThread
-admin/server/ServerAdmin.java
- admin.server.ServerAdmin
 drones/recharge/Recharge.java
  drones.recharge.Recharge
 com/progetto/grpc/CheckAliveServiceOuterClass.java
@@ -174,8 +105,6 @@ com/progetto/grpc/CheckAliveServiceOuterClass.java
  com.progetto.grpc.CheckAliveServiceOuterClass$HeartbeatResponse$1
  com.progetto.grpc.CheckAliveServiceOuterClass$HeartbeatResponse$Builder
  com.progetto.grpc.CheckAliveServiceOuterClass$HeartbeatResponseOrBuilder
-drones/eventbus/messages/SendOrderMessage.java
- drones.eventbus.messages.SendOrderMessage
 com/progetto/grpc/OrderServiceGrpc.java
  com.progetto.grpc.OrderServiceGrpc
  com.progetto.grpc.OrderServiceGrpc$1
@@ -187,21 +116,161 @@ com/progetto/grpc/OrderServiceGrpc.java
  com.progetto.grpc.OrderServiceGrpc$OrderServiceImplBase
  com.progetto.grpc.OrderServiceGrpc$OrderServiceMethodDescriptorSupplier
  com.progetto.grpc.OrderServiceGrpc$OrderServiceStub
-drones/recharge/listener/InformMasterListener.java
- drones.recharge.listener.InformMasterListener
+drones/stats/StatsSingleton.java
+ drones.stats.StatsSingleton
 admin/server/services/DroneService.java
  admin.server.services.DroneService
  admin.server.services.DroneService$1
 drones/order/Order.java
  drones.order.Order
-drones/order/master/OrderQueue.java
- drones.order.master.OrderQueue
-admin/entities/DroneEntity.java
- admin.entities.DroneEntity
 drones/eventbus/messages/GreetedEveryoneMessage.java
  drones.eventbus.messages.GreetedEveryoneMessage
+drones/eventbus/messages/ConfirmedElectedMessage.java
+ drones.eventbus.messages.ConfirmedElectedMessage
+drones/recharge/listener/SendOkToAllRechargeListener.java
+ drones.recharge.listener.SendOkToAllRechargeListener
+drones/order/listeners/SendOrderListener.java
+ drones.order.listeners.SendOrderListener
+drones/order/master/OrderClient.java
+ drones.order.master.OrderClient
+com/progetto/grpc/ElectionServiceOuterClass.java
+ com.progetto.grpc.ElectionServiceOuterClass
+ com.progetto.grpc.ElectionServiceOuterClass$1
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedRequest
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedRequest$1
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedRequest$Builder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedRequestOrBuilder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedResponse
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedResponse$1
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedResponse$Builder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectedResponseOrBuilder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionRequest
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionRequest$1
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionRequest$Builder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionRequestOrBuilder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$1
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$Builder
+ com.progetto.grpc.ElectionServiceOuterClass$ElectionResponseOrBuilder
+drones/recharge/listener/RechargeListener.java
+ drones.recharge.listener.RechargeListener
+drones/stats/StatsMasterLoop.java
+ drones.stats.StatsMasterLoop
+com/progetto/grpc/CheckMasterAliveServiceOuterClass.java
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$1
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequest
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequest$1
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequest$Builder
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequestOrBuilder
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse$1
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse$Builder
+ com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponseOrBuilder
+InsertionRequest.java
+ InsertionRequest
+drones/checkalive/CheckAliveInformServer.java
+ drones.checkalive.CheckAliveInformServer
+drones/eventbus/messages/RechargeMessage.java
+ drones.eventbus.messages.RechargeMessage
+drones/recharge/listener/SendOkRechargeListener.java
+ drones.recharge.listener.SendOkRechargeListener
+drones/recharge/RechargeInformMasterClient.java
+ drones.recharge.RechargeInformMasterClient
+drones/DroneModel.java
+ drones.DroneModel
+drones/election/ElectionElectionClient.java
+ drones.election.ElectionElectionClient
+drones/eventbus/messages/InformMasterRechargeMessage.java
+ drones.eventbus.messages.InformMasterRechargeMessage
 drones/order/listeners/DroneDeadListener.java
  drones.order.listeners.DroneDeadListener
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin
+drones/eventbus/messages/BroadcastRechargeMessage.java
+ drones.eventbus.messages.BroadcastRechargeMessage
+admin/server/beans/Drones.java
+ admin.server.beans.Drones
+drones/election/ElectionLogic.java
+ drones.election.ElectionLogic
+admin/server/ServerAdmin.java
+ admin.server.ServerAdmin
+admin/entities/StatisticEntity.java
+ admin.entities.StatisticEntity
+drones/greetings/GreetingsLogic.java
+ drones.greetings.GreetingsLogic
+drones/eventbus/messages/SendOkRechargeMessage.java
+ drones.eventbus.messages.SendOkRechargeMessage
+drones/DroneSingleton.java
+ drones.DroneSingleton
+drones/stats/StatsLoop.java
+ drones.stats.StatsLoop
+drones/recharge/RechargeBroadcast.java
+ drones.recharge.RechargeBroadcast
+com/progetto/grpc/InsertionServiceGrpc.java
+ com.progetto.grpc.InsertionServiceGrpc
+ com.progetto.grpc.InsertionServiceGrpc$1
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceBaseDescriptorSupplier
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceBlockingStub
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceFileDescriptorSupplier
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceFutureStub
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceImplBase
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceMethodDescriptorSupplier
+ com.progetto.grpc.InsertionServiceGrpc$InsertionServiceStub
+ com.progetto.grpc.InsertionServiceGrpc$MethodHandlers
+drones/order/listeners/ConfirmedElectedListener.java
+ drones.order.listeners.ConfirmedElectedListener
+drones/eventbus/messages/ElectedMessage.java
+ drones.eventbus.messages.ElectedMessage
+com/progetto/grpc/InsertionServiceOuterClass.java
+ com.progetto.grpc.InsertionServiceOuterClass
+ com.progetto.grpc.InsertionServiceOuterClass$1
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest$1
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequest$Builder
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionRequestOrBuilder
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$1
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponse$Builder
+ com.progetto.grpc.InsertionServiceOuterClass$InsertionResponseOrBuilder
+drones/greetings/GreetingsClient.java
+ drones.greetings.GreetingsClient
+drones/closing/ClosingLogic.java
+ drones.closing.ClosingLogic
+com/progetto/grpc/RechargeServiceGrpc.java
+ com.progetto.grpc.RechargeServiceGrpc
+ com.progetto.grpc.RechargeServiceGrpc$1
+ com.progetto.grpc.RechargeServiceGrpc$MethodHandlers
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceBaseDescriptorSupplier
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceBlockingStub
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceFileDescriptorSupplier
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceFutureStub
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceImplBase
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceMethodDescriptorSupplier
+ com.progetto.grpc.RechargeServiceGrpc$RechargeServiceStub
+drones/stats/Stats.java
+ drones.stats.Stats
+drones/election/ElectionSingleton.java
+ drones.election.ElectionSingleton
+admin/server/beans/Statistics.java
+ admin.server.beans.Statistics
+drones/eventbus/EventBus.java
+ drones.eventbus.EventBus
+drones/recharge/RechargeRecharge.java
+ drones.recharge.RechargeRecharge
+drones/order/listeners/NewOrderListener.java
+ drones.order.listeners.NewOrderListener
+drones/eventbus/messages/SendOrderMessage.java
+ drones.eventbus.messages.SendOrderMessage
+drones/recharge/RechargeQueue.java
+ drones.recharge.RechargeQueue
+drones/order/master/OrderQueue.java
+ drones.order.master.OrderQueue
+drones/order/master/OrderChooseDroneForDelivery.java
+ drones.order.master.OrderChooseDroneForDelivery
+ drones.order.master.OrderChooseDroneForDelivery$1
+drones/checkalive/CheckAliveEveryone.java
+ drones.checkalive.CheckAliveEveryone
 com/progetto/grpc/CheckMasterAliveServiceGrpc.java
  com.progetto.grpc.CheckMasterAliveServiceGrpc
  com.progetto.grpc.CheckMasterAliveServiceGrpc$1
@@ -213,8 +282,6 @@ com/progetto/grpc/CheckMasterAliveServiceGrpc.java
  com.progetto.grpc.CheckMasterAliveServiceGrpc$CheckMasterAliveServiceMethodDescriptorSupplier
  com.progetto.grpc.CheckMasterAliveServiceGrpc$CheckMasterAliveServiceStub
  com.progetto.grpc.CheckMasterAliveServiceGrpc$MethodHandlers
-drones/eventbus/messages/ConfirmedElectedMessage.java
- drones.eventbus.messages.ConfirmedElectedMessage
 com/progetto/grpc/OrderService.java
  com.progetto.grpc.OrderService
  com.progetto.grpc.OrderService$1
@@ -243,121 +310,69 @@ drones/checkalive/CheckAliveLogic.java
  drones.checkalive.CheckAliveLogic
 drones/order/master/OrderLogic.java
  drones.order.master.OrderLogic
-drones/eventbus/Message.java
- drones.eventbus.Message
-drones/eventbus/messages/RechargeMessage.java
- drones.eventbus.messages.RechargeMessage
-drones/eventbus/messages/InsertionMessage.java
- drones.eventbus.messages.InsertionMessage
-drones/election/ElectionLogic.java
- drones.election.ElectionLogic
-com/progetto/grpc/CheckMasterAliveServiceOuterClass.java
- com.progetto.grpc.CheckMasterAliveServiceOuterClass
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$1
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequest
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequest$1
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequest$Builder
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatRequestOrBuilder
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse$1
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponse$Builder
- com.progetto.grpc.CheckMasterAliveServiceOuterClass$HeartbeatResponseOrBuilder
-drones/stats/DroneStatsThread.java
- drones.stats.DroneStatsThread
-com/progetto/grpc/ElectionServiceOuterClass.java
- com.progetto.grpc.ElectionServiceOuterClass
- com.progetto.grpc.ElectionServiceOuterClass$1
- com.progetto.grpc.ElectionServiceOuterClass$ElectedRequest
- com.progetto.grpc.ElectionServiceOuterClass$ElectedRequest$1
- com.progetto.grpc.ElectionServiceOuterClass$ElectedRequest$Builder
- com.progetto.grpc.ElectionServiceOuterClass$ElectedRequestOrBuilder
- com.progetto.grpc.ElectionServiceOuterClass$ElectedResponse
- com.progetto.grpc.ElectionServiceOuterClass$ElectedResponse$1
- com.progetto.grpc.ElectionServiceOuterClass$ElectedResponse$Builder
- com.progetto.grpc.ElectionServiceOuterClass$ElectedResponseOrBuilder
- com.progetto.grpc.ElectionServiceOuterClass$ElectionRequest
- com.progetto.grpc.ElectionServiceOuterClass$ElectionRequest$1
- com.progetto.grpc.ElectionServiceOuterClass$ElectionRequest$Builder
- com.progetto.grpc.ElectionServiceOuterClass$ElectionRequestOrBuilder
- com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse
- com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$1
- com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$Builder
- com.progetto.grpc.ElectionServiceOuterClass$ElectionResponseOrBuilder
-InsertionRequest.java
- InsertionRequest
-admin/client/ClientAdmin.java
- admin.client.ClientAdmin
-drones/eventbus/messages/InformMasterRechargeMessage.java
- drones.eventbus.messages.InformMasterRechargeMessage
-drones/eventbus/messages/SendOkRechargeMessage.java
- drones.eventbus.messages.SendOkRechargeMessage
-dronazon/DronazonPub.java
- dronazon.DronazonPub
-drones/election/ElectionElectionClient.java
- drones.election.ElectionElectionClient
-drones/order/master/OrderChooseDroneForDelivery.java
- drones.order.master.OrderChooseDroneForDelivery
- drones.order.master.OrderChooseDroneForDelivery$1
-drones/order/listeners/SendOrderListener.java
- drones.order.listeners.SendOrderListener
-drones/order/listeners/ConfirmedElectedListener.java
- drones.order.listeners.ConfirmedElectedListener
+drones/eventbus/messages/DroneDeadMessage.java
+ drones.eventbus.messages.DroneDeadMessage
+drones/stats/StatsLogic.java
+ drones.stats.StatsLogic
 drones/election/ElectionElectedClient.java
  drones.election.ElectionElectedClient
-drones/recharge/RechargeSendOkClient.java
- drones.recharge.RechargeSendOkClient
+drones/recharge/RechargeServiceImpl.java
+ drones.recharge.RechargeServiceImpl
+ drones.recharge.RechargeServiceImpl$1
 drones/election/listeners/ElectionListener.java
  drones.election.listeners.ElectionListener
-drones/greetings/GreetingsServiceImpl.java
- drones.greetings.GreetingsServiceImpl
-drones/eventbus/messages/SendOkToAllRechargeMessage.java
- drones.eventbus.messages.SendOkToAllRechargeMessage
-drones/order/master/OrderClient.java
- drones.order.master.OrderClient
 drones/DroneMain.java
  drones.DroneMain
-drones/election/ElectionServiceImpl.java
- drones.election.ElectionServiceImpl
 drones/order/master/OrderMQTTThread.java
  drones.order.master.OrderMQTTThread
  drones.order.master.OrderMQTTThread$1
 drones/checkalive/listeners/GreetedEveryoneListener.java
  drones.checkalive.listeners.GreetedEveryoneListener
-drones/recharge/RechargeQueue.java
- drones.recharge.RechargeQueue
-drones/recharge/listener/RechargeListener.java
- drones.recharge.listener.RechargeListener
-drones/eventbus/messages/DroneDeadMessage.java
- drones.eventbus.messages.DroneDeadMessage
-drones/eventbus/EventBus.java
- drones.eventbus.EventBus
-drones/recharge/listener/BroadcastRechargeListener.java
- drones.recharge.listener.BroadcastRechargeListener
-drones/recharge/listener/SendOkRechargeListener.java
- drones.recharge.listener.SendOkRechargeListener
-drones/election/listeners/ElectedListener.java
- drones.election.listeners.ElectedListener
-drones/order/listeners/NewOrderListener.java
- drones.order.listeners.NewOrderListener
-drones/recharge/RechargeRecharge.java
- drones.recharge.RechargeRecharge
-drones/recharge/listener/SendOkToAllRechargeListener.java
- drones.recharge.listener.SendOkToAllRechargeListener
-drones/recharge/RechargeBroadcast.java
- drones.recharge.RechargeBroadcast
+dronazon/DronazonPub.java
+ dronazon.DronazonPub
+drones/eventbus/messages/InsertionMessage.java
+ drones.eventbus.messages.InsertionMessage
 drones/checkalive/CheckAliveRequestBeat.java
  drones.checkalive.CheckAliveRequestBeat
  drones.checkalive.CheckAliveRequestBeat$1
-drones/recharge/RechargeServiceImpl.java
- drones.recharge.RechargeServiceImpl
- drones.recharge.RechargeServiceImpl$1
-drones/checkalive/listeners/InsertionListener.java
- drones.checkalive.listeners.InsertionListener
-drones/DroneSingleton.java
- drones.DroneSingleton
-drones/checkalive/CheckAliveEveryone.java
- drones.checkalive.CheckAliveEveryone
-drones/recharge/RechargeLogic.java
- drones.recharge.RechargeLogic
+drones/eventbus/Message.java
+ drones.eventbus.Message
+admin/entities/DroneEntity.java
+ admin.entities.DroneEntity
+drones/order/client/OrderServiceImpl.java
+ drones.order.client.OrderServiceImpl
+com/progetto/grpc/RechargeServiceOuterClass.java
+ com.progetto.grpc.RechargeServiceOuterClass
+ com.progetto.grpc.RechargeServiceOuterClass$1
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequest
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequest$1
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequest$Builder
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterRequestOrBuilder
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponse
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponse$1
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponse$Builder
+ com.progetto.grpc.RechargeServiceOuterClass$InformMasterResponseOrBuilder
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeRequest
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeRequest$1
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeRequest$Builder
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeRequestOrBuilder
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeResponse
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeResponse$1
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeResponse$Builder
+ com.progetto.grpc.RechargeServiceOuterClass$RechargeResponseOrBuilder
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkRequest
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkRequest$1
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkRequest$Builder
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkRequestOrBuilder
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse$1
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse$Builder
+ com.progetto.grpc.RechargeServiceOuterClass$SendOkResponseOrBuilder
+drones/election/listeners/ElectedListener.java
+ drones.election.listeners.ElectedListener
+drones/recharge/listener/InformMasterListener.java
+ drones.recharge.listener.InformMasterListener
 drones/recharge/listener/DroneDeadListener.java
  drones.recharge.listener.DroneDeadListener
+drones/recharge/RechargeSendOkClient.java
+ drones.recharge.RechargeSendOkClient

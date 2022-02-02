@@ -85,7 +85,7 @@ public class ClientAdmin {
         System.out.println(clientResponse.toString());
         Statistics statistics = clientResponse.getEntity(Statistics.class);
         for (StatisticEntity s : statistics.getStatisticList()) {
-            System.out.println("battery: " + s.getBatteryLevel());
+            System.out.println("battery: " + s.getAverageBatteryLevel());
         }
     }
 

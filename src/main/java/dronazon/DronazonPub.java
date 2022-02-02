@@ -51,7 +51,7 @@ public class DronazonPub {
                 client.publish(topic, message);
                 System.out.println(clientId + " Message published");
                 deliveryId += 1;
-                Thread.sleep(5000);
+                Thread.sleep(20000);
             }
 
             //if (client.isConnected())

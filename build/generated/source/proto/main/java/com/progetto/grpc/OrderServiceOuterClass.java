@@ -637,47 +637,19 @@ public final class OrderServiceOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
-     * @return Whether the arrivalTimestamp field is set.
+     * <code>.com.progetto.grpc.Stats stats = 1;</code>
+     * @return Whether the stats field is set.
      */
-    boolean hasArrivalTimestamp();
+    boolean hasStats();
     /**
-     * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
-     * @return The arrivalTimestamp.
+     * <code>.com.progetto.grpc.Stats stats = 1;</code>
+     * @return The stats.
      */
-    com.google.protobuf.Timestamp getArrivalTimestamp();
+    com.progetto.grpc.StatsOuterClass.Stats getStats();
     /**
-     * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+     * <code>.com.progetto.grpc.Stats stats = 1;</code>
      */
-    com.google.protobuf.TimestampOrBuilder getArrivalTimestampOrBuilder();
-
-    /**
-     * <code>uint32 newX = 2;</code>
-     * @return The newX.
-     */
-    int getNewX();
-
-    /**
-     * <code>uint32 newY = 3;</code>
-     * @return The newY.
-     */
-    int getNewY();
-
-    /**
-     * <code>double kmRun = 4;</code>
-     * @return The kmRun.
-     */
-    double getKmRun();
-
-    /**
-     * <pre>
-     * metti media misurazioni
-     * </pre>
-     *
-     * <code>uint32 residualBattery = 6;</code>
-     * @return The residualBattery.
-     */
-    int getResidualBattery();
+    com.progetto.grpc.StatsOuterClass.StatsOrBuilder getStatsOrBuilder();
   }
   /**
    * Protobuf type {@code com.progetto.grpc.OrderResponse}
@@ -725,36 +697,16 @@ public final class OrderServiceOuterClass {
               done = true;
               break;
             case 10: {
-              com.google.protobuf.Timestamp.Builder subBuilder = null;
-              if (arrivalTimestamp_ != null) {
-                subBuilder = arrivalTimestamp_.toBuilder();
+              com.progetto.grpc.StatsOuterClass.Stats.Builder subBuilder = null;
+              if (stats_ != null) {
+                subBuilder = stats_.toBuilder();
               }
-              arrivalTimestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              stats_ = input.readMessage(com.progetto.grpc.StatsOuterClass.Stats.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(arrivalTimestamp_);
-                arrivalTimestamp_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(stats_);
+                stats_ = subBuilder.buildPartial();
               }
 
-              break;
-            }
-            case 16: {
-
-              newX_ = input.readUInt32();
-              break;
-            }
-            case 24: {
-
-              newY_ = input.readUInt32();
-              break;
-            }
-            case 33: {
-
-              kmRun_ = input.readDouble();
-              break;
-            }
-            case 48: {
-
-              residualBattery_ = input.readUInt32();
               break;
             }
             default: {
@@ -789,71 +741,27 @@ public final class OrderServiceOuterClass {
               com.progetto.grpc.OrderServiceOuterClass.OrderResponse.class, com.progetto.grpc.OrderServiceOuterClass.OrderResponse.Builder.class);
     }
 
-    public static final int ARRIVALTIMESTAMP_FIELD_NUMBER = 1;
-    private com.google.protobuf.Timestamp arrivalTimestamp_;
+    public static final int STATS_FIELD_NUMBER = 1;
+    private com.progetto.grpc.StatsOuterClass.Stats stats_;
     /**
-     * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
-     * @return Whether the arrivalTimestamp field is set.
+     * <code>.com.progetto.grpc.Stats stats = 1;</code>
+     * @return Whether the stats field is set.
      */
-    public boolean hasArrivalTimestamp() {
-      return arrivalTimestamp_ != null;
+    public boolean hasStats() {
+      return stats_ != null;
     }
     /**
-     * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
-     * @return The arrivalTimestamp.
+     * <code>.com.progetto.grpc.Stats stats = 1;</code>
+     * @return The stats.
      */
-    public com.google.protobuf.Timestamp getArrivalTimestamp() {
-      return arrivalTimestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : arrivalTimestamp_;
+    public com.progetto.grpc.StatsOuterClass.Stats getStats() {
+      return stats_ == null ? com.progetto.grpc.StatsOuterClass.Stats.getDefaultInstance() : stats_;
     }
     /**
-     * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+     * <code>.com.progetto.grpc.Stats stats = 1;</code>
      */
-    public com.google.protobuf.TimestampOrBuilder getArrivalTimestampOrBuilder() {
-      return getArrivalTimestamp();
-    }
-
-    public static final int NEWX_FIELD_NUMBER = 2;
-    private int newX_;
-    /**
-     * <code>uint32 newX = 2;</code>
-     * @return The newX.
-     */
-    public int getNewX() {
-      return newX_;
-    }
-
-    public static final int NEWY_FIELD_NUMBER = 3;
-    private int newY_;
-    /**
-     * <code>uint32 newY = 3;</code>
-     * @return The newY.
-     */
-    public int getNewY() {
-      return newY_;
-    }
-
-    public static final int KMRUN_FIELD_NUMBER = 4;
-    private double kmRun_;
-    /**
-     * <code>double kmRun = 4;</code>
-     * @return The kmRun.
-     */
-    public double getKmRun() {
-      return kmRun_;
-    }
-
-    public static final int RESIDUALBATTERY_FIELD_NUMBER = 6;
-    private int residualBattery_;
-    /**
-     * <pre>
-     * metti media misurazioni
-     * </pre>
-     *
-     * <code>uint32 residualBattery = 6;</code>
-     * @return The residualBattery.
-     */
-    public int getResidualBattery() {
-      return residualBattery_;
+    public com.progetto.grpc.StatsOuterClass.StatsOrBuilder getStatsOrBuilder() {
+      return getStats();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -870,20 +778,8 @@ public final class OrderServiceOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (arrivalTimestamp_ != null) {
-        output.writeMessage(1, getArrivalTimestamp());
-      }
-      if (newX_ != 0) {
-        output.writeUInt32(2, newX_);
-      }
-      if (newY_ != 0) {
-        output.writeUInt32(3, newY_);
-      }
-      if (kmRun_ != 0D) {
-        output.writeDouble(4, kmRun_);
-      }
-      if (residualBattery_ != 0) {
-        output.writeUInt32(6, residualBattery_);
+      if (stats_ != null) {
+        output.writeMessage(1, getStats());
       }
       unknownFields.writeTo(output);
     }
@@ -894,25 +790,9 @@ public final class OrderServiceOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (arrivalTimestamp_ != null) {
+      if (stats_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getArrivalTimestamp());
-      }
-      if (newX_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, newX_);
-      }
-      if (newY_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, newY_);
-      }
-      if (kmRun_ != 0D) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, kmRun_);
-      }
-      if (residualBattery_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(6, residualBattery_);
+          .computeMessageSize(1, getStats());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -929,20 +809,11 @@ public final class OrderServiceOuterClass {
       }
       com.progetto.grpc.OrderServiceOuterClass.OrderResponse other = (com.progetto.grpc.OrderServiceOuterClass.OrderResponse) obj;
 
-      if (hasArrivalTimestamp() != other.hasArrivalTimestamp()) return false;
-      if (hasArrivalTimestamp()) {
-        if (!getArrivalTimestamp()
-            .equals(other.getArrivalTimestamp())) return false;
+      if (hasStats() != other.hasStats()) return false;
+      if (hasStats()) {
+        if (!getStats()
+            .equals(other.getStats())) return false;
       }
-      if (getNewX()
-          != other.getNewX()) return false;
-      if (getNewY()
-          != other.getNewY()) return false;
-      if (java.lang.Double.doubleToLongBits(getKmRun())
-          != java.lang.Double.doubleToLongBits(
-              other.getKmRun())) return false;
-      if (getResidualBattery()
-          != other.getResidualBattery()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -954,19 +825,10 @@ public final class OrderServiceOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasArrivalTimestamp()) {
-        hash = (37 * hash) + ARRIVALTIMESTAMP_FIELD_NUMBER;
-        hash = (53 * hash) + getArrivalTimestamp().hashCode();
+      if (hasStats()) {
+        hash = (37 * hash) + STATS_FIELD_NUMBER;
+        hash = (53 * hash) + getStats().hashCode();
       }
-      hash = (37 * hash) + NEWX_FIELD_NUMBER;
-      hash = (53 * hash) + getNewX();
-      hash = (37 * hash) + NEWY_FIELD_NUMBER;
-      hash = (53 * hash) + getNewY();
-      hash = (37 * hash) + KMRUN_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getKmRun()));
-      hash = (37 * hash) + RESIDUALBATTERY_FIELD_NUMBER;
-      hash = (53 * hash) + getResidualBattery();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1100,20 +962,12 @@ public final class OrderServiceOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (arrivalTimestampBuilder_ == null) {
-          arrivalTimestamp_ = null;
+        if (statsBuilder_ == null) {
+          stats_ = null;
         } else {
-          arrivalTimestamp_ = null;
-          arrivalTimestampBuilder_ = null;
+          stats_ = null;
+          statsBuilder_ = null;
         }
-        newX_ = 0;
-
-        newY_ = 0;
-
-        kmRun_ = 0D;
-
-        residualBattery_ = 0;
-
         return this;
       }
 
@@ -1140,15 +994,11 @@ public final class OrderServiceOuterClass {
       @java.lang.Override
       public com.progetto.grpc.OrderServiceOuterClass.OrderResponse buildPartial() {
         com.progetto.grpc.OrderServiceOuterClass.OrderResponse result = new com.progetto.grpc.OrderServiceOuterClass.OrderResponse(this);
-        if (arrivalTimestampBuilder_ == null) {
-          result.arrivalTimestamp_ = arrivalTimestamp_;
+        if (statsBuilder_ == null) {
+          result.stats_ = stats_;
         } else {
-          result.arrivalTimestamp_ = arrivalTimestampBuilder_.build();
+          result.stats_ = statsBuilder_.build();
         }
-        result.newX_ = newX_;
-        result.newY_ = newY_;
-        result.kmRun_ = kmRun_;
-        result.residualBattery_ = residualBattery_;
         onBuilt();
         return result;
       }
@@ -1197,20 +1047,8 @@ public final class OrderServiceOuterClass {
 
       public Builder mergeFrom(com.progetto.grpc.OrderServiceOuterClass.OrderResponse other) {
         if (other == com.progetto.grpc.OrderServiceOuterClass.OrderResponse.getDefaultInstance()) return this;
-        if (other.hasArrivalTimestamp()) {
-          mergeArrivalTimestamp(other.getArrivalTimestamp());
-        }
-        if (other.getNewX() != 0) {
-          setNewX(other.getNewX());
-        }
-        if (other.getNewY() != 0) {
-          setNewY(other.getNewY());
-        }
-        if (other.getKmRun() != 0D) {
-          setKmRun(other.getKmRun());
-        }
-        if (other.getResidualBattery() != 0) {
-          setResidualBattery(other.getResidualBattery());
+        if (other.hasStats()) {
+          mergeStats(other.getStats());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1241,255 +1079,123 @@ public final class OrderServiceOuterClass {
         return this;
       }
 
-      private com.google.protobuf.Timestamp arrivalTimestamp_;
+      private com.progetto.grpc.StatsOuterClass.Stats stats_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> arrivalTimestampBuilder_;
+          com.progetto.grpc.StatsOuterClass.Stats, com.progetto.grpc.StatsOuterClass.Stats.Builder, com.progetto.grpc.StatsOuterClass.StatsOrBuilder> statsBuilder_;
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
-       * @return Whether the arrivalTimestamp field is set.
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
+       * @return Whether the stats field is set.
        */
-      public boolean hasArrivalTimestamp() {
-        return arrivalTimestampBuilder_ != null || arrivalTimestamp_ != null;
+      public boolean hasStats() {
+        return statsBuilder_ != null || stats_ != null;
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
-       * @return The arrivalTimestamp.
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
+       * @return The stats.
        */
-      public com.google.protobuf.Timestamp getArrivalTimestamp() {
-        if (arrivalTimestampBuilder_ == null) {
-          return arrivalTimestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : arrivalTimestamp_;
+      public com.progetto.grpc.StatsOuterClass.Stats getStats() {
+        if (statsBuilder_ == null) {
+          return stats_ == null ? com.progetto.grpc.StatsOuterClass.Stats.getDefaultInstance() : stats_;
         } else {
-          return arrivalTimestampBuilder_.getMessage();
+          return statsBuilder_.getMessage();
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
-      public Builder setArrivalTimestamp(com.google.protobuf.Timestamp value) {
-        if (arrivalTimestampBuilder_ == null) {
+      public Builder setStats(com.progetto.grpc.StatsOuterClass.Stats value) {
+        if (statsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          arrivalTimestamp_ = value;
+          stats_ = value;
           onChanged();
         } else {
-          arrivalTimestampBuilder_.setMessage(value);
+          statsBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
-      public Builder setArrivalTimestamp(
-          com.google.protobuf.Timestamp.Builder builderForValue) {
-        if (arrivalTimestampBuilder_ == null) {
-          arrivalTimestamp_ = builderForValue.build();
+      public Builder setStats(
+          com.progetto.grpc.StatsOuterClass.Stats.Builder builderForValue) {
+        if (statsBuilder_ == null) {
+          stats_ = builderForValue.build();
           onChanged();
         } else {
-          arrivalTimestampBuilder_.setMessage(builderForValue.build());
+          statsBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
-      public Builder mergeArrivalTimestamp(com.google.protobuf.Timestamp value) {
-        if (arrivalTimestampBuilder_ == null) {
-          if (arrivalTimestamp_ != null) {
-            arrivalTimestamp_ =
-              com.google.protobuf.Timestamp.newBuilder(arrivalTimestamp_).mergeFrom(value).buildPartial();
+      public Builder mergeStats(com.progetto.grpc.StatsOuterClass.Stats value) {
+        if (statsBuilder_ == null) {
+          if (stats_ != null) {
+            stats_ =
+              com.progetto.grpc.StatsOuterClass.Stats.newBuilder(stats_).mergeFrom(value).buildPartial();
           } else {
-            arrivalTimestamp_ = value;
+            stats_ = value;
           }
           onChanged();
         } else {
-          arrivalTimestampBuilder_.mergeFrom(value);
+          statsBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
-      public Builder clearArrivalTimestamp() {
-        if (arrivalTimestampBuilder_ == null) {
-          arrivalTimestamp_ = null;
+      public Builder clearStats() {
+        if (statsBuilder_ == null) {
+          stats_ = null;
           onChanged();
         } else {
-          arrivalTimestamp_ = null;
-          arrivalTimestampBuilder_ = null;
+          stats_ = null;
+          statsBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
-      public com.google.protobuf.Timestamp.Builder getArrivalTimestampBuilder() {
+      public com.progetto.grpc.StatsOuterClass.Stats.Builder getStatsBuilder() {
         
         onChanged();
-        return getArrivalTimestampFieldBuilder().getBuilder();
+        return getStatsFieldBuilder().getBuilder();
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
-      public com.google.protobuf.TimestampOrBuilder getArrivalTimestampOrBuilder() {
-        if (arrivalTimestampBuilder_ != null) {
-          return arrivalTimestampBuilder_.getMessageOrBuilder();
+      public com.progetto.grpc.StatsOuterClass.StatsOrBuilder getStatsOrBuilder() {
+        if (statsBuilder_ != null) {
+          return statsBuilder_.getMessageOrBuilder();
         } else {
-          return arrivalTimestamp_ == null ?
-              com.google.protobuf.Timestamp.getDefaultInstance() : arrivalTimestamp_;
+          return stats_ == null ?
+              com.progetto.grpc.StatsOuterClass.Stats.getDefaultInstance() : stats_;
         }
       }
       /**
-       * <code>.google.protobuf.Timestamp arrivalTimestamp = 1;</code>
+       * <code>.com.progetto.grpc.Stats stats = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
-          getArrivalTimestampFieldBuilder() {
-        if (arrivalTimestampBuilder_ == null) {
-          arrivalTimestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
-                  getArrivalTimestamp(),
+          com.progetto.grpc.StatsOuterClass.Stats, com.progetto.grpc.StatsOuterClass.Stats.Builder, com.progetto.grpc.StatsOuterClass.StatsOrBuilder> 
+          getStatsFieldBuilder() {
+        if (statsBuilder_ == null) {
+          statsBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.progetto.grpc.StatsOuterClass.Stats, com.progetto.grpc.StatsOuterClass.Stats.Builder, com.progetto.grpc.StatsOuterClass.StatsOrBuilder>(
+                  getStats(),
                   getParentForChildren(),
                   isClean());
-          arrivalTimestamp_ = null;
+          stats_ = null;
         }
-        return arrivalTimestampBuilder_;
-      }
-
-      private int newX_ ;
-      /**
-       * <code>uint32 newX = 2;</code>
-       * @return The newX.
-       */
-      public int getNewX() {
-        return newX_;
-      }
-      /**
-       * <code>uint32 newX = 2;</code>
-       * @param value The newX to set.
-       * @return This builder for chaining.
-       */
-      public Builder setNewX(int value) {
-        
-        newX_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 newX = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearNewX() {
-        
-        newX_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int newY_ ;
-      /**
-       * <code>uint32 newY = 3;</code>
-       * @return The newY.
-       */
-      public int getNewY() {
-        return newY_;
-      }
-      /**
-       * <code>uint32 newY = 3;</code>
-       * @param value The newY to set.
-       * @return This builder for chaining.
-       */
-      public Builder setNewY(int value) {
-        
-        newY_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>uint32 newY = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearNewY() {
-        
-        newY_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private double kmRun_ ;
-      /**
-       * <code>double kmRun = 4;</code>
-       * @return The kmRun.
-       */
-      public double getKmRun() {
-        return kmRun_;
-      }
-      /**
-       * <code>double kmRun = 4;</code>
-       * @param value The kmRun to set.
-       * @return This builder for chaining.
-       */
-      public Builder setKmRun(double value) {
-        
-        kmRun_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double kmRun = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearKmRun() {
-        
-        kmRun_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private int residualBattery_ ;
-      /**
-       * <pre>
-       * metti media misurazioni
-       * </pre>
-       *
-       * <code>uint32 residualBattery = 6;</code>
-       * @return The residualBattery.
-       */
-      public int getResidualBattery() {
-        return residualBattery_;
-      }
-      /**
-       * <pre>
-       * metti media misurazioni
-       * </pre>
-       *
-       * <code>uint32 residualBattery = 6;</code>
-       * @param value The residualBattery to set.
-       * @return This builder for chaining.
-       */
-      public Builder setResidualBattery(int value) {
-        
-        residualBattery_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * metti media misurazioni
-       * </pre>
-       *
-       * <code>uint32 residualBattery = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearResidualBattery() {
-        
-        residualBattery_ = 0;
-        onChanged();
-        return this;
+        return statsBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1565,20 +1271,19 @@ public final class OrderServiceOuterClass {
     java.lang.String[] descriptorData = {
       "\n\022OrderService.proto\022\021com.progetto.grpc\032" +
       "\037google/protobuf/timestamp.proto\032\013Order." +
-      "proto\"7\n\014OrderRequest\022\'\n\005order\030\001 \001(\0132\030.c" +
-      "om.progetto.grpc.Order\"\211\001\n\rOrderResponse" +
-      "\0224\n\020arrivalTimestamp\030\001 \001(\0132\032.google.prot" +
-      "obuf.Timestamp\022\014\n\004newX\030\002 \001(\r\022\014\n\004newY\030\003 \001" +
-      "(\r\022\r\n\005kmRun\030\004 \001(\001\022\027\n\017residualBattery\030\006 \001" +
-      "(\r2a\n\014OrderService\022Q\n\014makeDelivery\022\037.com" +
-      ".progetto.grpc.OrderRequest\032 .com.proget" +
-      "to.grpc.OrderResponseb\006proto3"
+      "proto\032\013Stats.proto\"7\n\014OrderRequest\022\'\n\005or" +
+      "der\030\001 \001(\0132\030.com.progetto.grpc.Order\"8\n\rO" +
+      "rderResponse\022\'\n\005stats\030\001 \001(\0132\030.com.proget" +
+      "to.grpc.Stats2a\n\014OrderService\022Q\n\014makeDel" +
+      "ivery\022\037.com.progetto.grpc.OrderRequest\032 " +
+      ".com.progetto.grpc.OrderResponseb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.TimestampProto.getDescriptor(),
           com.progetto.grpc.OrderOuterClass.getDescriptor(),
+          com.progetto.grpc.StatsOuterClass.getDescriptor(),
         });
     internal_static_com_progetto_grpc_OrderRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1591,9 +1296,10 @@ public final class OrderServiceOuterClass {
     internal_static_com_progetto_grpc_OrderResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_OrderResponse_descriptor,
-        new java.lang.String[] { "ArrivalTimestamp", "NewX", "NewY", "KmRun", "ResidualBattery", });
+        new java.lang.String[] { "Stats", });
     com.google.protobuf.TimestampProto.getDescriptor();
     com.progetto.grpc.OrderOuterClass.getDescriptor();
+    com.progetto.grpc.StatsOuterClass.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

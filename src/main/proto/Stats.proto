@@ -1,0 +1,14 @@
+syntax = "proto3";
+package com.progetto.grpc;
+import "google/protobuf/timestamp.proto";
+
+message Stats {
+  uint32 orderId = 1;
+  uint32 droneId = 2;
+  google.protobuf.Timestamp arrivalTimestamp = 3;
+  uint32 newX = 4;
+  uint32 newY = 5;
+  double kmRun = 6;
+  // TODO: metti media misurazioni inq
+  uint32 residualBattery = 7;
+}

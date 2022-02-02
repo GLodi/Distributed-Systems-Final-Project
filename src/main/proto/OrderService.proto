@@ -3,18 +3,14 @@ package com.progetto.grpc;
 import "google/protobuf/timestamp.proto";
 
 import 'Order.proto';
+import 'Stats.proto';
 
 message OrderRequest {
   Order order = 1;
 }
 
 message OrderResponse {
-  google.protobuf.Timestamp arrivalTimestamp = 1;
-  uint32 newX = 2;
-  uint32 newY = 3;
-  double kmRun = 4;
-  // metti media misurazioni
-  uint32 residualBattery = 6;
+  Stats stats = 1;
 }
 
 service OrderService {

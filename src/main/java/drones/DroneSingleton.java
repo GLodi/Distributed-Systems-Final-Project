@@ -17,6 +17,7 @@ import drones.order.master.OrderQueue;
 import drones.recharge.RechargeLogic;
 import drones.recharge.RechargeServiceImpl;
 import drones.register.RegistrationLogic;
+import drones.stats.StatsLogic;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
@@ -119,6 +120,15 @@ public class DroneSingleton {
         }
     }
 
+    public void startStatsService() {
+        try {
+            StatsLogic statsLogic = new StatsLogic();
+            statsLogic.start();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startStatsService esecuzione fallita");
+        }
+    }
+
     public synchronized void startGRPCServers() {
         try {
             System.out.println("GRPC servers starting");
@@ -188,10 +198,11 @@ public class DroneSingleton {
         return droneModel.battery;
     }
 
-    public synchronized void makeDelivery(int x, int y) {
+    public synchronized int makeDelivery(int x, int y) {
         droneModel.x = x;
         droneModel.y = y;
         droneModel.battery -= 10;
+        return droneModel.battery;
     }
 
     public synchronized int getX() {

@@ -59,6 +59,8 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startRechargeService();
 
+        DroneSingleton.getInstance().startStatsService();
+
         // need to do last
         DroneSingleton.getInstance().startGreetingsService();
 

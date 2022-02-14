@@ -9,6 +9,10 @@ message Stats {
   uint32 newX = 4;
   uint32 newY = 5;
   double kmRun = 6;
-  // TODO: metti media misurazioni inq
-  uint32 residualBattery = 7;
+  message AverageMeasurement {
+    double value = 1;
+    google.protobuf.Timestamp timestamp = 2;
+  }
+  repeated AverageMeasurement averageMeasurements = 7;
+  uint32 residualBattery = 8;
 }

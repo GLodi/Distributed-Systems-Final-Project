@@ -10,6 +10,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import drones.DroneSingleton;
+import drones.sensors.AverageMeasurement;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
 import java.sql.Timestamp;
@@ -30,27 +31,40 @@ public class StatsMasterLoop extends Thread {
     }
 
     public void run() {
-        System.out.println("StatsMasterLogic started");
-        List<Stats> statList = StatsSingleton.getInstance().getList();
-        double numDroni = DroneSingleton.getInstance().getDroneList().size();
+        while (true) {
+            try {
+                System.out.println("StatsMasterLogic started");
+                List<Stats> statList = StatsSingleton.getInstance().getList();
+                double numDroni = DroneSingleton.getInstance().getDroneList().size() + 1;
 
-        double averageDeliveryDone = statList.size() / numDroni;
-        double averageKmTraveled = statList.stream().map(s -> s.kmRun).reduce(0.0, Double::sum) / numDroni;
-        double averagePollutionLevel = 0;
-        double averageBatteryLevel = statList.stream().map(s -> s.residualBattery).reduce(0, Integer::sum) / numDroni;
+                double averageDeliveryDone = statList.size() / numDroni;
+                double averageKmTraveled = statList.stream().map(s -> s.kmRun).reduce(0.0, Double::sum) / numDroni;
+                double averagePollutionLevel =
+                        statList.stream().map(s ->
+                                        s.averageMeasurementList.stream().map(AverageMeasurement::getValue).reduce(0.0, Double::sum))
+                                .reduce(0.0, Double::sum) / numDroni;
+                double averageBatteryLevel = statList.stream().map(s -> s.residualBattery).reduce(0, Integer::sum) / numDroni;
 
-        ClientConfig config = new DefaultClientConfig();
-        config.getClasses().add(JacksonJaxbJsonProvider.class);
-        config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+                if (statList.size() > 0) {
+                    ClientConfig config = new DefaultClientConfig();
+                    config.getClasses().add(JacksonJaxbJsonProvider.class);
+                    config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 
-        Client client = Client.create(config);
-        ClientResponse clientResponse = null;
+                    Client client = Client.create(config);
+                    ClientResponse clientResponse = null;
 
-        String addPath = "/stats/add";
-        StatisticEntity statisticEntity = new StatisticEntity(averageDeliveryDone, averageKmTraveled, averagePollutionLevel, averageBatteryLevel, Timestamp.from(Instant.now()));
-        clientResponse = postRequest(client, "http://" + DroneSingleton.getInstance().getServerAddress() + addPath, statisticEntity);
-        System.out.println(clientResponse.toString());
+                    String addPath = "/stats";
+                    StatisticEntity statisticEntity = new StatisticEntity(averageDeliveryDone, averageKmTraveled, averagePollutionLevel, averageBatteryLevel, Timestamp.from(Instant.now()));
+                    clientResponse = postRequest(client, "http://" + DroneSingleton.getInstance().getServerAddress() + addPath, statisticEntity);
+                    System.out.println(clientResponse.toString());
+                } else {
+                    System.out.println("StatsMasterLogic no stats to send");
+                }
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-        System.out.println("StatsMasterLogic ended");
     }
 }

@@ -1,7 +1,5 @@
 package drones.recharge;
 
-import com.progetto.grpc.RechargeServiceOuterClass;
-
 import java.sql.Timestamp;
 
 public class Recharge {
@@ -27,9 +25,5 @@ public class Recharge {
 
     public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public RechargeServiceOuterClass.RechargeRequest toRequest() {
-        return RechargeServiceOuterClass.RechargeRequest.newBuilder().setId(id).setTimestamp(com.google.protobuf.Timestamp.newBuilder().setNanos(timestamp.getNanos()).build()).build();
     }
 }

@@ -17,6 +17,7 @@ import drones.order.master.OrderQueue;
 import drones.recharge.RechargeLogic;
 import drones.recharge.RechargeServiceImpl;
 import drones.register.RegistrationLogic;
+import drones.sensors.SensorsLogic;
 import drones.stats.StatsLogic;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -126,6 +127,15 @@ public class DroneSingleton {
             statsLogic.start();
         } catch (Exception e) {
             System.out.println("DroneSingleton startStatsService esecuzione fallita");
+        }
+    }
+
+    public void startSensorsService() {
+        try {
+            SensorsLogic sensorsLogic = new SensorsLogic();
+            sensorsLogic.start();
+        } catch (Exception e) {
+            System.out.println("DroneSingleton startSensorsService esecuzione fallita");
         }
     }
 

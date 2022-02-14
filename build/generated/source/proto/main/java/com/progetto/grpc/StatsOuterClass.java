@@ -64,11 +64,31 @@ public final class StatsOuterClass {
     double getKmRun();
 
     /**
-     * <pre>
-     * TODO: metti media misurazioni inq
-     * </pre>
-     *
-     * <code>uint32 residualBattery = 7;</code>
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    java.util.List<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement> 
+        getAverageMeasurementsList();
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement getAverageMeasurements(int index);
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    int getAverageMeasurementsCount();
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    java.util.List<? extends com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder> 
+        getAverageMeasurementsOrBuilderList();
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder getAverageMeasurementsOrBuilder(
+        int index);
+
+    /**
+     * <code>uint32 residualBattery = 8;</code>
      * @return The residualBattery.
      */
     int getResidualBattery();
@@ -86,6 +106,7 @@ public final class StatsOuterClass {
       super(builder);
     }
     private Stats() {
+      averageMeasurements_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -108,6 +129,7 @@ public final class StatsOuterClass {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -156,7 +178,16 @@ public final class StatsOuterClass {
               kmRun_ = input.readDouble();
               break;
             }
-            case 56: {
+            case 58: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                averageMeasurements_ = new java.util.ArrayList<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              averageMeasurements_.add(
+                  input.readMessage(com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.parser(), extensionRegistry));
+              break;
+            }
+            case 64: {
 
               residualBattery_ = input.readUInt32();
               break;
@@ -176,6 +207,9 @@ public final class StatsOuterClass {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          averageMeasurements_ = java.util.Collections.unmodifiableList(averageMeasurements_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -191,6 +225,694 @@ public final class StatsOuterClass {
       return com.progetto.grpc.StatsOuterClass.internal_static_com_progetto_grpc_Stats_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.progetto.grpc.StatsOuterClass.Stats.class, com.progetto.grpc.StatsOuterClass.Stats.Builder.class);
+    }
+
+    public interface AverageMeasurementOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.progetto.grpc.Stats.AverageMeasurement)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>double value = 1;</code>
+       * @return The value.
+       */
+      double getValue();
+
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+       * @return Whether the timestamp field is set.
+       */
+      boolean hasTimestamp();
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+       * @return The timestamp.
+       */
+      com.google.protobuf.Timestamp getTimestamp();
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+       */
+      com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
+    }
+    /**
+     * Protobuf type {@code com.progetto.grpc.Stats.AverageMeasurement}
+     */
+    public  static final class AverageMeasurement extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:com.progetto.grpc.Stats.AverageMeasurement)
+        AverageMeasurementOrBuilder {
+    private static final long serialVersionUID = 0L;
+      // Use AverageMeasurement.newBuilder() to construct.
+      private AverageMeasurement(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private AverageMeasurement() {
+      }
+
+      @java.lang.Override
+      @SuppressWarnings({"unused"})
+      protected java.lang.Object newInstance(
+          UnusedPrivateParameter unused) {
+        return new AverageMeasurement();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return this.unknownFields;
+      }
+      private AverageMeasurement(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 9: {
+
+                value_ = input.readDouble();
+                break;
+              }
+              case 18: {
+                com.google.protobuf.Timestamp.Builder subBuilder = null;
+                if (timestamp_ != null) {
+                  subBuilder = timestamp_.toBuilder();
+                }
+                timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+                if (subBuilder != null) {
+                  subBuilder.mergeFrom(timestamp_);
+                  timestamp_ = subBuilder.buildPartial();
+                }
+
+                break;
+              }
+              default: {
+                if (!parseUnknownField(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.progetto.grpc.StatsOuterClass.internal_static_com_progetto_grpc_Stats_AverageMeasurement_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.progetto.grpc.StatsOuterClass.internal_static_com_progetto_grpc_Stats_AverageMeasurement_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.class, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder.class);
+      }
+
+      public static final int VALUE_FIELD_NUMBER = 1;
+      private double value_;
+      /**
+       * <code>double value = 1;</code>
+       * @return The value.
+       */
+      public double getValue() {
+        return value_;
+      }
+
+      public static final int TIMESTAMP_FIELD_NUMBER = 2;
+      private com.google.protobuf.Timestamp timestamp_;
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+       * @return Whether the timestamp field is set.
+       */
+      public boolean hasTimestamp() {
+        return timestamp_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+       * @return The timestamp.
+       */
+      public com.google.protobuf.Timestamp getTimestamp() {
+        return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+        return getTimestamp();
+      }
+
+      private byte memoizedIsInitialized = -1;
+      @java.lang.Override
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      @java.lang.Override
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (value_ != 0D) {
+          output.writeDouble(1, value_);
+        }
+        if (timestamp_ != null) {
+          output.writeMessage(2, getTimestamp());
+        }
+        unknownFields.writeTo(output);
+      }
+
+      @java.lang.Override
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (value_ != 0D) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeDoubleSize(1, value_);
+        }
+        if (timestamp_ != null) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(2, getTimestamp());
+        }
+        size += unknownFields.getSerializedSize();
+        memoizedSize = size;
+        return size;
+      }
+
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement)) {
+          return super.equals(obj);
+        }
+        com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement other = (com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement) obj;
+
+        if (java.lang.Double.doubleToLongBits(getValue())
+            != java.lang.Double.doubleToLongBits(
+                other.getValue())) return false;
+        if (hasTimestamp() != other.hasTimestamp()) return false;
+        if (hasTimestamp()) {
+          if (!getTimestamp()
+              .equals(other.getTimestamp())) return false;
+        }
+        if (!unknownFields.equals(other.unknownFields)) return false;
+        return true;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptor().hashCode();
+        hash = (37 * hash) + VALUE_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            java.lang.Double.doubleToLongBits(getValue()));
+        if (hasTimestamp()) {
+          hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+          hash = (53 * hash) + getTimestamp().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          java.nio.ByteBuffer data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          java.nio.ByteBuffer data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      @java.lang.Override
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      @java.lang.Override
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code com.progetto.grpc.Stats.AverageMeasurement}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:com.progetto.grpc.Stats.AverageMeasurement)
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.progetto.grpc.StatsOuterClass.internal_static_com_progetto_grpc_Stats_AverageMeasurement_descriptor;
+        }
+
+        @java.lang.Override
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.progetto.grpc.StatsOuterClass.internal_static_com_progetto_grpc_Stats_AverageMeasurement_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.class, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder.class);
+        }
+
+        // Construct using com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        @java.lang.Override
+        public Builder clear() {
+          super.clear();
+          value_ = 0D;
+
+          if (timestampBuilder_ == null) {
+            timestamp_ = null;
+          } else {
+            timestamp_ = null;
+            timestampBuilder_ = null;
+          }
+          return this;
+        }
+
+        @java.lang.Override
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.progetto.grpc.StatsOuterClass.internal_static_com_progetto_grpc_Stats_AverageMeasurement_descriptor;
+        }
+
+        @java.lang.Override
+        public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement getDefaultInstanceForType() {
+          return com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.getDefaultInstance();
+        }
+
+        @java.lang.Override
+        public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement build() {
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        @java.lang.Override
+        public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement buildPartial() {
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement result = new com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement(this);
+          result.value_ = value_;
+          if (timestampBuilder_ == null) {
+            result.timestamp_ = timestamp_;
+          } else {
+            result.timestamp_ = timestampBuilder_.build();
+          }
+          onBuilt();
+          return result;
+        }
+
+        @java.lang.Override
+        public Builder clone() {
+          return super.clone();
+        }
+        @java.lang.Override
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.setField(field, value);
+        }
+        @java.lang.Override
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return super.clearField(field);
+        }
+        @java.lang.Override
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return super.clearOneof(oneof);
+        }
+        @java.lang.Override
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, java.lang.Object value) {
+          return super.setRepeatedField(field, index, value);
+        }
+        @java.lang.Override
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            java.lang.Object value) {
+          return super.addRepeatedField(field, value);
+        }
+        @java.lang.Override
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement) {
+            return mergeFrom((com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement other) {
+          if (other == com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.getDefaultInstance()) return this;
+          if (other.getValue() != 0D) {
+            setValue(other.getValue());
+          }
+          if (other.hasTimestamp()) {
+            mergeTimestamp(other.getTimestamp());
+          }
+          this.mergeUnknownFields(other.unknownFields);
+          onChanged();
+          return this;
+        }
+
+        @java.lang.Override
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        @java.lang.Override
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private double value_ ;
+        /**
+         * <code>double value = 1;</code>
+         * @return The value.
+         */
+        public double getValue() {
+          return value_;
+        }
+        /**
+         * <code>double value = 1;</code>
+         * @param value The value to set.
+         * @return This builder for chaining.
+         */
+        public Builder setValue(double value) {
+          
+          value_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>double value = 1;</code>
+         * @return This builder for chaining.
+         */
+        public Builder clearValue() {
+          
+          value_ = 0D;
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.Timestamp timestamp_;
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         * @return Whether the timestamp field is set.
+         */
+        public boolean hasTimestamp() {
+          return timestampBuilder_ != null || timestamp_ != null;
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         * @return The timestamp.
+         */
+        public com.google.protobuf.Timestamp getTimestamp() {
+          if (timestampBuilder_ == null) {
+            return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+          } else {
+            return timestampBuilder_.getMessage();
+          }
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        public Builder setTimestamp(com.google.protobuf.Timestamp value) {
+          if (timestampBuilder_ == null) {
+            if (value == null) {
+              throw new NullPointerException();
+            }
+            timestamp_ = value;
+            onChanged();
+          } else {
+            timestampBuilder_.setMessage(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        public Builder setTimestamp(
+            com.google.protobuf.Timestamp.Builder builderForValue) {
+          if (timestampBuilder_ == null) {
+            timestamp_ = builderForValue.build();
+            onChanged();
+          } else {
+            timestampBuilder_.setMessage(builderForValue.build());
+          }
+
+          return this;
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
+          if (timestampBuilder_ == null) {
+            if (timestamp_ != null) {
+              timestamp_ =
+                com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
+            } else {
+              timestamp_ = value;
+            }
+            onChanged();
+          } else {
+            timestampBuilder_.mergeFrom(value);
+          }
+
+          return this;
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        public Builder clearTimestamp() {
+          if (timestampBuilder_ == null) {
+            timestamp_ = null;
+            onChanged();
+          } else {
+            timestamp_ = null;
+            timestampBuilder_ = null;
+          }
+
+          return this;
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+          
+          onChanged();
+          return getTimestampFieldBuilder().getBuilder();
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+          if (timestampBuilder_ != null) {
+            return timestampBuilder_.getMessageOrBuilder();
+          } else {
+            return timestamp_ == null ?
+                com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+          }
+        }
+        /**
+         * <code>.google.protobuf.Timestamp timestamp = 2;</code>
+         */
+        private com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+            getTimestampFieldBuilder() {
+          if (timestampBuilder_ == null) {
+            timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+                com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                    getTimestamp(),
+                    getParentForChildren(),
+                    isClean());
+            timestamp_ = null;
+          }
+          return timestampBuilder_;
+        }
+        @java.lang.Override
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.setUnknownFields(unknownFields);
+        }
+
+        @java.lang.Override
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return super.mergeUnknownFields(unknownFields);
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:com.progetto.grpc.Stats.AverageMeasurement)
+      }
+
+      // @@protoc_insertion_point(class_scope:com.progetto.grpc.Stats.AverageMeasurement)
+      private static final com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement();
+      }
+
+      public static com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<AverageMeasurement>
+          PARSER = new com.google.protobuf.AbstractParser<AverageMeasurement>() {
+        @java.lang.Override
+        public AverageMeasurement parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AverageMeasurement(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<AverageMeasurement> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<AverageMeasurement> getParserForType() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
     }
 
     public static final int ORDERID_FIELD_NUMBER = 1;
@@ -266,14 +988,45 @@ public final class StatsOuterClass {
       return kmRun_;
     }
 
-    public static final int RESIDUALBATTERY_FIELD_NUMBER = 7;
+    public static final int AVERAGEMEASUREMENTS_FIELD_NUMBER = 7;
+    private java.util.List<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement> averageMeasurements_;
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    public java.util.List<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement> getAverageMeasurementsList() {
+      return averageMeasurements_;
+    }
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    public java.util.List<? extends com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder> 
+        getAverageMeasurementsOrBuilderList() {
+      return averageMeasurements_;
+    }
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    public int getAverageMeasurementsCount() {
+      return averageMeasurements_.size();
+    }
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement getAverageMeasurements(int index) {
+      return averageMeasurements_.get(index);
+    }
+    /**
+     * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+     */
+    public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder getAverageMeasurementsOrBuilder(
+        int index) {
+      return averageMeasurements_.get(index);
+    }
+
+    public static final int RESIDUALBATTERY_FIELD_NUMBER = 8;
     private int residualBattery_;
     /**
-     * <pre>
-     * TODO: metti media misurazioni inq
-     * </pre>
-     *
-     * <code>uint32 residualBattery = 7;</code>
+     * <code>uint32 residualBattery = 8;</code>
      * @return The residualBattery.
      */
     public int getResidualBattery() {
@@ -312,8 +1065,11 @@ public final class StatsOuterClass {
       if (kmRun_ != 0D) {
         output.writeDouble(6, kmRun_);
       }
+      for (int i = 0; i < averageMeasurements_.size(); i++) {
+        output.writeMessage(7, averageMeasurements_.get(i));
+      }
       if (residualBattery_ != 0) {
-        output.writeUInt32(7, residualBattery_);
+        output.writeUInt32(8, residualBattery_);
       }
       unknownFields.writeTo(output);
     }
@@ -348,9 +1104,13 @@ public final class StatsOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(6, kmRun_);
       }
+      for (int i = 0; i < averageMeasurements_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, averageMeasurements_.get(i));
+      }
       if (residualBattery_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(7, residualBattery_);
+          .computeUInt32Size(8, residualBattery_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -383,6 +1143,8 @@ public final class StatsOuterClass {
       if (java.lang.Double.doubleToLongBits(getKmRun())
           != java.lang.Double.doubleToLongBits(
               other.getKmRun())) return false;
+      if (!getAverageMeasurementsList()
+          .equals(other.getAverageMeasurementsList())) return false;
       if (getResidualBattery()
           != other.getResidualBattery()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -411,6 +1173,10 @@ public final class StatsOuterClass {
       hash = (37 * hash) + KMRUN_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getKmRun()));
+      if (getAverageMeasurementsCount() > 0) {
+        hash = (37 * hash) + AVERAGEMEASUREMENTS_FIELD_NUMBER;
+        hash = (53 * hash) + getAverageMeasurementsList().hashCode();
+      }
       hash = (37 * hash) + RESIDUALBATTERY_FIELD_NUMBER;
       hash = (53 * hash) + getResidualBattery();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -541,6 +1307,7 @@ public final class StatsOuterClass {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getAverageMeasurementsFieldBuilder();
         }
       }
       @java.lang.Override
@@ -562,6 +1329,12 @@ public final class StatsOuterClass {
 
         kmRun_ = 0D;
 
+        if (averageMeasurementsBuilder_ == null) {
+          averageMeasurements_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          averageMeasurementsBuilder_.clear();
+        }
         residualBattery_ = 0;
 
         return this;
@@ -590,6 +1363,7 @@ public final class StatsOuterClass {
       @java.lang.Override
       public com.progetto.grpc.StatsOuterClass.Stats buildPartial() {
         com.progetto.grpc.StatsOuterClass.Stats result = new com.progetto.grpc.StatsOuterClass.Stats(this);
+        int from_bitField0_ = bitField0_;
         result.orderId_ = orderId_;
         result.droneId_ = droneId_;
         if (arrivalTimestampBuilder_ == null) {
@@ -600,6 +1374,15 @@ public final class StatsOuterClass {
         result.newX_ = newX_;
         result.newY_ = newY_;
         result.kmRun_ = kmRun_;
+        if (averageMeasurementsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            averageMeasurements_ = java.util.Collections.unmodifiableList(averageMeasurements_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.averageMeasurements_ = averageMeasurements_;
+        } else {
+          result.averageMeasurements_ = averageMeasurementsBuilder_.build();
+        }
         result.residualBattery_ = residualBattery_;
         onBuilt();
         return result;
@@ -667,6 +1450,32 @@ public final class StatsOuterClass {
         if (other.getKmRun() != 0D) {
           setKmRun(other.getKmRun());
         }
+        if (averageMeasurementsBuilder_ == null) {
+          if (!other.averageMeasurements_.isEmpty()) {
+            if (averageMeasurements_.isEmpty()) {
+              averageMeasurements_ = other.averageMeasurements_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureAverageMeasurementsIsMutable();
+              averageMeasurements_.addAll(other.averageMeasurements_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.averageMeasurements_.isEmpty()) {
+            if (averageMeasurementsBuilder_.isEmpty()) {
+              averageMeasurementsBuilder_.dispose();
+              averageMeasurementsBuilder_ = null;
+              averageMeasurements_ = other.averageMeasurements_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              averageMeasurementsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getAverageMeasurementsFieldBuilder() : null;
+            } else {
+              averageMeasurementsBuilder_.addAllMessages(other.averageMeasurements_);
+            }
+          }
+        }
         if (other.getResidualBattery() != 0) {
           setResidualBattery(other.getResidualBattery());
         }
@@ -698,6 +1507,7 @@ public final class StatsOuterClass {
         }
         return this;
       }
+      private int bitField0_;
 
       private int orderId_ ;
       /**
@@ -968,24 +1778,256 @@ public final class StatsOuterClass {
         return this;
       }
 
+      private java.util.List<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement> averageMeasurements_ =
+        java.util.Collections.emptyList();
+      private void ensureAverageMeasurementsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          averageMeasurements_ = new java.util.ArrayList<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement>(averageMeasurements_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder> averageMeasurementsBuilder_;
+
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public java.util.List<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement> getAverageMeasurementsList() {
+        if (averageMeasurementsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(averageMeasurements_);
+        } else {
+          return averageMeasurementsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public int getAverageMeasurementsCount() {
+        if (averageMeasurementsBuilder_ == null) {
+          return averageMeasurements_.size();
+        } else {
+          return averageMeasurementsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement getAverageMeasurements(int index) {
+        if (averageMeasurementsBuilder_ == null) {
+          return averageMeasurements_.get(index);
+        } else {
+          return averageMeasurementsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder setAverageMeasurements(
+          int index, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement value) {
+        if (averageMeasurementsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.set(index, value);
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder setAverageMeasurements(
+          int index, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder builderForValue) {
+        if (averageMeasurementsBuilder_ == null) {
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder addAverageMeasurements(com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement value) {
+        if (averageMeasurementsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.add(value);
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder addAverageMeasurements(
+          int index, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement value) {
+        if (averageMeasurementsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.add(index, value);
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder addAverageMeasurements(
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder builderForValue) {
+        if (averageMeasurementsBuilder_ == null) {
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.add(builderForValue.build());
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder addAverageMeasurements(
+          int index, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder builderForValue) {
+        if (averageMeasurementsBuilder_ == null) {
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder addAllAverageMeasurements(
+          java.lang.Iterable<? extends com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement> values) {
+        if (averageMeasurementsBuilder_ == null) {
+          ensureAverageMeasurementsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, averageMeasurements_);
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder clearAverageMeasurements() {
+        if (averageMeasurementsBuilder_ == null) {
+          averageMeasurements_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public Builder removeAverageMeasurements(int index) {
+        if (averageMeasurementsBuilder_ == null) {
+          ensureAverageMeasurementsIsMutable();
+          averageMeasurements_.remove(index);
+          onChanged();
+        } else {
+          averageMeasurementsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder getAverageMeasurementsBuilder(
+          int index) {
+        return getAverageMeasurementsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder getAverageMeasurementsOrBuilder(
+          int index) {
+        if (averageMeasurementsBuilder_ == null) {
+          return averageMeasurements_.get(index);  } else {
+          return averageMeasurementsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public java.util.List<? extends com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder> 
+           getAverageMeasurementsOrBuilderList() {
+        if (averageMeasurementsBuilder_ != null) {
+          return averageMeasurementsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(averageMeasurements_);
+        }
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder addAverageMeasurementsBuilder() {
+        return getAverageMeasurementsFieldBuilder().addBuilder(
+            com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder addAverageMeasurementsBuilder(
+          int index) {
+        return getAverageMeasurementsFieldBuilder().addBuilder(
+            index, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .com.progetto.grpc.Stats.AverageMeasurement averageMeasurements = 7;</code>
+       */
+      public java.util.List<com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder> 
+           getAverageMeasurementsBuilderList() {
+        return getAverageMeasurementsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder> 
+          getAverageMeasurementsFieldBuilder() {
+        if (averageMeasurementsBuilder_ == null) {
+          averageMeasurementsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurement.Builder, com.progetto.grpc.StatsOuterClass.Stats.AverageMeasurementOrBuilder>(
+                  averageMeasurements_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          averageMeasurements_ = null;
+        }
+        return averageMeasurementsBuilder_;
+      }
+
       private int residualBattery_ ;
       /**
-       * <pre>
-       * TODO: metti media misurazioni inq
-       * </pre>
-       *
-       * <code>uint32 residualBattery = 7;</code>
+       * <code>uint32 residualBattery = 8;</code>
        * @return The residualBattery.
        */
       public int getResidualBattery() {
         return residualBattery_;
       }
       /**
-       * <pre>
-       * TODO: metti media misurazioni inq
-       * </pre>
-       *
-       * <code>uint32 residualBattery = 7;</code>
+       * <code>uint32 residualBattery = 8;</code>
        * @param value The residualBattery to set.
        * @return This builder for chaining.
        */
@@ -996,11 +2038,7 @@ public final class StatsOuterClass {
         return this;
       }
       /**
-       * <pre>
-       * TODO: metti media misurazioni inq
-       * </pre>
-       *
-       * <code>uint32 residualBattery = 7;</code>
+       * <code>uint32 residualBattery = 8;</code>
        * @return This builder for chaining.
        */
       public Builder clearResidualBattery() {
@@ -1067,6 +2105,11 @@ public final class StatsOuterClass {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_com_progetto_grpc_Stats_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_progetto_grpc_Stats_AverageMeasurement_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_com_progetto_grpc_Stats_AverageMeasurement_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1077,11 +2120,15 @@ public final class StatsOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Stats.proto\022\021com.progetto.grpc\032\037google" +
-      "/protobuf/timestamp.proto\"\243\001\n\005Stats\022\017\n\007o" +
+      "/protobuf/timestamp.proto\"\301\002\n\005Stats\022\017\n\007o" +
       "rderId\030\001 \001(\r\022\017\n\007droneId\030\002 \001(\r\0224\n\020arrival" +
       "Timestamp\030\003 \001(\0132\032.google.protobuf.Timest" +
       "amp\022\014\n\004newX\030\004 \001(\r\022\014\n\004newY\030\005 \001(\r\022\r\n\005kmRun" +
-      "\030\006 \001(\001\022\027\n\017residualBattery\030\007 \001(\rb\006proto3"
+      "\030\006 \001(\001\022H\n\023averageMeasurements\030\007 \003(\0132+.co" +
+      "m.progetto.grpc.Stats.AverageMeasurement" +
+      "\022\027\n\017residualBattery\030\010 \001(\r\032R\n\022AverageMeas" +
+      "urement\022\r\n\005value\030\001 \001(\001\022-\n\ttimestamp\030\002 \001(" +
+      "\0132\032.google.protobuf.Timestampb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1093,7 +2140,13 @@ public final class StatsOuterClass {
     internal_static_com_progetto_grpc_Stats_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_progetto_grpc_Stats_descriptor,
-        new java.lang.String[] { "OrderId", "DroneId", "ArrivalTimestamp", "NewX", "NewY", "KmRun", "ResidualBattery", });
+        new java.lang.String[] { "OrderId", "DroneId", "ArrivalTimestamp", "NewX", "NewY", "KmRun", "AverageMeasurements", "ResidualBattery", });
+    internal_static_com_progetto_grpc_Stats_AverageMeasurement_descriptor =
+      internal_static_com_progetto_grpc_Stats_descriptor.getNestedTypes().get(0);
+    internal_static_com_progetto_grpc_Stats_AverageMeasurement_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_com_progetto_grpc_Stats_AverageMeasurement_descriptor,
+        new java.lang.String[] { "Value", "Timestamp", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

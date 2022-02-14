@@ -39,6 +39,10 @@ com/progetto/grpc/StatsOuterClass.java
  com.progetto.grpc.StatsOuterClass$1
  com.progetto.grpc.StatsOuterClass$Stats
  com.progetto.grpc.StatsOuterClass$Stats$1
+ com.progetto.grpc.StatsOuterClass$Stats$AverageMeasurement
+ com.progetto.grpc.StatsOuterClass$Stats$AverageMeasurement$1
+ com.progetto.grpc.StatsOuterClass$Stats$AverageMeasurement$Builder
+ com.progetto.grpc.StatsOuterClass$Stats$AverageMeasurementOrBuilder
  com.progetto.grpc.StatsOuterClass$Stats$Builder
  com.progetto.grpc.StatsOuterClass$StatsOrBuilder
 drones/recharge/RechargeBroadcastClient.java
@@ -79,8 +83,6 @@ com/progetto/grpc/ElectionServiceGrpc.java
  com.progetto.grpc.ElectionServiceGrpc$ElectionServiceMethodDescriptorSupplier
  com.progetto.grpc.ElectionServiceGrpc$ElectionServiceStub
  com.progetto.grpc.ElectionServiceGrpc$MethodHandlers
-drones/recharge/listener/BroadcastRechargeListener.java
- drones.recharge.listener.BroadcastRechargeListener
 com/progetto/grpc/DroneOuterClass.java
  com.progetto.grpc.DroneOuterClass
  com.progetto.grpc.DroneOuterClass$1
@@ -88,10 +90,10 @@ com/progetto/grpc/DroneOuterClass.java
  com.progetto.grpc.DroneOuterClass$Drone$1
  com.progetto.grpc.DroneOuterClass$Drone$Builder
  com.progetto.grpc.DroneOuterClass$DroneOrBuilder
+drones/sensors/sim/Measurement.java
+ drones.sensors.sim.Measurement
 drones/checkalive/CheckAliveServiceImpl.java
  drones.checkalive.CheckAliveServiceImpl
-drones/sensors/DroneSensorsThread.java
- drones.sensors.DroneSensorsThread
 drones/recharge/Recharge.java
  drones.recharge.Recharge
 com/progetto/grpc/CheckAliveServiceOuterClass.java
@@ -127,10 +129,10 @@ drones/eventbus/messages/GreetedEveryoneMessage.java
  drones.eventbus.messages.GreetedEveryoneMessage
 drones/eventbus/messages/ConfirmedElectedMessage.java
  drones.eventbus.messages.ConfirmedElectedMessage
-drones/recharge/listener/SendOkToAllRechargeListener.java
- drones.recharge.listener.SendOkToAllRechargeListener
 drones/order/listeners/SendOrderListener.java
  drones.order.listeners.SendOrderListener
+drones/recharge/listeners/BroadcastRechargeListener.java
+ drones.recharge.listeners.BroadcastRechargeListener
 drones/order/master/OrderClient.java
  drones.order.master.OrderClient
 com/progetto/grpc/ElectionServiceOuterClass.java
@@ -152,10 +154,12 @@ com/progetto/grpc/ElectionServiceOuterClass.java
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$1
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponse$Builder
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponseOrBuilder
-drones/recharge/listener/RechargeListener.java
- drones.recharge.listener.RechargeListener
+drones/sensors/sim/PM10Simulator.java
+ drones.sensors.sim.PM10Simulator
 drones/stats/StatsMasterLoop.java
  drones.stats.StatsMasterLoop
+drones/sensors/SensorsLogic.java
+ drones.sensors.SensorsLogic
 com/progetto/grpc/CheckMasterAliveServiceOuterClass.java
  com.progetto.grpc.CheckMasterAliveServiceOuterClass
  com.progetto.grpc.CheckMasterAliveServiceOuterClass$1
@@ -173,8 +177,6 @@ drones/checkalive/CheckAliveInformServer.java
  drones.checkalive.CheckAliveInformServer
 drones/eventbus/messages/RechargeMessage.java
  drones.eventbus.messages.RechargeMessage
-drones/recharge/listener/SendOkRechargeListener.java
- drones.recharge.listener.SendOkRechargeListener
 drones/recharge/RechargeInformMasterClient.java
  drones.recharge.RechargeInformMasterClient
 drones/DroneModel.java
@@ -185,6 +187,8 @@ drones/eventbus/messages/InformMasterRechargeMessage.java
  drones.eventbus.messages.InformMasterRechargeMessage
 drones/order/listeners/DroneDeadListener.java
  drones.order.listeners.DroneDeadListener
+drones/sensors/sim/Simulator.java
+ drones.sensors.sim.Simulator
 admin/client/ClientAdmin.java
  admin.client.ClientAdmin
 drones/eventbus/messages/BroadcastRechargeMessage.java
@@ -203,6 +207,8 @@ drones/eventbus/messages/SendOkRechargeMessage.java
  drones.eventbus.messages.SendOkRechargeMessage
 drones/DroneSingleton.java
  drones.DroneSingleton
+drones/recharge/listeners/SendOkRechargeListener.java
+ drones.recharge.listeners.SendOkRechargeListener
 drones/stats/StatsLoop.java
  drones.stats.StatsLoop
 drones/recharge/RechargeBroadcast.java
@@ -256,6 +262,8 @@ admin/server/beans/Statistics.java
  admin.server.beans.Statistics
 drones/eventbus/EventBus.java
  drones.eventbus.EventBus
+drones/stats/listeners/ConfirmedElectedListener.java
+ drones.stats.listeners.ConfirmedElectedListener
 drones/recharge/RechargeRecharge.java
  drones.recharge.RechargeRecharge
 drones/order/listeners/NewOrderListener.java
@@ -319,6 +327,8 @@ drones/election/ElectionElectedClient.java
 drones/recharge/RechargeServiceImpl.java
  drones.recharge.RechargeServiceImpl
  drones.recharge.RechargeServiceImpl$1
+drones/sensors/sim/Buffer.java
+ drones.sensors.sim.Buffer
 drones/election/listeners/ElectionListener.java
  drones.election.listeners.ElectionListener
 drones/DroneMain.java
@@ -332,9 +342,15 @@ dronazon/DronazonPub.java
  dronazon.DronazonPub
 drones/eventbus/messages/InsertionMessage.java
  drones.eventbus.messages.InsertionMessage
+drones/recharge/listeners/RechargeListener.java
+ drones.recharge.listeners.RechargeListener
+drones/sensors/AverageMeasurement.java
+ drones.sensors.AverageMeasurement
 drones/checkalive/CheckAliveRequestBeat.java
  drones.checkalive.CheckAliveRequestBeat
  drones.checkalive.CheckAliveRequestBeat$1
+drones/sensors/SensorsBuffer.java
+ drones.sensors.SensorsBuffer
 drones/eventbus/Message.java
  drones.eventbus.Message
 admin/entities/DroneEntity.java
@@ -368,11 +384,13 @@ com/progetto/grpc/RechargeServiceOuterClass.java
  com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse$1
  com.progetto.grpc.RechargeServiceOuterClass$SendOkResponse$Builder
  com.progetto.grpc.RechargeServiceOuterClass$SendOkResponseOrBuilder
+drones/recharge/listeners/SendOkToAllRechargeListener.java
+ drones.recharge.listeners.SendOkToAllRechargeListener
+drones/recharge/listeners/DroneDeadListener.java
+ drones.recharge.listeners.DroneDeadListener
 drones/election/listeners/ElectedListener.java
  drones.election.listeners.ElectedListener
-drones/recharge/listener/InformMasterListener.java
- drones.recharge.listener.InformMasterListener
-drones/recharge/listener/DroneDeadListener.java
- drones.recharge.listener.DroneDeadListener
 drones/recharge/RechargeSendOkClient.java
  drones.recharge.RechargeSendOkClient
+drones/recharge/listeners/InformMasterListener.java
+ drones.recharge.listeners.InformMasterListener

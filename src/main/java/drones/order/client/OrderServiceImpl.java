@@ -1,16 +1,20 @@
 package drones.order.client;
 
-import com.google.protobuf.Timestamp;
 import com.progetto.grpc.OrderServiceGrpc.OrderServiceImplBase;
 import com.progetto.grpc.OrderServiceOuterClass.OrderRequest;
 import com.progetto.grpc.OrderServiceOuterClass.OrderResponse;
 import com.progetto.grpc.StatsOuterClass;
 import drones.DroneSingleton;
+import drones.sensors.AverageMeasurement;
+import drones.sensors.SensorsBuffer;
 import drones.stats.Stats;
 import drones.stats.StatsSingleton;
 import io.grpc.stub.StreamObserver;
 
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderServiceImpl extends OrderServiceImplBase {
 
@@ -37,19 +41,29 @@ public class OrderServiceImpl extends OrderServiceImplBase {
 
         int residualBattery = DroneSingleton.getInstance().makeDelivery(request.getOrder().getDropX(), request.getOrder().getDropY());
 
+        List<AverageMeasurement> averages = new ArrayList<>();
+        if (StatsSingleton.getInstance().getList().size() != 0) {
+            Timestamp lastDelivery = StatsSingleton.getInstance().getList().get(StatsSingleton.getInstance().getList().size() - 1).arrivalTs;
+            SensorsBuffer.getInstance().readAllAndClean();
+            SensorsBuffer.getInstance().getAverageMeasurementList().stream().filter(am ->
+                    am.getTimestamp().toInstant().isAfter(lastDelivery.toInstant())).forEach(averages::add);
+        }
+        List<StatsOuterClass.Stats.AverageMeasurement> protoList = new ArrayList<>();
+        averages.forEach(a -> protoList.add(a.toProto()));
+
         Instant time = Instant.now();
         StatsOuterClass.Stats stats = StatsOuterClass.Stats.newBuilder()
-                .setArrivalTimestamp(Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build())
+                .setArrivalTimestamp(com.google.protobuf.Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build())
                 .setNewX(DroneSingleton.getInstance().getX())
                 .setNewY(DroneSingleton.getInstance().getY())
                 .setKmRun(kmRun)
                 .setOrderId(request.getOrder().getId())
                 .setDroneId(DroneSingleton.getInstance().getId())
                 .setResidualBattery(residualBattery)
+                .addAllAverageMeasurements(protoList)
                 .build();
-        // TODO: metti media misurazioni
-        responseObserver.onNext(OrderResponse.newBuilder().setStats(stats)
-                .build());
+        responseObserver.onNext(OrderResponse.newBuilder().setStats(stats).build());
+
         System.out.println("Order OrderServiceImpl done delivering " + request.getOrder().getId());
 
         StatsSingleton.getInstance().add(new Stats(stats));

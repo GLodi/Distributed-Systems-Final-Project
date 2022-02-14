@@ -61,14 +61,12 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startStatsService();
 
+        DroneSingleton.getInstance().startSensorsService();
+
         // need to do last
         DroneSingleton.getInstance().startGreetingsService();
 
-        // TODO: thread avvia sensore per rilevamento inquinamento
-
         // TODO: thread per inviare statistiche a master (GRPC) SE NON MASTER
-
-        // TODO: usa orologi logici per garantire happened-before?
 
         // SE SEI MASTER USA ESEMPIO CHATSERVICEIMPL PER GESTIRE LA COMUNICAZIONE CON TUTTI I DRONI IN GRPC
         // TODO: SE MASTER. TUTTI IN WAIT/NOTIFY SU isMaster VARIABLE

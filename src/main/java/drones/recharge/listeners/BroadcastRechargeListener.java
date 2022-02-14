@@ -1,4 +1,4 @@
-package drones.recharge.listener;
+package drones.recharge.listeners;
 
 import drones.eventbus.EventBus;
 import drones.eventbus.messages.BroadcastRechargeMessage;

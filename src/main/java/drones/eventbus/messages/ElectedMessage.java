@@ -6,7 +6,7 @@ import drones.eventbus.Message;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-// called when the drone is requested to forward an elected message to the first neightbour available
+// called when the drone is requested to forward an elected message to the first neighbour available
 public class ElectedMessage extends Message {
     public final int electedId;
     public final DroneEntity newMaster;

@@ -156,8 +156,8 @@ com/progetto/grpc/ElectionServiceOuterClass.java
  com.progetto.grpc.ElectionServiceOuterClass$ElectionResponseOrBuilder
 drones/sensors/sim/PM10Simulator.java
  drones.sensors.sim.PM10Simulator
-drones/stats/StatsMasterLoop.java
- drones.stats.StatsMasterLoop
+drones/recharge/RechargeSendOkClient.java
+ drones.recharge.RechargeSendOkClient
 drones/sensors/SensorsLogic.java
  drones.sensors.SensorsLogic
 com/progetto/grpc/CheckMasterAliveServiceOuterClass.java
@@ -189,8 +189,8 @@ drones/order/listeners/DroneDeadListener.java
  drones.order.listeners.DroneDeadListener
 drones/sensors/sim/Simulator.java
  drones.sensors.sim.Simulator
-admin/client/ClientAdmin.java
- admin.client.ClientAdmin
+drones/stats/StatsMasterLoop.java
+ drones.stats.StatsMasterLoop
 drones/eventbus/messages/BroadcastRechargeMessage.java
  drones.eventbus.messages.BroadcastRechargeMessage
 admin/server/beans/Drones.java
@@ -262,8 +262,8 @@ admin/server/beans/Statistics.java
  admin.server.beans.Statistics
 drones/eventbus/EventBus.java
  drones.eventbus.EventBus
-drones/stats/listeners/ConfirmedElectedListener.java
- drones.stats.listeners.ConfirmedElectedListener
+drones/recharge/listeners/InformMasterListener.java
+ drones.recharge.listeners.InformMasterListener
 drones/recharge/RechargeRecharge.java
  drones.recharge.RechargeRecharge
 drones/order/listeners/NewOrderListener.java
@@ -301,8 +301,8 @@ com/progetto/grpc/OrderService.java
  com.progetto.grpc.OrderService$OrderResponse$1
  com.progetto.grpc.OrderService$OrderResponse$Builder
  com.progetto.grpc.OrderService$OrderResponseOrBuilder
-admin/server/services/StatsService.java
- admin.server.services.StatsService
+drones/stats/listeners/ConfirmedElectedListener.java
+ drones.stats.listeners.ConfirmedElectedListener
 com/progetto/grpc/GreetingsServiceOuterClass.java
  com.progetto.grpc.GreetingsServiceOuterClass
  com.progetto.grpc.GreetingsServiceOuterClass$1
@@ -390,7 +390,13 @@ drones/recharge/listeners/DroneDeadListener.java
  drones.recharge.listeners.DroneDeadListener
 drones/election/listeners/ElectedListener.java
  drones.election.listeners.ElectedListener
-drones/recharge/RechargeSendOkClient.java
- drones.recharge.RechargeSendOkClient
-drones/recharge/listeners/InformMasterListener.java
- drones.recharge.listeners.InformMasterListener
+admin/entities/AverageDeliveriesEntity.java
+ admin.entities.AverageDeliveriesEntity
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin
+ admin.client.ClientAdmin$1
+admin/entities/AverageKmTraveledEntity.java
+ admin.entities.AverageKmTraveledEntity
+admin/server/services/StatsService.java
+ admin.server.services.StatsService
+ admin.server.services.StatsService$1

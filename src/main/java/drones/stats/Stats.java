@@ -34,7 +34,12 @@ public class Stats {
         this.x = stats.getNewX();
         this.y = stats.getNewY();
         this.kmRun = stats.getKmRun();
+        this.residualBattery = stats.getResidualBattery();
         this.averageMeasurementList = stats.getAverageMeasurementsList().stream().map(AverageMeasurement::new).collect(Collectors.toList());
         this.arrivalTs = Timestamp.from(Instant.ofEpochSecond(stats.getArrivalTimestamp().getSeconds(), stats.getArrivalTimestamp().getNanos()));
+    }
+
+    public int getDroneId() {
+        return droneId;
     }
 }

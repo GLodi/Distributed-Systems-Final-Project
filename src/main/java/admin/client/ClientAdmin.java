@@ -1,15 +1,18 @@
 package admin.client;
 
+import admin.entities.AverageDeliveriesEntity;
+import admin.entities.AverageKmTraveledEntity;
 import admin.entities.DroneEntity;
 import admin.entities.StatisticEntity;
 import admin.server.beans.Drones;
-import admin.server.beans.Statistics;
 import com.google.gson.Gson;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientHandlerException;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.*;
+import com.sun.jersey.api.client.config.ClientConfig;
+import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.json.JSONConfiguration;
+import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ClientAdmin {
@@ -77,15 +80,23 @@ public class ClientAdmin {
         System.out.println("Enter number of last stats:");
         String n = keyboard.next();
 
-        Client client = Client.create();
+        ClientConfig config = new DefaultClientConfig();
+        config.getClasses().add(JacksonJaxbJsonProvider.class);
+        config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
+
+        Client client = Client.create(config);
         ClientResponse clientResponse = null;
 
         String getPath = "/stats/last/" + n;
         clientResponse = getRequest(client, "http://localhost:1337" + getPath);
         System.out.println(clientResponse.toString());
-        Statistics statistics = clientResponse.getEntity(Statistics.class);
-        for (StatisticEntity s : statistics.getStatisticList()) {
-            System.out.println("battery: " + s.getAverageBatteryLevel());
+        List<StatisticEntity> statisticEntityList = clientResponse.getEntity(new GenericType<List<StatisticEntity>>() {
+        });
+        for (StatisticEntity statisticEntity : statisticEntityList) {
+            System.out.println("ts: " + statisticEntity.getTimestamp());
+            System.out.println("average battery level: " + statisticEntity.getAverageBatteryLevel());
+            System.out.println("average deliveries done: " + statisticEntity.getAverageDeliveryDone());
+            System.out.println("average pollution level: " + statisticEntity.getAveragePollutionLevel());
         }
     }
 
@@ -104,7 +115,9 @@ public class ClientAdmin {
 
         String getPath = "/stats/deliveries/" + ts1 + "&" + ts2;
         clientResponse = getRequest(client, "http://localhost:1337" + getPath);
-        System.out.println(clientResponse.toString());
+        AverageDeliveriesEntity averageDelivery = clientResponse.getEntity(AverageDeliveriesEntity.class);
+        System.out.println(clientResponse);
+        System.out.println("average deliveries between " + ts1 + " and " + ts2 + ": " + averageDelivery.getAverageDeliveries());
     }
 
     private static void getAverageKm() {
@@ -122,7 +135,9 @@ public class ClientAdmin {
 
         String getPath = "/stats/km/" + ts1 + "&" + ts2;
         clientResponse = getRequest(client, "http://localhost:1337" + getPath);
-        System.out.println(clientResponse.toString());
+        AverageKmTraveledEntity averageKmTraveledEntity = clientResponse.getEntity(AverageKmTraveledEntity.class);
+        System.out.println(clientResponse);
+        System.out.println("average km run between " + ts1 + " and " + ts2 + ": " + averageKmTraveledEntity.getKmTraveled());
     }
 
     private static ClientResponse postRequest(Client client, String url, DroneEntity d) {

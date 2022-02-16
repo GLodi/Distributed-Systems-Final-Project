@@ -13,11 +13,18 @@ import drones.DroneSingleton;
 import drones.sensors.AverageMeasurement;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class StatsMasterLoop extends Thread {
+
+    public static <E, K> Map<K, List<E>> groupBy(List<E> list, Function<E, K> keyFunction) {
+        return Optional.ofNullable(list)
+                .orElseGet(ArrayList::new)
+                .stream()
+                .collect(Collectors.groupingBy(keyFunction));
+    }
 
     private ClientResponse postRequest(Client client, String url, StatisticEntity d) {
         WebResource webResource = client.resource(url);
@@ -37,26 +44,35 @@ public class StatsMasterLoop extends Thread {
                 List<Stats> statList = StatsSingleton.getInstance().getList();
                 double numDroni = DroneSingleton.getInstance().getDroneList().size() + 1;
 
-                double averageDeliveryDone = statList.size() / numDroni;
-                double averageKmTraveled = statList.stream().map(s -> s.kmRun).reduce(0.0, Double::sum) / numDroni;
-                double averagePollutionLevel =
-                        statList.stream().map(s ->
-                                        s.averageMeasurementList.stream().map(AverageMeasurement::getValue).reduce(0.0, Double::sum))
-                                .reduce(0.0, Double::sum) / numDroni;
-                double averageBatteryLevel = statList.stream().map(s -> s.residualBattery).reduce(0, Integer::sum) / numDroni;
+                Collection<List<Stats>> groupedStats = groupBy(statList, Stats::getDroneId).values();
+
+                double averageDeliveryDone = groupedStats.stream().map(List::size).reduce(Integer::sum).orElse(0) / numDroni;
+                double averageKmTraveled = groupedStats.stream().map((list) ->
+                                list.stream().map(s -> s.kmRun).reduce(Double::sum).orElse(0.0) / list.size())
+                        .reduce(Double::sum).orElse(0.0) / numDroni;
+                double averagePollutionLevel = groupedStats.stream().map((drone) ->
+                                drone.stream().filter(stat -> stat.averageMeasurementList.size() > 0).map(stat ->
+                                                stat.averageMeasurementList.stream().map(AverageMeasurement::getValue).reduce(Double::sum).orElse(0.0) /
+                                                        (stat.averageMeasurementList.size() == 0 ? 1 : stat.averageMeasurementList.size()))
+                                        .reduce(Double::sum).orElse(0.0) / drone.stream().filter(stat -> stat.averageMeasurementList.size() > 0).collect(Collectors.toList()).size() == 0 ? 1 : drone.stream().filter(stat -> stat.averageMeasurementList.size() > 0).collect(Collectors.toList()).size())
+                        .reduce(Integer::sum).orElse(0) / numDroni;
+                double averageBatteryLevel = groupedStats.stream().map((list) ->
+                                list.stream().map(s -> s.residualBattery).reduce(Integer::sum).orElse(0) / list.size())
+                        .reduce(Integer::sum).orElse(0) / numDroni;
 
                 if (statList.size() > 0) {
                     ClientConfig config = new DefaultClientConfig();
                     config.getClasses().add(JacksonJaxbJsonProvider.class);
                     config.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
 
-                    Client client = Client.create(config);
+                    Client client = Client.create();
                     ClientResponse clientResponse = null;
 
-                    String addPath = "/stats";
-                    StatisticEntity statisticEntity = new StatisticEntity(averageDeliveryDone, averageKmTraveled, averagePollutionLevel, averageBatteryLevel, Timestamp.from(Instant.now()));
+                    String addPath = "/stats/add";
+                    StatisticEntity statisticEntity = new StatisticEntity(averageDeliveryDone, averageKmTraveled, averagePollutionLevel, averageBatteryLevel, System.currentTimeMillis());
                     clientResponse = postRequest(client, "http://" + DroneSingleton.getInstance().getServerAddress() + addPath, statisticEntity);
                     System.out.println(clientResponse.toString());
+                    System.out.println("StatsMasterLogic done sending stats");
                 } else {
                     System.out.println("StatsMasterLogic no stats to send");
                 }

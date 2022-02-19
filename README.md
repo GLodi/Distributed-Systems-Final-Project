@@ -1,7 +1,16 @@
+# Istruzioni
+
+Mains:
+
+- `drones/DroneMain.java`
+- `dronazon/DronazonPub.java`
+- `admin/server/ServerAdmin.java`
+- `admin/client/ClientAdmin.java`
+
 # Project Setup
 
-* You can import the project directly from a *Version Control System*, by providing the following URL: 
-TODO
+* You can import the project directly from a *Version Control System*, by providing the following URL:
+  TODO
 
 <img src = './assets/img_1.png'>
 
@@ -10,8 +19,6 @@ TODO
 * If required, trust the project and accept the Gradle auto-import
 
 * Wait until the Gradle indexing process ends (it may take a few seconds)
-
-
 
 ## ENJOY THE PROJECT!
 

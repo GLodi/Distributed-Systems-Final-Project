@@ -40,9 +40,6 @@ public class DroneMain {
             address = "localhost:1337";
         }
 
-        // START
-        //DroneSingleton.getInstance().listenForErrors();
-
         DroneSingleton.getInstance().startRegisterService(id, address, port);
         if (!DroneSingleton.getInstance().initiated()) {
             System.out.println("Unable to connect. Closing.");
@@ -63,15 +60,7 @@ public class DroneMain {
 
         DroneSingleton.getInstance().startSensorsService();
 
-        // need to do last
         DroneSingleton.getInstance().startGreetingsService();
-
-        // TODO: thread per inviare statistiche a master (GRPC) SE NON MASTER
-
-        // SE SEI MASTER USA ESEMPIO CHATSERVICEIMPL PER GESTIRE LA COMUNICAZIONE CON TUTTI I DRONI IN GRPC
-        // TODO: SE MASTER. TUTTI IN WAIT/NOTIFY SU isMaster VARIABLE
-        //      thread per ricevere ordini da MQTT (se drone e' master)
-        //      thread per invio stats / collegamento con server (REST) (sempre master)
 
         while (true) {
             System.out.println("Press q to exit:");

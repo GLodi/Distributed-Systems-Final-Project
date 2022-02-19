@@ -22,7 +22,6 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
                 " with electionId " + request.getElectionId() +
                 " and battery " + request.getBattery());
 
-        // TODO: da modificare, viene eletto quello con batteria maggiore, se uguale id maggiore
         if (request.getBattery() > ownBattery || (request.getBattery() == ownBattery && request.getElectionId() > ownId)) {
             // forward message unchanged
             System.out.println("ElectionServiceImpl forwardElection FORWARD MESSAGE UNCHANGED: " + request.getElectionId());
@@ -44,7 +43,6 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
             responseObserver.onNext(ElectionResponse.newBuilder().build());
             responseObserver.onCompleted();
         } else if (request.getElectionId() == ownId) {
-            // EventBus put ElectedMessage
             System.out.println("ElectionServiceImpl forwardElection ELECTED ID: " + ownId);
             DroneSingleton.getInstance().setMaster(DroneSingleton.getInstance().getDroneEntity());
             ElectionSingleton.getInstance().setNonParticipant();
@@ -63,7 +61,6 @@ public class ElectionServiceImpl extends ElectionServiceGrpc.ElectionServiceImpl
             responseObserver.onNext(ElectedResponse.newBuilder().build());
             responseObserver.onCompleted();
             EventBus.getInstance().put(new ElectedMessage(request.getId(), new DroneEntity(request.getNewMaster())));
-            //EventBus.getInstance().put(new NewMasterMessage());
         } else {
             System.out.println("ElectionServiceImpl forwardElected received my own ELECTED. ELECTION OVER");
             responseObserver.onNext(ElectedResponse.newBuilder().build());

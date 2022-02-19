@@ -32,8 +32,9 @@ drones/eventbus/messages/NewOrderMessage.java
  drones.eventbus.messages.NewOrderMessage
 drones/eventbus/messages/ErrorMessage.java
  drones.eventbus.messages.ErrorMessage
-drones/election/ElectionServiceImpl.java
- drones.election.ElectionServiceImpl
+admin/server/services/StatsService.java
+ admin.server.services.StatsService
+ admin.server.services.StatsService$1
 com/progetto/grpc/StatsOuterClass.java
  com.progetto.grpc.StatsOuterClass
  com.progetto.grpc.StatsOuterClass$1
@@ -56,9 +57,8 @@ com/progetto/grpc/OrderOuterClass.java
  com.progetto.grpc.OrderOuterClass$OrderOrBuilder
 drones/checkalive/listeners/InsertionListener.java
  drones.checkalive.listeners.InsertionListener
-drones/register/RegistrationLogic.java
- drones.register.RegistrationLogic
- drones.register.RegistrationLogic$1
+admin/entities/StatisticEntity.java
+ admin.entities.StatisticEntity
 com/progetto/grpc/GreetingsServiceGrpc.java
  com.progetto.grpc.GreetingsServiceGrpc
  com.progetto.grpc.GreetingsServiceGrpc$1
@@ -179,8 +179,9 @@ drones/eventbus/messages/RechargeMessage.java
  drones.eventbus.messages.RechargeMessage
 drones/recharge/RechargeInformMasterClient.java
  drones.recharge.RechargeInformMasterClient
-drones/DroneModel.java
- drones.DroneModel
+admin/client/ClientAdmin.java
+ admin.client.ClientAdmin
+ admin.client.ClientAdmin$1
 drones/election/ElectionElectionClient.java
  drones.election.ElectionElectionClient
 drones/eventbus/messages/InformMasterRechargeMessage.java
@@ -189,8 +190,8 @@ drones/order/listeners/DroneDeadListener.java
  drones.order.listeners.DroneDeadListener
 drones/sensors/sim/Simulator.java
  drones.sensors.sim.Simulator
-drones/stats/StatsMasterLoop.java
- drones.stats.StatsMasterLoop
+drones/election/listeners/ElectedListener.java
+ drones.election.listeners.ElectedListener
 drones/eventbus/messages/BroadcastRechargeMessage.java
  drones.eventbus.messages.BroadcastRechargeMessage
 admin/server/beans/Drones.java
@@ -199,14 +200,14 @@ drones/election/ElectionLogic.java
  drones.election.ElectionLogic
 admin/server/ServerAdmin.java
  admin.server.ServerAdmin
-admin/entities/StatisticEntity.java
- admin.entities.StatisticEntity
+admin/entities/AverageKmTraveledEntity.java
+ admin.entities.AverageKmTraveledEntity
 drones/greetings/GreetingsLogic.java
  drones.greetings.GreetingsLogic
 drones/eventbus/messages/SendOkRechargeMessage.java
  drones.eventbus.messages.SendOkRechargeMessage
-drones/DroneSingleton.java
- drones.DroneSingleton
+admin/server/beans/Statistics.java
+ admin.server.beans.Statistics
 drones/recharge/listeners/SendOkRechargeListener.java
  drones.recharge.listeners.SendOkRechargeListener
 drones/stats/StatsLoop.java
@@ -258,8 +259,8 @@ drones/stats/Stats.java
  drones.stats.Stats
 drones/election/ElectionSingleton.java
  drones.election.ElectionSingleton
-admin/server/beans/Statistics.java
- admin.server.beans.Statistics
+admin/entities/AverageDeliveriesEntity.java
+ admin.entities.AverageDeliveriesEntity
 drones/eventbus/EventBus.java
  drones.eventbus.EventBus
 drones/recharge/listeners/InformMasterListener.java
@@ -331,8 +332,8 @@ drones/sensors/sim/Buffer.java
  drones.sensors.sim.Buffer
 drones/election/listeners/ElectionListener.java
  drones.election.listeners.ElectionListener
-drones/DroneMain.java
- drones.DroneMain
+drones/stats/StatsMasterLoop.java
+ drones.stats.StatsMasterLoop
 drones/order/master/OrderMQTTThread.java
  drones.order.master.OrderMQTTThread
  drones.order.master.OrderMQTTThread$1
@@ -388,15 +389,14 @@ drones/recharge/listeners/SendOkToAllRechargeListener.java
  drones.recharge.listeners.SendOkToAllRechargeListener
 drones/recharge/listeners/DroneDeadListener.java
  drones.recharge.listeners.DroneDeadListener
-drones/election/listeners/ElectedListener.java
- drones.election.listeners.ElectedListener
-admin/entities/AverageDeliveriesEntity.java
- admin.entities.AverageDeliveriesEntity
-admin/client/ClientAdmin.java
- admin.client.ClientAdmin
- admin.client.ClientAdmin$1
-admin/entities/AverageKmTraveledEntity.java
- admin.entities.AverageKmTraveledEntity
-admin/server/services/StatsService.java
- admin.server.services.StatsService
- admin.server.services.StatsService$1
+drones/DroneMain.java
+ drones.DroneMain
+drones/election/ElectionServiceImpl.java
+ drones.election.ElectionServiceImpl
+drones/DroneModel.java
+ drones.DroneModel
+drones/register/RegistrationLogic.java
+ drones.register.RegistrationLogic
+ drones.register.RegistrationLogic$1
+drones/DroneSingleton.java
+ drones.DroneSingleton

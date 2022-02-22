@@ -1,6 +1,6 @@
 # Unimi Distributed and Pervasive Systems Final Project
 
-This is my final project for the Distributed and Pervasive Systems course at Unimi.
+This is my final project for the Distributed and Pervasive Systems course at Unimi (Master's Degree in Computer Science).
 
 It emulates a distributed network of drones in charge of delivering goods in a city (grid). They communicate with each other through gRPC while updating a remote server over REST.
 

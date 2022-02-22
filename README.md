@@ -1,9 +1,12 @@
 # Unimi Distributed and Pervasive Systems Final Project
 
 This is my final project for the Distributed and Pervasive Systems course at Unimi.
+
 It emulates a distributed network of drones in charge of delivering goods in a city (grid). They communicate with each other through gRPC while updating a remote server over REST.
+
 A master drone is responsible for taking orders from an MQTT client and delegating them to the closest available drone for delivery.
 It features ring-based election as well as mutual exclusion (Ricart Agrawala) distributed algorithms.
+
 
 Mains:
 
